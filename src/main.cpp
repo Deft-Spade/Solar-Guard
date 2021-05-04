@@ -6,6 +6,10 @@
 #include "bn_bg_palettes.h"
 #include "bn_sprite_text_generator.h"
 
+#include "bn_regular_bg_ptr.h"
+#include "bn_regular_bg_item.h"
+#include "bn_regular_bg_items_bg_earth_and_sun.h"
+
 #include "fixed_8x8_sprite_font.h"
 #include "fixed_8x16_sprite_font.h"
 #include "variable_8x8_sprite_font.h"
@@ -16,12 +20,13 @@
 
 namespace
 {
-    constexpr const bn::music_item solar_conflict(0);
-    constexpr const bn::music_item solar_patrol(1);
-    constexpr const bn::music_item solar_somber(2);
-    constexpr const bn::music_item theme_menu(3);
-    constexpr const bn::music_item theme_title(4);
-    constexpr const bn::music_item theme_upbeat(5);
+    constexpr const bn::music_item bgm_solar_conflict(0);
+    constexpr const bn::music_item bgm_solar_patrol(1);
+    constexpr const bn::music_item bgm_solar_somber(2);
+    constexpr const bn::music_item bgm_tactical(3);
+    constexpr const bn::music_item bgm_theme_menu(4);
+    constexpr const bn::music_item bgm_theme_title(5);
+    constexpr const bn::music_item bgm_theme_upbeat(6);
 
     constexpr const bn::fixed text_y_inc = 14;
     constexpr const bn::fixed text_y_limit = (bn::display::height() / 2) - text_y_inc;
@@ -30,14 +35,14 @@ namespace
 
     void scene_1()
     {
-        theme_title.play();
-
-        text_generator.set_center_alignment();
+        bgm_theme_title.play();
 
         bn::vector<bn::sprite_ptr, 32> text_sprites;
         text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
-        text_generator.generate(0, 0, "Currently Playing Title Music", text_sprites);
-        text_generator.generate(0, text_y_limit, "Press START to Switch to Menu Music", text_sprites);
+        text_generator.generate(0, -6, "Currently Playing", text_sprites);
+        text_generator.generate(0, 6, "Title Music", text_sprites);
+        text_generator.generate(0, text_y_limit -10, "Press START to Switch to", text_sprites);
+        text_generator.generate(0, text_y_limit, "Menu Music", text_sprites);
 
         while(! bn::keypad::start_pressed())
         {
@@ -47,14 +52,14 @@ namespace
 
     void scene_2()
     {
-        theme_menu.play();
-
-        text_generator.set_center_alignment();
+        bgm_theme_menu.play();
 
         bn::vector<bn::sprite_ptr, 32> text_sprites;
         text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
-        text_generator.generate(0, 0, "Currently Playing Menu Music", text_sprites);
-        text_generator.generate(0, text_y_limit, "Press START to Switch to Upbeat Music", text_sprites);
+        text_generator.generate(0, -6, "Currently Playing", text_sprites);
+        text_generator.generate(0, 6, "Menu Music", text_sprites);
+        text_generator.generate(0, text_y_limit -10, "Press START to Switch to", text_sprites);
+        text_generator.generate(0, text_y_limit, "Upbeat Music", text_sprites);
 
         while(! bn::keypad::start_pressed())
         {
@@ -64,14 +69,14 @@ namespace
 
     void scene_3()
     {
-        theme_upbeat.play();
-
-        text_generator.set_center_alignment();
+        bgm_theme_upbeat.play();
 
         bn::vector<bn::sprite_ptr, 32> text_sprites;
         text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
-        text_generator.generate(0, 0, "Currently Playing Upbeat Music", text_sprites);
-        text_generator.generate(0, text_y_limit, "Press START to Switch to Patrol Music", text_sprites);
+        text_generator.generate(0, -6, "Currently Playing", text_sprites);
+        text_generator.generate(0, 6, "Upbeat Music", text_sprites);
+        text_generator.generate(0, text_y_limit -10, "Press START to Switch to", text_sprites);
+        text_generator.generate(0, text_y_limit, "Tactical Music", text_sprites);
 
         while(! bn::keypad::start_pressed())
         {
@@ -81,14 +86,14 @@ namespace
 
     void scene_4()
     {
-        solar_patrol.play();
-
-        text_generator.set_center_alignment();
+        bgm_tactical.play();
 
         bn::vector<bn::sprite_ptr, 32> text_sprites;
         text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
-        text_generator.generate(0, 0, "Currently Playing Patrol Music", text_sprites);
-        text_generator.generate(0, text_y_limit, "Press START to Switch to Conflict Music", text_sprites);
+        text_generator.generate(0, -6, "Currently Playing", text_sprites);
+        text_generator.generate(0, 6, "Tactical Music", text_sprites);
+        text_generator.generate(0, text_y_limit -10, "Press START to Switch to", text_sprites);
+        text_generator.generate(0, text_y_limit, "Patrol Music", text_sprites);
 
         while(! bn::keypad::start_pressed())
         {
@@ -98,14 +103,14 @@ namespace
 
     void scene_5()
     {
-        solar_conflict.play();
-
-        text_generator.set_center_alignment();
+        bgm_solar_patrol.play();
 
         bn::vector<bn::sprite_ptr, 32> text_sprites;
         text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
-        text_generator.generate(0, 0, "Currently Playing Conflict Music", text_sprites);
-        text_generator.generate(0, text_y_limit, "Press START to Switch to Somber Music", text_sprites);
+        text_generator.generate(0, -6, "Currently Playing", text_sprites);
+        text_generator.generate(0, 6, "Patrol Music", text_sprites);
+        text_generator.generate(0, text_y_limit -10, "Press START to Switch to", text_sprites);
+        text_generator.generate(0, text_y_limit, "Conflict Music", text_sprites);
 
         while(! bn::keypad::start_pressed())
         {
@@ -115,14 +120,31 @@ namespace
 
     void scene_6()
     {
-        solar_somber.play();
-
-        text_generator.set_center_alignment();
+        bgm_solar_conflict.play();
 
         bn::vector<bn::sprite_ptr, 32> text_sprites;
         text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
-        text_generator.generate(0, 0, "Currently Playing Somber Music", text_sprites);
-        text_generator.generate(0, text_y_limit, "Press START to Switch to Title Music", text_sprites);
+        text_generator.generate(0, -6, "Currently Playing", text_sprites);
+        text_generator.generate(0, 6, "Conflict Music", text_sprites);
+        text_generator.generate(0, text_y_limit -10, "Press START to Switch to", text_sprites);
+        text_generator.generate(0, text_y_limit, "Somber Music", text_sprites);
+
+        while(! bn::keypad::start_pressed())
+        {
+            bn::core::update();
+        }
+    }
+
+    void scene_7()
+    {
+        bgm_solar_somber.play();
+
+        bn::vector<bn::sprite_ptr, 32> text_sprites;
+        text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
+        text_generator.generate(0, -6, "Currently Playing", text_sprites);
+        text_generator.generate(0, 6, "Somber Music", text_sprites);
+        text_generator.generate(0, text_y_limit -10, "Press START to Switch to", text_sprites);
+        text_generator.generate(0, text_y_limit, "Title Music", text_sprites);
 
         while(! bn::keypad::start_pressed())
         {
@@ -134,6 +156,10 @@ namespace
 int main()
 {
     bn::core::init();
+
+    text_generator.set_center_alignment();
+
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_earth_and_sun.create_bg(0, 15);
 
     while(true)
     {
@@ -153,6 +179,9 @@ int main()
         bn::core::update();
 
         scene_6();
+        bn::core::update();
+
+        scene_7();
         bn::core::update();
     }
 }
