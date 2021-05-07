@@ -11,7 +11,6 @@
 #include "bn_regular_bg_items_bg_title_screen.h"
 #include "bn_regular_bg_items_bg_earth_and_sun.h"
 #include "bn_regular_bg_items_bg_earth_horizon.h"
-#include "bn_regular_bg_items_bg_seamless_stars.h"
 
 #include "fixed_8x16_sprite_font.h"
 #include "variable_8x16_sprite_font.h"
@@ -20,6 +19,7 @@
 #include "bn_music_item.h"
 #include "bn_music_actions.h"
 
+#include "gameplay_testing.h"
 #include "music.h"
 
 namespace
@@ -112,7 +112,7 @@ int main()
 
         switch (current_selection) {
             case 1:
-                // Do nothing.
+                gameplay_testing();
             break;
 
             case 2:
