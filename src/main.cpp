@@ -54,11 +54,17 @@ void title_screen()
     text_generator.generate(0, 55, "Press START", text_sprites);
 
     // Wait for player to press start.
-    while(! bn::keypad::start_pressed()) { bn::core::update(); }
+    while(! bn::keypad::start_pressed())
+    {
+        bn::core::update();
+    }
 }
 
 void primary_menu()
 {
+    // Make sure that the current selection variable is equal to 1 if it's out of bounds.
+    if (current_selection < 1 || current_selection > max_items) current_selection = 1;
+
     // Set a background for the main menu.
     const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_earth_and_sun.create_bg(0, 15);
 
@@ -77,8 +83,8 @@ void primary_menu()
     text_generator.generate(-(bn::display::width() / 2) + 20, - 10, "Gameplay Testing", text_sprites);
     text_generator.generate(-(bn::display::width() / 2) + 20, + 10, "Music Playback", text_sprites);
 
-    // Menu operation loop.
-    while(! bn::keypad::start_pressed())
+    // Menu operation loop (exits upon pressing A, relies on current_selection being set correctly by indicator position).
+    while(! bn::keypad::a_pressed())
     {
         // Adjust selection in response to user input.
         if(bn::keypad::down_held() && current_selection < max_items)
@@ -93,6 +99,16 @@ void primary_menu()
         // Set the menu selection arrow sprite to the selection's position.
         menu_selector.set_y(-10 + (current_selection - 1) * 20);
 
+        // Return to the title screen if B is pressed.
+        if (bn::keypad::b_pressed())
+        {
+            // Set current selection variable to zero to indicate backing out to the title screen.
+            current_selection = 0;
+
+            // Break out of the main menu's own loop.
+            break;
+        }
+
         bn::core::update();
     }
 }
@@ -102,6 +118,7 @@ int main()
 {
     bn::core::init();
 
+    // Initial title screen.
     title_screen();
     bn::core::update();
 
@@ -111,8 +128,14 @@ int main()
         bn::core::update();
 
         switch (current_selection) {
+            case 0: // 0 is used to indicate backing out into the title screen.
+                title_screen();
+                bn::core::update();
+            break;
+
             case 1:
                 gameplay_testing();
+                bn::core::update();
             break;
 
             case 2:
