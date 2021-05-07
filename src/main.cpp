@@ -8,6 +8,7 @@
 
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
+#include "bn_regular_bg_items_bg_title_screen.h"
 #include "bn_regular_bg_items_bg_earth_and_sun.h"
 #include "bn_regular_bg_items_bg_earth_horizon.h"
 #include "bn_regular_bg_items_bg_seamless_stars.h"
@@ -38,13 +39,36 @@ namespace
     int max_items = 2;
 }
 
-void primary_menu()
+void title_screen()
 {
-    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_earth_and_sun.create_bg(0, 15);
-    bn::sprite_ptr menu_selector = bn::sprite_items::menu_arrow.create_sprite(-(bn::display::width() / 2) + 10, -10);
+    // Title screen background.
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_title_screen.create_bg(0, 0);
 
+    // Play the title screen music.
     bgm_theme_title.play();
 
+    // Draw the text.
+    bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
+    text_generator.set_center_alignment();
+    bn::vector<bn::sprite_ptr, 32> text_sprites;
+    text_generator.generate(0, 55, "Press START", text_sprites);
+
+    // Wait for player to press start.
+    while(! bn::keypad::start_pressed()) { bn::core::update(); }
+}
+
+void primary_menu()
+{
+    // Set a background for the main menu.
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_earth_and_sun.create_bg(0, 15);
+
+    // Create the menu selector arrow sprite.
+    bn::sprite_ptr menu_selector = bn::sprite_items::menu_arrow.create_sprite(-(bn::display::width() / 2) + 10, -10);
+
+    // Play the main menu music.
+    bgm_theme_menu.play();
+
+    // Draw the main menu text.
     bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
     text_generator.set_center_alignment();
     bn::vector<bn::sprite_ptr, 32> text_sprites;
@@ -53,8 +77,10 @@ void primary_menu()
     text_generator.generate(-(bn::display::width() / 2) + 20, - 10, "Gameplay Testing", text_sprites);
     text_generator.generate(-(bn::display::width() / 2) + 20, + 10, "Music Playback", text_sprites);
 
+    // Menu operation loop.
     while(! bn::keypad::start_pressed())
     {
+        // Adjust selection in response to user input.
         if(bn::keypad::down_held() && current_selection < max_items)
         {
             current_selection++;
@@ -64,6 +90,7 @@ void primary_menu()
             current_selection--;
         }
 
+        // Set the menu selection arrow sprite to the selection's position.
         menu_selector.set_y(-10 + (current_selection - 1) * 20);
 
         bn::core::update();
@@ -74,6 +101,9 @@ void primary_menu()
 int main()
 {
     bn::core::init();
+
+    title_screen();
+    bn::core::update();
 
     while(true)
     {
