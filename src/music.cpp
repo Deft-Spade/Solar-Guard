@@ -12,9 +12,7 @@
 #include "bn_regular_bg_items_bg_earth_horizon.h"
 #include "bn_regular_bg_items_bg_seamless_stars.h"
 
-#include "fixed_8x8_sprite_font.h"
 #include "fixed_8x16_sprite_font.h"
-#include "variable_8x8_sprite_font.h"
 #include "variable_8x16_sprite_font.h"
 
 #include "bn_music_item.h"
@@ -126,7 +124,7 @@ void music_scene_5()
 
     bgm_solar_patrol.play();
 
-    bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
+    bn::sprite_text_generator text_generator(fixed_8x16_sprite_font);
     text_generator.set_center_alignment();
     bn::vector<bn::sprite_ptr, 32> text_sprites;
     text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
@@ -147,7 +145,7 @@ void music_scene_6()
 
     bgm_solar_conflict.play();
 
-    bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
+    bn::sprite_text_generator text_generator(fixed_8x16_sprite_font);
     text_generator.set_center_alignment();
     bn::vector<bn::sprite_ptr, 32> text_sprites;
     text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
@@ -168,7 +166,7 @@ void music_scene_7()
 
     bgm_solar_somber.play();
 
-    bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
+    bn::sprite_text_generator text_generator(fixed_8x16_sprite_font);
     text_generator.set_center_alignment();
     bn::vector<bn::sprite_ptr, 32> text_sprites;
     text_generator.generate(0, -text_y_limit, "Project: SOLAR GUARD", text_sprites);
