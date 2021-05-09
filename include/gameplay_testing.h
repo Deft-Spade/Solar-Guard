@@ -1,6 +1,6 @@
 #ifndef GAMEPLAY_TESTING_H
 #define GAMEPLAY_TESTING_H
 
-void gameplay_testing();
+void scene_gameplay_testing();
 
 #endif // GAMEPLAY_TESTING_H

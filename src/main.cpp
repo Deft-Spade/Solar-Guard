@@ -24,13 +24,14 @@
 
 namespace
 {
-    constexpr const bn::music_item bgm_solar_conflict(0);
-    constexpr const bn::music_item bgm_solar_patrol(1);
-    constexpr const bn::music_item bgm_solar_somber(2);
-    constexpr const bn::music_item bgm_tactical(3);
-    constexpr const bn::music_item bgm_theme_menu(4);
-    constexpr const bn::music_item bgm_theme_title(5);
-    constexpr const bn::music_item bgm_theme_upbeat(6);
+    constexpr const bn::music_item bgm_rescue(0);
+    constexpr const bn::music_item bgm_solar_conflict(1);
+    constexpr const bn::music_item bgm_solar_patrol(2);
+    constexpr const bn::music_item bgm_solar_somber(3);
+    constexpr const bn::music_item bgm_tactical(4);
+    constexpr const bn::music_item bgm_theme_menu(5);
+    constexpr const bn::music_item bgm_theme_title(6);
+    constexpr const bn::music_item bgm_theme_upbeat(7);
 
     constexpr const bn::fixed text_y_inc = 14;
     constexpr const bn::fixed text_y_limit = (bn::display::height() / 2) - text_y_inc;
@@ -134,30 +135,12 @@ int main()
             break;
 
             case 1:
-                gameplay_testing();
+                scene_gameplay_testing();
                 bn::core::update();
             break;
 
             case 2:
-                music_scene_1();
-                bn::core::update();
-
-                music_scene_2();
-                bn::core::update();
-
-                music_scene_3();
-                bn::core::update();
-
-                music_scene_4();
-                bn::core::update();
-
-                music_scene_5();
-                bn::core::update();
-
-                music_scene_6();
-                bn::core::update();
-
-                music_scene_7();
+                scene_music_playback();
                 bn::core::update();
             break;
 

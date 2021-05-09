@@ -1,2 +1,2 @@
 # Ignore OpenMPT's backup files.
-.bak
+*.bak

@@ -36,7 +36,7 @@ namespace
     constexpr const bn::music_item bgm_theme_upbeat(6);
 }
 
-void gameplay_testing()
+void scene_gameplay_testing()
 {
     // Set a background for the main menu.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_seamless_stars.create_bg(0, 0);
