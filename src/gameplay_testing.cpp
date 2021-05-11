@@ -24,17 +24,7 @@
 #include "bn_camera_actions.h"
 
 #include "gameplay_testing.h"
-
-namespace
-{
-    constexpr const bn::music_item bgm_solar_conflict(0);
-    constexpr const bn::music_item bgm_solar_patrol(1);
-    constexpr const bn::music_item bgm_solar_somber(2);
-    constexpr const bn::music_item bgm_tactical(3);
-    constexpr const bn::music_item bgm_theme_menu(4);
-    constexpr const bn::music_item bgm_theme_title(5);
-    constexpr const bn::music_item bgm_theme_upbeat(6);
-}
+#include "music.h"
 
 void scene_gameplay_testing()
 {
