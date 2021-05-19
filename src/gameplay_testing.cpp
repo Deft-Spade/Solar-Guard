@@ -15,6 +15,8 @@
 
 #include "fixed_8x16_sprite_font.h"
 #include "variable_8x16_sprite_font.h"
+#include "font_hud.h"
+#include "font_hud_compact.h"
 #include "bn_sprite_items_spr_player.h"
 
 #include "bn_music_item.h"
@@ -42,7 +44,22 @@ void scene_gameplay_testing()
     gameplay_bg.set_camera(camera);
     player_sprite.set_camera(camera);
 
-    // Menu operation loop.
+    // Draw a basic text-based HUD.
+    bn::sprite_text_generator text_generator(font_hud);
+    bn::vector<bn::sprite_ptr, 64> text_sprites;
+    text_generator.set_left_alignment();
+    text_generator.generate(-120, -75, "HUD TEXT TESTING", text_sprites);
+    text_generator.generate(-120, -65, "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", text_sprites);
+    text_generator.generate(-120, -55, "`~!@#$%^&*()-=_+[]{}\\|;':\",./<>?", text_sprites);
+
+    bn::sprite_text_generator small_text_generator(font_hud_compact);
+    bn::vector<bn::sprite_ptr, 64> small_text_sprites;
+    text_generator.set_left_alignment();
+    small_text_generator.generate(-120, 55, "HUD TEXT TESTING", small_text_sprites);
+    small_text_generator.generate(-120, 65, "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", small_text_sprites);
+    small_text_generator.generate(-120, 75, "`~!@#$%^&*()-=_+[]{}\\|;':\",./<>?", small_text_sprites);
+
+    // Game controls.
     while(! bn::keypad::select_pressed())
     {
         // Move the player.
