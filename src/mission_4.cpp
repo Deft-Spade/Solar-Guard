@@ -8,9 +8,6 @@
 
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
-#include "bn_regular_bg_items_bg_title_screen.h"
-#include "bn_regular_bg_items_bg_earth_and_sun.h"
-#include "bn_regular_bg_items_bg_earth_horizon.h"
 #include "bn_regular_bg_items_bg_seamless_stars.h"
 
 #include "fixed_8x16_sprite_font.h"
@@ -25,10 +22,10 @@
 #include "bn_camera_ptr.h"
 #include "bn_camera_actions.h"
 
-#include "gameplay_testing.h"
+#include "mission_4.h"
 #include "music.h"
 
-void scene_gameplay_testing()
+void mission_4()
 {
     // Set a background for the main menu.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_seamless_stars.create_bg(0, 0);
@@ -37,7 +34,7 @@ void scene_gameplay_testing()
     bn::sprite_ptr player_sprite = bn::sprite_items::spr_player.create_sprite(0,0);
 
     // Play the non-combat gameplay music.
-    bgm_solar_patrol.play();
+    bgm_solar_somber.play();
 
     // Setup camera.
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
@@ -59,7 +56,7 @@ void scene_gameplay_testing()
     small_text_generator.generate(-120, 65, "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", small_text_sprites);
     small_text_generator.generate(-120, 75, "`~!@#$%^&*()-=_+[]{}\\|;':\",./<>?", small_text_sprites);
 
-    // Game controls.
+    // Game loop.
     while(! bn::keypad::select_pressed())
     {
         // Move the player.
