@@ -5,6 +5,7 @@
 #include "bn_sprite_ptr.h"
 #include "bn_bg_palettes.h"
 #include "bn_sprite_text_generator.h"
+#include "bn_math.h"
 
 #include <string>
 
@@ -23,23 +24,44 @@ void gameplay_hud_draw(bn::sprite_text_generator &text_generator, bn::vector<bn:
 }
 
 void gameplay_player_control(bn::sprite_ptr &player_sprite)
-{
-    // Move the player.
+{   
+    // Turn ship.
     if(bn::keypad::left_held())
-    {
-        player_sprite.set_x(player_sprite.x() - 1);
+    {        
+        if (player_sprite.rotation_angle().ceil_integer() != 359)
+        {
+            player_sprite.set_rotation_angle(player_sprite.rotation_angle().ceil_integer() + 1);
+        }
+        else
+        {
+            player_sprite.set_rotation_angle(0);
+        }
     }
     else if(bn::keypad::right_held())
     {
-        player_sprite.set_x(player_sprite.x() + 1);
+        if (player_sprite.rotation_angle().ceil_integer() != 0)
+        {
+            player_sprite.set_rotation_angle(player_sprite.rotation_angle().ceil_integer() - 1);
+        }
+        else
+        {
+            player_sprite.set_rotation_angle(359);
+        }
     }
 
+    // Move forth and back.
+    // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
     if(bn::keypad::up_held())
     {
-        player_sprite.set_y(player_sprite.y() - 1);
+        // Adding the vector * cos() part.
+        player_sprite.set_x(player_sprite.x() + 1 * bn::degrees_cos(player_sprite.rotation_angle()));
+
+        // Subtracting the vector * sin() part because y coordinate decreases when going upwards.
+        player_sprite.set_y(player_sprite.y() - 1 * bn::degrees_sin(player_sprite.rotation_angle()));
     }
     else if(bn::keypad::down_held())
     {
-        player_sprite.set_y(player_sprite.y() + 1);
+        player_sprite.set_x(player_sprite.x() - 1 * bn::degrees_cos(player_sprite.rotation_angle()));
+        player_sprite.set_y(player_sprite.y() + 1 * bn::degrees_sin(player_sprite.rotation_angle()));
     }
 }
