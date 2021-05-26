@@ -37,7 +37,7 @@ void mission_2()
     bn::sprite_ptr player_sprite = bn::sprite_items::spr_sg_ship_2.create_sprite(0,0);
 
     // Play the non-combat gameplay music.
-    bgm_solar_patrol.play();
+    bgm_escort.play();
 
     // Setup camera.
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);

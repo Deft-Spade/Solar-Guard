@@ -35,7 +35,7 @@ void scene_music_playback()
 {
     // Menu operation variables.
     int selected_track = 1;
-    const int max_tracks = 8;
+    const int max_tracks = 9;
 
     // The background.
     const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_earth_horizon.create_bg(0, -20);
@@ -83,22 +83,28 @@ void scene_music_playback()
             case 5:
                 switch_track(bgm_solar_patrol);
                 text_song.clear();
-                text_generator.generate(0, 0, "Now Playing Mission 1/2 Track", text_song);
+                text_generator.generate(0, 0, "Now Playing Mission 1 Track", text_song);
             break;
 
             case 6:
+                switch_track(bgm_escort);
+                text_song.clear();
+                text_generator.generate(0, 0, "Now Playing Mission 2 Track", text_song);
+            break;
+
+            case 7:
                 switch_track(bgm_solar_conflict);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 3 Track", text_song);
             break;
 
-            case 7:
+            case 8:
                 switch_track(bgm_solar_somber);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 4 Track", text_song);
             break;
 
-            case 8:
+            case 9:
                 switch_track(bgm_rescue);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 5 Track", text_song);
