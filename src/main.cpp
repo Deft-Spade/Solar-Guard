@@ -18,15 +18,13 @@
 #include "variable_8x16_sprite_font.h"
 #include "bn_sprite_items_menu_arrow.h"
 
-#include "bn_music_item.h"
-#include "bn_music_actions.h"
-
+#include "splash_screens.h"
+#include "music.h"
 #include "mission_1.h"
 #include "mission_2.h"
 #include "mission_3.h"
 #include "mission_4.h"
 #include "mission_5.h"
-#include "music.h"
 
 namespace
 {
@@ -225,6 +223,12 @@ void main_menu()
 int main()
 {
     bn::core::init();
+
+    // Splash screens.
+    splash_screen_developer();
+    bn::core::update();
+    splash_screen_event();
+    bn::core::update();
 
     // Initial title screen.
     title_screen();
