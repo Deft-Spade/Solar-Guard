@@ -57,9 +57,9 @@ constexpr const int8_t font_hud_compact_character_widths[] = {
     4,  // 72 H
     4,  // 73 I
     4,  // 74 J
-    4,  // 75 K
+    5,  // 75 K
     4,  // 76 L
-    4,  // 77 M
+    6,  // 77 M
     4,  // 78 N
     4,  // 79 O
     4,  // 80 P
@@ -69,7 +69,7 @@ constexpr const int8_t font_hud_compact_character_widths[] = {
     4,  // 84 T
     4,  // 85 U
     4,  // 86 V
-    4,  // 87 W
+    6,  // 87 W
     4,  // 88 X
     4,  // 89 Y
     4,  // 90 Z

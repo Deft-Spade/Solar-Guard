@@ -20,11 +20,14 @@
 
 #include "splash_screens.h"
 #include "music.h"
+
 #include "mission_1.h"
 #include "mission_2.h"
 #include "mission_3.h"
 #include "mission_4.h"
 #include "mission_5.h"
+
+#include "briefings.h"
 
 namespace
 {
@@ -246,26 +249,41 @@ int main()
             break;
 
             case 11:
+                briefing_1();
+                bn::core::update();
+
                 mission_1();
                 bn::core::update();
             break;
 
             case 12:
+                briefing_2();
+                bn::core::update();
+
                 mission_2();
                 bn::core::update();
             break;
 
             case 13:
+                briefing_3();
+                bn::core::update();
+
                 mission_3();
                 bn::core::update();
             break;
 
             case 14:
+                briefing_4();
+                bn::core::update();
+
                 mission_4();
                 bn::core::update();
             break;
 
             case 15:
+                briefing_5();
+                bn::core::update();
+
                 mission_5();
                 bn::core::update();
             break;

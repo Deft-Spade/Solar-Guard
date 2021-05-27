@@ -8,7 +8,8 @@
 
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
-#include "bn_regular_bg_items_bg_seamless_stars.h"
+#include "bn_regular_bg_items_bg_mission_1.h"
+#include "bn_regular_bg_items_bg_mission_5_background.h"
 
 #include "fixed_8x16_sprite_font.h"
 #include "variable_8x16_sprite_font.h"
@@ -28,8 +29,9 @@
 
 void mission_1()
 {
-    // Set a background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_seamless_stars.create_bg(0, 0);
+    // Set a parallax two-layer background.
+    bn::regular_bg_ptr gameplay_bg_rear = bn::regular_bg_items::bg_mission_5_background.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_1.create_bg(0, 0);
 
     // Create the player sprite.
     bn::sprite_ptr player_sprite = bn::sprite_items::spr_sg_ship_1.create_sprite(0,0);
@@ -57,6 +59,10 @@ void mission_1()
 
         // Update camera position.
         camera.set_position(player_sprite.x(), player_sprite.y());
+
+        // Rear background scrolling at slower speed for parallax.
+        gameplay_bg_rear.set_x(-player_sprite.x() / 2);
+        gameplay_bg_rear.set_y(-player_sprite.y() / 2);
 
         bn::core::update();
     }

@@ -30,8 +30,8 @@
 void mission_2()
 {
     // Set a parallax two-layer background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_stars_blue_background.create_bg(0, 0);
     bn::regular_bg_ptr gameplay_bg_rear = bn::regular_bg_items::bg_stars_blue_foreground.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_stars_blue_background.create_bg(0, 0);
 
     // Create the player sprite.
     bn::sprite_ptr player_sprite = bn::sprite_items::spr_sg_ship_2.create_sprite(0,0);

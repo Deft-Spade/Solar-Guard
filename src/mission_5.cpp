@@ -10,8 +10,8 @@
 
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
-#include "bn_regular_bg_items_bg_stars_blue_background.h"
-#include "bn_regular_bg_items_bg_stars_blue_foreground.h"
+#include "bn_regular_bg_items_bg_mission_5.h"
+#include "bn_regular_bg_items_bg_mission_5_background.h"
 
 #include "fixed_8x16_sprite_font.h"
 #include "variable_8x16_sprite_font.h"
@@ -32,8 +32,9 @@
 void mission_5()
 {
     // Set a parallax two-layer background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_stars_blue_background.create_bg(0, 0);
-    bn::regular_bg_ptr gameplay_bg_rear = bn::regular_bg_items::bg_stars_blue_foreground.create_bg(0, 0);
+    // Rear background is in front this time to make the background start viewable 'through' the sunlight.
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_5.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg_rear = bn::regular_bg_items::bg_mission_5_background.create_bg(0, 0);
 
     // Create the player sprite.
     bn::sprite_ptr player_sprite = bn::sprite_items::spr_sg_ship_5.create_sprite(0,0);
