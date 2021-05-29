@@ -31,8 +31,8 @@ void mission_3()
     // Set a background.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_seamless_stars.create_bg(0, 0);
 
-    // Create the player sprite.
-    bn::sprite_ptr player_sprite = bn::sprite_items::spr_sg_ship_3.create_sprite(0,0);
+    // Create the player object.
+    player_ship player_ship(3);
 
     // Play the non-combat gameplay music.
     bgm_solar_conflict.play();
@@ -40,7 +40,7 @@ void mission_3()
     // Setup camera.
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
-    player_sprite.set_camera(camera);
+    player_ship.player_sprite.set_camera(camera);
 
     // Draw a basic text-based HUD.
     bn::sprite_text_generator text_generator(font_hud);
@@ -50,13 +50,13 @@ void mission_3()
     while(! bn::keypad::select_pressed())
     {
         // Draw HUD.
-        gameplay_hud_draw(text_generator, text_sprites, player_sprite);
+        gameplay_hud_draw(text_generator, text_sprites, player_ship.x, player_ship.y);
 
         // Player input.
-        gameplay_player_control(player_sprite);
+        gameplay_player_control(player_ship);
 
         // Update camera position.
-        camera.set_position(player_sprite.x(), player_sprite.y());
+        camera.set_position(player_ship.x, player_ship.y);
 
         bn::core::update();
     }
