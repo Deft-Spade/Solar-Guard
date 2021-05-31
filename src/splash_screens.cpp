@@ -13,6 +13,7 @@
 #include "bn_regular_bg_item.h"
 #include "bn_regular_bg_items_bg_splash_screen_deft_spade.h"
 #include "bn_regular_bg_items_bg_splash_screen_gba_jam_2021.h"
+#include "bn_regular_bg_items_bg_splash_screen_butano.h"
 
 #include "splash_screens.h"
 
@@ -46,14 +47,19 @@ void splash_screen(bn::regular_bg_ptr splash_screen)
 
 void splash_screen_developer()
 {
-    // Splash screen background.
     bn::regular_bg_ptr background_splash_screen_developer = bn::regular_bg_items::bg_splash_screen_deft_spade.create_bg(0, 0);
     splash_screen(background_splash_screen_developer);
 }
 
+void splash_screen_engine()
+{
+    bn::regular_bg_ptr background_splash_screen_event = bn::regular_bg_items::bg_splash_screen_butano.create_bg(0, 0);
+    splash_screen(background_splash_screen_event);
+}
+
+
 void splash_screen_event()
 {
-    // Splash screen background.
     bn::regular_bg_ptr background_splash_screen_event = bn::regular_bg_items::bg_splash_screen_gba_jam_2021.create_bg(0, 0);
     splash_screen(background_splash_screen_event);
 }

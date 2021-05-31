@@ -230,6 +230,8 @@ int main()
     // Splash screens.
     splash_screen_developer();
     bn::core::update();
+    splash_screen_engine();
+    bn::core::update();
     splash_screen_event();
     bn::core::update();
 
