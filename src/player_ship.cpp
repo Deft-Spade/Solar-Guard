@@ -1,4 +1,7 @@
 #include "player_ship.h"
+#include "bn_keypad.h"
+#include "bn_math.h"
+
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_items_spr_sg_ship_1.h"
 #include "bn_sprite_items_spr_sg_ship_2.h"
@@ -29,5 +32,49 @@ player_ship::player_ship(int arg_type)
 
 void player_ship::movement()
 {
+    // Turn ship.
+    if(bn::keypad::left_held())
+    {
+        if (dir_facing.ceil_integer() != 359)
+        {
+            dir_facing += 1;
+        }
+        else
+        {
+            dir_facing = 0;
+        }
+    }
+    else if(bn::keypad::right_held())
+    {
+        if (dir_facing.ceil_integer() != 0)
+        {
+            dir_facing -= 1;
+        }
+        else
+        {
+            dir_facing = 359;
+        }
+    }
 
+    // Update sprite rotation.
+    player_sprite.set_rotation_angle(dir_facing);
+
+    // Speed up and slow down.
+    if(bn::keypad::up_held())
+    {
+        speed = bn::min(speed + 0.1, speed_max);
+    }
+    else if(bn::keypad::down_held())
+    {
+        speed = bn::max(bn::fixed(0), speed - 0.1);
+    }
+
+    // Apply Movement (is atmosphere turning style, not space momentum style, for now).
+    // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
+    x += speed * bn::degrees_cos(dir_facing);   // Adding the vector * cos() part.
+    y -= speed * bn::degrees_sin(dir_facing);   // Subtracting the vector * sin() part because y coordinate decreases when going upwards.
+
+    // Update the sprite's position.
+    player_sprite.set_x(x);
+    player_sprite.set_y(y);
 }

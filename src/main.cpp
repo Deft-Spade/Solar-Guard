@@ -2,13 +2,13 @@
 #include "bn_keypad.h"
 #include "bn_display.h"
 #include "bn_optional.h"
-#include "bn_sprite_ptr.h"
-#include "bn_bg_palettes.h"
+#include "bn_assert.h"
 
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_text_generator.h"
 #include "bn_sprite_items_spr_logo.h"
 
+#include "bn_bg_palettes.h"
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
 #include "bn_regular_bg_items_bg_title_screen.h"
@@ -213,7 +213,7 @@ void main_menu()
                 break;
 
                 default:
-                    // Do nothing.
+                    BN_ERROR("Invalid menu selection number: ", current_selection);
                 break;
             }
         }
@@ -294,7 +294,7 @@ int main()
             break;
 
             default:
-                // Do nothing.
+                BN_ERROR("Invalid scene number: ", current_scene);
             break;
         }
     }

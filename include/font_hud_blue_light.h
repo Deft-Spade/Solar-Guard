@@ -3,17 +3,17 @@
  * zlib License, see LICENSE file.
  */
 
-#ifndef FONT_HUD_H
-#define FONT_HUD_H
+#ifndef FONT_HUD_BLUE_LIGHT_H
+#define FONT_HUD_BLUE_LIGHT_H
 
 #include "bn_sprite_font.h"
-#include "bn_sprite_items_spr_font_hud.h"
+#include "bn_sprite_items_font_hud_blue_light.h"
 
-constexpr const bn::string_view font_hud_utf8_characters[] = {
+constexpr const bn::string_view font_hud_blue_light_utf8_characters[] = {
     "Á", "É", "Í", "Ó", "Ú", "Ü", "Ñ", "á", "é", "í", "ó", "ú", "ü", "ñ", "¡", "¿"
 };
 
-constexpr const int8_t font_hud_character_widths[] = {
+constexpr const int8_t font_hud_blue_light_character_widths[] = {
     6,  // 32
     6,  // 33 !
     6,  // 34 "
@@ -127,8 +127,8 @@ constexpr const int8_t font_hud_character_widths[] = {
     6,  // ¿
 };
 
-constexpr const bn::sprite_font font_hud(
-        bn::sprite_items::spr_font_hud, font_hud_utf8_characters,
-        font_hud_character_widths);
+constexpr const bn::sprite_font font_hud_blue_light(
+        bn::sprite_items::font_hud_blue_light, font_hud_blue_light_utf8_characters,
+        font_hud_blue_light_character_widths);
 
 #endif

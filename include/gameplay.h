@@ -11,6 +11,5 @@
 #include "player_ship.h"
 
 void gameplay_hud_draw(bn::sprite_text_generator &text_generator, bn::vector<bn::sprite_ptr, 64> &text_sprites, bn::fixed x, bn::fixed y);
-void gameplay_player_control(player_ship &player_ship);
 
 #endif // GAMEPLAY_H
