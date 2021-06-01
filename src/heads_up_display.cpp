@@ -72,33 +72,25 @@ void heads_up_display::draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::f
     // Ally health (hardcoded for now).
     text_generator_compact_green.generate(-116, -37, "100", hud_text);
 
-    // Determine directional speed.
-    // https://www.onlinemathlearning.com/vector-magnitude.html
-    bn::fixed directional_speed = bn::sqrt(player_ship.speed_x * player_ship.speed_x + player_ship.speed_y * player_ship.speed_y);
-
     // Movement Speed
-    bn::fixed speed_display_value = bn::fixed((directional_speed / 2) * 60);
+    bn::fixed speed_display_value = bn::fixed((player_ship.directional_speed / 2) * 60);
     text_generator_compact_green.generate(14, -76, bn::to_string<8>(speed_display_value.floor_integer()) + "M/S", hud_text);
-    bn::fixed speed_display_sprite = (directional_speed / player_ship.speed_max) * 30;
+    bn::fixed speed_display_sprite = (player_ship.directional_speed / player_ship.speed_max) * 30;
     spr_speed.set_tiles(bn::sprite_items::spr_hud_speed.tiles_item().create_tiles(bn::min(speed_display_sprite.floor_integer(),30)));
-
-    // Determine angle.
-    // https://www.cplusplus.com/reference/cmath/atan2/
-    bn::fixed display_angle = atan2f(player_ship.speed_y.to_float(),player_ship.speed_x.to_float()) * 180 / 3.14159265;
 
     // Movement Direction
     int display_dir_mov;
-    if (display_angle.integer() <= 90)
+    if (player_ship.mov_angle.integer() <= 90)
     {
-        display_dir_mov = 90 - display_angle.integer();
+        display_dir_mov = 90 - player_ship.mov_angle.integer();
     }
-    else if (display_angle.integer() <= 0)
+    else if (player_ship.mov_angle.integer() <= 0)
     {
-        display_dir_mov = 90 + bn::abs(display_angle.integer());
+        display_dir_mov = 90 + bn::abs(player_ship.mov_angle.integer());
     }
     else
     {
-        display_dir_mov = 270 + 180 - display_angle.integer();
+        display_dir_mov = 270 + 180 - player_ship.mov_angle.integer();
     }
     text_generator_compact_green.generate(14, -68, bn::to_string<6>(display_dir_mov) + "DEG", hud_text);
 

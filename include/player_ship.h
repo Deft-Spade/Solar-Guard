@@ -28,6 +28,8 @@ public:
     bn::fixed speed_x = 0;
     bn::fixed speed_y = 0;
     bn::fixed speed_max = 5;
+    bn::fixed directional_speed = 0;
+    bn::fixed mov_angle = 0;
     bn::fixed engine_fuel = 0;
     bn::fixed engine_heat = 0;
     int gun_ammo = 200;

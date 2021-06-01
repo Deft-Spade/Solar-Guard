@@ -61,8 +61,8 @@ void player_ship::movement()
     player_sprite.set_rotation_angle(direction);
 
     // Determine curent magnitude and direction for refrence.
-    int directional_speed = bn::sqrt(speed_x * speed_x + speed_y * speed_y).floor_integer();
-    bn::fixed mov_angle = atan2f(speed_y.to_float(), speed_x.to_float()) * 180 / 3.14159265;
+    directional_speed = bn::sqrt(speed_x * speed_x + speed_y * speed_y);             // https://www.onlinemathlearning.com/vector-magnitude.html
+    mov_angle = atan2(speed_y.to_double(), speed_x.to_double()) * 180 / 3.14159265;  // https://www.cplusplus.com/reference/cmath/atan2/
 
     // Speed up and slow down.
     if(bn::keypad::up_held())
@@ -73,17 +73,31 @@ void player_ship::movement()
         speed_y += 0.1 * bn::degrees_sin(direction);
 
         // Keep speed in check.
-        if (directional_speed > speed_max.floor_integer())
+        if (directional_speed.ceil_integer() > speed_max.floor_integer())
         {
-            speed_x = speed_max * bn::degrees_cos(mov_angle);
-            speed_y = speed_max * bn::degrees_sin(mov_angle);
+            // Retain direction but reset magnitude to maximum allowed speed.
+            // https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
+            speed_x = speed_x * speed_max / directional_speed;
+            speed_y = speed_y * speed_max / directional_speed;
         }
     }
     else if(bn::keypad::down_held())
     {
-        // Deceleration
-        speed_x -= 0.05 * bn::degrees_cos(mov_angle);
-        speed_y -= 0.05 * bn::degrees_sin(mov_angle);
+        // Check if current overall speed is greater than deceleration amount.
+        if (directional_speed.to_double() > 0.05)
+        {
+            // Retain direction but reduce magnitude by a deceleration amount.
+            // https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
+            speed_x = speed_x * (directional_speed - 0.05) / directional_speed;
+            speed_y = speed_y * (directional_speed - 0.05) / directional_speed;
+        }
+        else
+        {
+            // In the event that the current overall speed is as large or smaller than deceleration amount, set speed
+            // to 0 to properly stop ship and avoid a slow drift from a flipped speed value that's small but not zero.
+            speed_x = 0;
+            speed_y = 0;
+        }
     }
 
     // Apply Movement
