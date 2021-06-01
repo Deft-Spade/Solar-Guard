@@ -1,6 +1,7 @@
 #include "player_ship.h"
 #include "bn_keypad.h"
 #include "bn_math.h"
+#include <math.h>
 
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_items_spr_sg_ship_1.h"
@@ -11,8 +12,6 @@
 #include "bn_sprite_items_spr_sg_ship_6.h"
 #include "bn_sprite_items_spr_sg_ship_7.h"
 #include "bn_sprite_items_spr_sg_ship_8.h"
-
-#include <math.h>
 
 player_ship::player_ship(int arg_type)
 {
@@ -37,55 +36,59 @@ void player_ship::movement()
     // Turn ship.
     if(bn::keypad::left_held())
     {
-        if (dir_facing.ceil_integer() != 359)
+        if (direction.ceil_integer() != 359)
         {
-            dir_facing += 1;
+            direction += 1;
         }
         else
         {
-            dir_facing = 0;
+            direction = 0;
         }
     }
     else if(bn::keypad::right_held())
     {
-        if (dir_facing.ceil_integer() != 0)
+        if (direction.ceil_integer() != 0)
         {
-            dir_facing -= 1;
+            direction -= 1;
         }
         else
         {
-            dir_facing = 359;
+            direction = 359;
         }
     }
 
     // Update sprite rotation.
-    player_sprite.set_rotation_angle(dir_facing);
+    player_sprite.set_rotation_angle(direction);
+
+    // Determine curent magnitude and direction for refrence.
+    int directional_speed = bn::sqrt(speed_x * speed_x + speed_y * speed_y).floor_integer();
+    bn::fixed mov_angle = atan2f(speed_y.to_float(), speed_x.to_float()) * 180 / 3.14159265;
 
     // Speed up and slow down.
     if(bn::keypad::up_held())
     {
         // Determine new x and y speeds.
-        bn::fixed combined_x_speed = speed * bn::degrees_cos(dir_moving) + 0.1 * bn::degrees_cos(dir_facing);
-        bn::fixed combined_y_speed = speed * bn::degrees_sin(dir_moving) + 0.1 * bn::degrees_sin(dir_facing);
+        // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
+        speed_x += 0.1 * bn::degrees_cos(direction);
+        speed_y += 0.1 * bn::degrees_sin(direction);
 
-        // Determine directional speed.
-        // https://www.onlinemathlearning.com/vector-magnitude.html
-        speed = bn::min(bn::fixed(bn::sqrt(combined_x_speed * combined_x_speed + combined_y_speed * combined_y_speed)), speed_max);
-
-        // Determine angle.
-        // https://www.cplusplus.com/reference/cmath/atan2/
-        dir_moving = atan2f(combined_y_speed.to_float(),combined_x_speed.to_float()) * 180 / 3.14159265;
+        // Keep speed in check.
+        if (directional_speed > speed_max.floor_integer())
+        {
+            speed_x = speed_max * bn::degrees_cos(mov_angle);
+            speed_y = speed_max * bn::degrees_sin(mov_angle);
+        }
     }
     else if(bn::keypad::down_held())
     {
-        // Simple deceleration.
-        speed = bn::max(bn::fixed(0), speed - 0.01);
+        // Deceleration
+        speed_x -= 0.05 * bn::degrees_cos(mov_angle);
+        speed_y -= 0.05 * bn::degrees_sin(mov_angle);
     }
 
     // Apply Movement
-    // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-    x += speed * bn::degrees_cos(dir_moving);   // Adding the vector * cos() part.
-    y -= speed * bn::degrees_sin(dir_moving);   // Subtracting the vector * sin() part because y coordinate decreases when going upwards.
+    x += speed_x;
+    y -= speed_y;   // Subtracting because y coordinate decreases when going upwards.
 
     // Update the sprite's position.
     player_sprite.set_x(x);

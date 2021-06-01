@@ -22,8 +22,10 @@
 #include "bn_sprite_affine_second_attributes_hbe_ptr.h"
 #include "bn_sprite_regular_second_attributes_hbe_ptr.h"
 
+#include <math.h>
 #include "bn_math.h"
 #include "bn_string.h"
+#include "bn_log.h"
 
 #include "bn_sprite_text_generator.h"
 
@@ -70,25 +72,33 @@ void heads_up_display::draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::f
     // Ally health (hardcoded for now).
     text_generator_compact_green.generate(-116, -37, "100", hud_text);
 
+    // Determine directional speed.
+    // https://www.onlinemathlearning.com/vector-magnitude.html
+    bn::fixed directional_speed = bn::sqrt(player_ship.speed_x * player_ship.speed_x + player_ship.speed_y * player_ship.speed_y);
+
     // Movement Speed
-    bn::fixed speed_display_value = bn::fixed((player_ship.speed / 2) * 60);
+    bn::fixed speed_display_value = bn::fixed((directional_speed / 2) * 60);
     text_generator_compact_green.generate(14, -76, bn::to_string<8>(speed_display_value.floor_integer()) + "M/S", hud_text);
-    bn::fixed speed_display_sprite = (player_ship.speed / player_ship.speed_max) * 30;
-    spr_speed.set_tiles(bn::sprite_items::spr_hud_speed.tiles_item().create_tiles(speed_display_sprite.floor_integer()));
+    bn::fixed speed_display_sprite = (directional_speed / player_ship.speed_max) * 30;
+    spr_speed.set_tiles(bn::sprite_items::spr_hud_speed.tiles_item().create_tiles(bn::min(speed_display_sprite.floor_integer(),30)));
+
+    // Determine angle.
+    // https://www.cplusplus.com/reference/cmath/atan2/
+    bn::fixed display_angle = atan2f(player_ship.speed_y.to_float(),player_ship.speed_x.to_float()) * 180 / 3.14159265;
 
     // Movement Direction
     int display_dir_mov;
-    if (player_ship.dir_moving.integer() <= 90)
+    if (display_angle.integer() <= 90)
     {
-        display_dir_mov = 90 - player_ship.dir_moving.integer();
+        display_dir_mov = 90 - display_angle.integer();
     }
-    else if (player_ship.dir_moving.integer() <= 0)
+    else if (display_angle.integer() <= 0)
     {
-        display_dir_mov = 90 + bn::abs(player_ship.dir_moving.integer());
+        display_dir_mov = 90 + bn::abs(display_angle.integer());
     }
     else
     {
-        display_dir_mov = 270 + 180 - player_ship.dir_moving.integer();
+        display_dir_mov = 270 + 180 - display_angle.integer();
     }
     text_generator_compact_green.generate(14, -68, bn::to_string<6>(display_dir_mov) + "DEG", hud_text);
 

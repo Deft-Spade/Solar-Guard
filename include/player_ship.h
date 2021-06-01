@@ -24,9 +24,9 @@ public:
     int hull_recharge_amount = 20;
     bn::fixed x = 0;
     bn::fixed y = 0;
-    bn::fixed dir_facing = 0;
-    bn::fixed dir_moving = 0;
-    bn::fixed speed = 0;
+    bn::fixed direction = 0;
+    bn::fixed speed_x = 0;
+    bn::fixed speed_y = 0;
     bn::fixed speed_max = 5;
     bn::fixed engine_fuel = 0;
     bn::fixed engine_heat = 0;
