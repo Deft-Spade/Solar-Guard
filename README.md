@@ -1,5 +1,5 @@
 # Solar Guard
-A [homebrew](https://en.wikipedia.org/wiki/Homebrew_(video_games) [Game Boy Advance](https://en.wikipedia.org/wiki/Game_Boy_Advance) game made for [GBA Jam 2021](https://itch.io/jam/gbajam21).
+A [homebrew](https://en.wikipedia.org/wiki/Homebrew_(video_games)) [Game Boy Advance](https://en.wikipedia.org/wiki/Game_Boy_Advance) game made for [GBA Jam 2021](https://itch.io/jam/gbajam21).
 
 The game is intended to be a space shooter where you complete various missions in the solar system.
 
