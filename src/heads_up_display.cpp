@@ -70,12 +70,27 @@ void heads_up_display::draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::f
     // Ally health (hardcoded for now).
     text_generator_compact_green.generate(-116, -37, "100", hud_text);
 
-    // Movement speed and direction.
+    // Movement Speed
     bn::fixed speed_display_value = bn::fixed((player_ship.speed / 2) * 60);
     text_generator_compact_green.generate(14, -76, bn::to_string<8>(speed_display_value.floor_integer()) + "M/S", hud_text);
     bn::fixed speed_display_sprite = (player_ship.speed / player_ship.speed_max) * 30;
     spr_speed.set_tiles(bn::sprite_items::spr_hud_speed.tiles_item().create_tiles(speed_display_sprite.floor_integer()));
-    text_generator_compact_green.generate(14, -68, bn::to_string<6>(player_ship.dir_facing.floor_integer()) + "DEG", hud_text);
+
+    // Movement Direction
+    int display_dir_mov;
+    if (player_ship.dir_moving.integer() <= 90)
+    {
+        display_dir_mov = 90 - player_ship.dir_moving.integer();
+    }
+    else if (player_ship.dir_moving.integer() <= 0)
+    {
+        display_dir_mov = 90 + bn::abs(player_ship.dir_moving.integer());
+    }
+    else
+    {
+        display_dir_mov = 270 + 180 - player_ship.dir_moving.integer();
+    }
+    text_generator_compact_green.generate(14, -68, bn::to_string<6>(display_dir_mov) + "DEG", hud_text);
 
     // Target's shields and health (draws hardcoded values for now until targeting is implemented).
     text_generator_compact_green.set_right_alignment();

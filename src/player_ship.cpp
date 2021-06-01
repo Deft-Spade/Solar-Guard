@@ -12,6 +12,8 @@
 #include "bn_sprite_items_spr_sg_ship_7.h"
 #include "bn_sprite_items_spr_sg_ship_8.h"
 
+#include <math.h>
+
 player_ship::player_ship(int arg_type)
 {
     type = arg_type;
@@ -62,17 +64,28 @@ void player_ship::movement()
     // Speed up and slow down.
     if(bn::keypad::up_held())
     {
-        speed = bn::min(speed + 0.1, speed_max);
+        // Determine new x and y speeds.
+        bn::fixed combined_x_speed = speed * bn::degrees_cos(dir_moving) + 0.1 * bn::degrees_cos(dir_facing);
+        bn::fixed combined_y_speed = speed * bn::degrees_sin(dir_moving) + 0.1 * bn::degrees_sin(dir_facing);
+
+        // Determine directional speed.
+        // https://www.onlinemathlearning.com/vector-magnitude.html
+        speed = bn::min(bn::fixed(bn::sqrt(combined_x_speed * combined_x_speed + combined_y_speed * combined_y_speed)), speed_max);
+
+        // Determine angle.
+        // https://www.cplusplus.com/reference/cmath/atan2/
+        dir_moving = atan2f(combined_y_speed.to_float(),combined_x_speed.to_float()) * 180 / 3.14159265;
     }
     else if(bn::keypad::down_held())
     {
-        speed = bn::max(bn::fixed(0), speed - 0.1);
+        // Simple deceleration.
+        speed = bn::max(bn::fixed(0), speed - 0.01);
     }
 
-    // Apply Movement (is atmosphere turning style, not space momentum style, for now).
+    // Apply Movement
     // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-    x += speed * bn::degrees_cos(dir_facing);   // Adding the vector * cos() part.
-    y -= speed * bn::degrees_sin(dir_facing);   // Subtracting the vector * sin() part because y coordinate decreases when going upwards.
+    x += speed * bn::degrees_cos(dir_moving);   // Adding the vector * cos() part.
+    y -= speed * bn::degrees_sin(dir_moving);   // Subtracting the vector * sin() part because y coordinate decreases when going upwards.
 
     // Update the sprite's position.
     player_sprite.set_x(x);
