@@ -66,6 +66,10 @@ void mission_5()
         // Player movement (input and logic is handled in player object).
         player_ship.movement();
 
+        // Keep player's position within mission bounds.
+        player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
+        player_ship.y = bn::min(bn::max(-y_limit, player_ship.y), y_limit);
+
         // Update camera position (preventing it from moving beyond the big background's boundaries).
         bn::fixed cam_x_pos = bn::max(bn::fixed(bn::min(player_ship.x, x_limit - 120)), -x_limit + 120);
         bn::fixed cam_y_pos = bn::max(bn::fixed(bn::min(player_ship.y, y_limit - 80)), -y_limit + 80);

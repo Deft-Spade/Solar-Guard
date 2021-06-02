@@ -30,8 +30,8 @@
 void mission_4()
 {
     // Mission constants.
-    const bn::fixed x_limit = 8192;
-    const bn::fixed y_limit = 8192;
+    const bn::fixed x_limit = 20480;
+    const bn::fixed y_limit = 20480;
 
     // Set a background.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_seamless_stars.create_bg(0, 0);
@@ -60,6 +60,10 @@ void mission_4()
 
         // Player movement (input and logic is handled in player object).
         player_ship.movement();
+
+        // Keep player's position within mission bounds.
+        player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
+        player_ship.y = bn::min(bn::max(-y_limit, player_ship.y), y_limit);
 
         // Update camera position (preventing it from moving beyond the big background's boundaries).
         bn::fixed cam_x_pos = bn::max(bn::fixed(bn::min(player_ship.x, x_limit - 120)), -x_limit + 120);
