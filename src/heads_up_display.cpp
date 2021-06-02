@@ -101,6 +101,29 @@ void heads_up_display::draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::f
     text_generator_compact_green.generate(119, -68, "100", hud_text);
 
     // Implement update of engine and utility statuses.
+    if (bn::keypad::r_held())
+    {
+        if (bn::keypad::l_held())
+        {
+            // Afterburner indicator on HUD.
+            spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(1));
+        }
+        else
+        {
+            // Engaged indicator on HUD.
+            spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(0));
+        }
+    }
+    else if (bn::keypad::l_held())
+    {
+        // Halt indicator on HUD.
+        spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(3));
+    }
+    else
+    {
+        // Idle indicator on HUD.
+        spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(2));
+    }
 
 
     // Coordinates Text

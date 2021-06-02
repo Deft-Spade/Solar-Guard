@@ -3,6 +3,8 @@
 
 #include "bn_fixed.h"
 #include "bn_sprite_ptr.h"
+#include "bn_sprite_animate_actions.h"
+
 #include "bn_sprite_items_spr_sg_ship_1.h"
 
 class player_ship

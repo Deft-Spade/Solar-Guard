@@ -60,59 +60,59 @@ void scene_music_playback()
                 switch_track(bgm_theme_title);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Title Screen Track", text_song);
-            break;
+                break;
 
             case 2:
                 switch_track(bgm_theme_menu);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Main Menu Track", text_song);
-            break;
+                break;
 
             case 3:
                 switch_track(bgm_theme_upbeat);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing 'Upbeat' Track", text_song);
-            break;
+                break;
 
             case 4:
                 switch_track(bgm_tactical);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission Briefing Track", text_song);
-            break;
+                break;
 
             case 5:
                 switch_track(bgm_solar_patrol);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 1 Track", text_song);
-            break;
+                break;
 
             case 6:
                 switch_track(bgm_escort);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 2 Track", text_song);
-            break;
+                break;
 
             case 7:
                 switch_track(bgm_solar_conflict);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 3 Track", text_song);
-            break;
+                break;
 
             case 8:
                 switch_track(bgm_solar_somber);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 4 Track", text_song);
-            break;
+                break;
 
             case 9:
                 switch_track(bgm_rescue);
                 text_song.clear();
                 text_generator.generate(0, 0, "Now Playing Mission 5 Track", text_song);
-            break;
+                break;
 
             default:
                 // Do nothing.
-            break;
+                break;
         }
 
         while (true)

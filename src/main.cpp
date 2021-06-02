@@ -202,7 +202,7 @@ void main_menu()
                         // Return out of the main menu's own loop.
                         return;
                     }
-                break;
+                    break;
 
                 case 2:
                     // Instruct game to go to music playback scene.
@@ -210,11 +210,11 @@ void main_menu()
 
                     // Return out of the main menu's own loop.
                     return;
-                break;
+                    break;
 
                 default:
                     BN_ERROR("Invalid menu selection number: ", current_selection);
-                break;
+                    break;
             }
         }
 
@@ -248,7 +248,7 @@ int main()
             case 0:
                 title_screen();
                 bn::core::update();
-            break;
+                break;
 
             case 11:
                 briefing_1();
@@ -256,7 +256,7 @@ int main()
 
                 mission_1();
                 bn::core::update();
-            break;
+                break;
 
             case 12:
                 briefing_2();
@@ -264,7 +264,7 @@ int main()
 
                 mission_2();
                 bn::core::update();
-            break;
+                break;
 
             case 13:
                 briefing_3();
@@ -272,7 +272,7 @@ int main()
 
                 mission_3();
                 bn::core::update();
-            break;
+                break;
 
             case 14:
                 briefing_4();
@@ -280,7 +280,7 @@ int main()
 
                 mission_4();
                 bn::core::update();
-            break;
+                break;
 
             case 15:
                 briefing_5();
@@ -288,16 +288,16 @@ int main()
 
                 mission_5();
                 bn::core::update();
-            break;
+                break;
 
             case 2:
                 scene_music_playback();
                 bn::core::update();
-            break;
+                break;
 
             default:
                 BN_ERROR("Invalid scene number: ", current_scene);
-            break;
+                break;
         }
     }
 }
