@@ -88,7 +88,7 @@ void player_ship::movement()
     mov_angle = atan2(speed_y.to_double(), speed_x.to_double()) * 180 / 3.14159265;  // https://www.cplusplus.com/reference/cmath/atan2/
 
     // Speed up and slow down.
-    if(bn::keypad::r_held())
+    if(bn::keypad::r_held() && !engine_overheated && engine_fuel.ceil_integer() > 0)
     {
         // Check for L also being held, engage afterburner if so.
         if (bn::keypad::l_held())
@@ -97,6 +97,12 @@ void player_ship::movement()
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
             speed_x += 0.1 * bn::degrees_cos(direction);
             speed_y += 0.1 * bn::degrees_sin(direction);
+
+            // Engine heating.
+            engine_heat = bn::min(engine_heat += 0.2, engine_heat_max);
+
+            // Fuel consumption.
+            engine_fuel = bn::max(bn::fixed(0), engine_fuel -= 0.02);
         }
         else
         {
@@ -104,6 +110,12 @@ void player_ship::movement()
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
             speed_x += 0.05 * bn::degrees_cos(direction);
             speed_y += 0.05 * bn::degrees_sin(direction);
+
+            // Engine heating.
+            engine_heat = bn::min(engine_heat += 0.1, engine_heat_max);
+
+            // Fuel consumption.
+            engine_fuel = bn::max(bn::fixed(0), engine_fuel -= 0.005);
         }
 
         // Keep speed in check.
@@ -115,27 +127,45 @@ void player_ship::movement()
             speed_y = speed_y * speed_max / directional_speed;
         }
     }
-    else if(bn::keypad::l_held())
+    else
     {
-        // Check if current overall speed is greater than deceleration amount.
-        if (directional_speed.to_double() > 0.05)
+        // Engine cooldown.
+        engine_heat = bn::max(bn::fixed(0), engine_heat -= 0.3);
+
+        if(bn::keypad::l_held() && !bn::keypad::r_held())
         {
-            // Retain direction but reduce magnitude by a deceleration amount.
-            // https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
-            speed_x = speed_x * (directional_speed - 0.05) / directional_speed;
-            speed_y = speed_y * (directional_speed - 0.05) / directional_speed;
-        }
-        else
-        {
-            // In the event that the current overall speed is as large or smaller than deceleration amount, set speed
-            // to 0 to properly stop ship and avoid a slow drift from a flipped speed value that's small but not zero.
-            speed_x = 0;
-            speed_y = 0;
+            // Check if current overall speed is greater than deceleration amount.
+            if (directional_speed.to_double() > 0.05)
+            {
+                // Retain direction but reduce magnitude by a deceleration amount.
+                // https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
+                speed_x = speed_x * (directional_speed - 0.05) / directional_speed;
+                speed_y = speed_y * (directional_speed - 0.05) / directional_speed;
+            }
+            else
+            {
+                // In the event that the current overall speed is as large or smaller than deceleration amount, set speed
+                // to 0 to properly stop ship and avoid a slow drift from a flipped speed value that's small but not zero.
+                speed_x = 0;
+                speed_y = 0;
+            }
         }
     }
 
+    // Switch to overheated if engine heat reaches 100%.
+    if (!engine_overheated && engine_heat.floor_integer() == engine_heat_max.floor_integer())
+    {
+        engine_overheated = true;
+    }
+
+    // Switch back to not being overheated once engine cools down to 0%.
+    if (engine_overheated && engine_heat.ceil_integer() == 0)
+    {
+        engine_overheated = false;
+    }
+
     // Afterburner sprite.
-    if (bn::keypad::l_held() && bn::keypad::r_held())
+    if (bn::keypad::l_held() && bn::keypad::r_held() && !engine_overheated && engine_fuel.ceil_integer() > 0)
     {
         switch (type)
         {
