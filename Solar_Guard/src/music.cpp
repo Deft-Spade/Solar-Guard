@@ -10,7 +10,7 @@
 #include "bn_regular_bg_item.h"
 #include "bn_regular_bg_items_bg_earth_horizon.h"
 
-#include "fixed_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "variable_8x16_sprite_font.h"
 
 #include "bn_music_item.h"

@@ -11,10 +11,10 @@
 #include "bn_regular_bg_items_bg_mission_1.h"
 #include "bn_regular_bg_items_bg_mission_5_background.h"
 
-#include "fixed_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "variable_8x16_sprite_font.h"
-#include "font_hud_green.h"
-#include "font_hud_compact_green.h"
+#include "font_hud.h"
+#include "font_hud_compact.h"
 #include "bn_sprite_items_spr_sg_ship_1.h"
 
 #include "bn_music_item.h"
@@ -56,6 +56,10 @@ void mission_1()
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+
+        // Gravitational acceleration downward.
+        if (player_ship.directional_speed.floor_integer() < player_ship.speed_max.floor_integer())
+        player_ship.speed_y -= 0.002;
 
         // Player movement (input and logic is handled in player object).
         player_ship.movement();

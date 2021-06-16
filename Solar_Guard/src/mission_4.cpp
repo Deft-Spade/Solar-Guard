@@ -10,9 +10,9 @@
 #include "bn_regular_bg_item.h"
 #include "bn_regular_bg_items_bg_seamless_stars.h"
 
-#include "fixed_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "variable_8x16_sprite_font.h"
-#include "font_hud_green.h"
+#include "font_hud.h"
 #include "bn_sprite_items_spr_sg_ship_4.h"
 
 #include "bn_music_item.h"
@@ -26,6 +26,9 @@
 #include "gameplay.h"
 #include "player_ship.h"
 #include "heads_up_display.h"
+
+#include "bn_log.h"
+#include "bn_string.h"
 
 void mission_4()
 {
@@ -47,10 +50,6 @@ void mission_4()
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
     player_ship.player_sprite.set_camera(camera);
-
-    // Draw a basic text-based HUD.
-    bn::sprite_text_generator text_generator(font_hud_green);
-    bn::vector<bn::sprite_ptr, 64> text_sprites;
 
     // Game loop.
     while(! bn::keypad::select_pressed())

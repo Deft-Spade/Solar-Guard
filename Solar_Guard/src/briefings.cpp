@@ -13,10 +13,10 @@
 #include "bn_regular_bg_item.h"
 #include "bn_regular_bg_items_bg_mission_briefing.h"
 
-#include "fixed_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "variable_8x16_sprite_font.h"
-#include "font_hud_green.h"
-#include "font_hud_compact_green.h"
+#include "font_hud.h"
+#include "font_hud_compact.h"
 #include "bn_sprite_items_menu_arrow.h"
 
 #include "music.h"
@@ -31,9 +31,9 @@ void briefing_1()
     bgm_tactical.play();
 
     // Setup drawing text.
-    bn::sprite_text_generator text_generator(font_hud_green);
+    bn::sprite_text_generator text_generator(font_hud);
     bn::vector<bn::sprite_ptr, 32> briefing_title;
-    bn::sprite_text_generator text_generator_compact(font_hud_compact_green);
+    bn::sprite_text_generator text_generator_compact(font_hud_compact);
     bn::vector<bn::sprite_ptr, 64> briefing_text;
 
     // Draw briefing title.
@@ -65,9 +65,9 @@ void briefing_2()
     bgm_tactical.play();
 
     // Setup drawing text.
-    bn::sprite_text_generator text_generator(font_hud_green);
+    bn::sprite_text_generator text_generator(font_hud);
     bn::vector<bn::sprite_ptr, 32> briefing_title;
-    bn::sprite_text_generator text_generator_compact(font_hud_compact_green);
+    bn::sprite_text_generator text_generator_compact(font_hud_compact);
     bn::vector<bn::sprite_ptr, 64> briefing_text;
 
     // Draw briefing title.
@@ -99,9 +99,9 @@ void briefing_3()
     bgm_tactical.play();
 
     // Setup drawing text.
-    bn::sprite_text_generator text_generator(font_hud_green);
+    bn::sprite_text_generator text_generator(font_hud);
     bn::vector<bn::sprite_ptr, 32> briefing_title;
-    bn::sprite_text_generator text_generator_compact(font_hud_compact_green);
+    bn::sprite_text_generator text_generator_compact(font_hud_compact);
     bn::vector<bn::sprite_ptr, 64> briefing_text;
 
     // Draw briefing title.
@@ -133,9 +133,9 @@ void briefing_4()
     bgm_tactical.play();
 
     // Setup drawing text.
-    bn::sprite_text_generator text_generator(font_hud_green);
+    bn::sprite_text_generator text_generator(font_hud);
     bn::vector<bn::sprite_ptr, 32> briefing_title;
-    bn::sprite_text_generator text_generator_compact(font_hud_compact_green);
+    bn::sprite_text_generator text_generator_compact(font_hud_compact);
     bn::vector<bn::sprite_ptr, 64> briefing_text;
 
     // Draw briefing title.
@@ -167,9 +167,9 @@ void briefing_5()
     bgm_tactical.play();
 
     // Setup drawing text.
-    bn::sprite_text_generator text_generator(font_hud_green);
+    bn::sprite_text_generator text_generator(font_hud);
     bn::vector<bn::sprite_ptr, 32> briefing_title;
-    bn::sprite_text_generator text_generator_compact(font_hud_compact_green);
+    bn::sprite_text_generator text_generator_compact(font_hud_compact);
     bn::vector<bn::sprite_ptr, 64> briefing_text;
 
     // Draw briefing title.

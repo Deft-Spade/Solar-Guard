@@ -16,7 +16,7 @@
 #include "bn_regular_bg_items_bg_title_screen.h"
 #include "bn_regular_bg_items_bg_main_menu.h"
 
-#include "fixed_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "variable_8x16_sprite_font.h"
 #include "bn_sprite_items_menu_arrow.h"
 
