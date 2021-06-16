@@ -37,6 +37,7 @@ public:
     bn::fixed engine_heat = 0;
     bn::fixed engine_heat_max = 100;
     bool engine_overheated = false;
+    int alternate_ab_frame = 0;
     int gun_ammo = 200;
     int gun_ammo_max = 200;
     bn::fixed gun_heat = 0;

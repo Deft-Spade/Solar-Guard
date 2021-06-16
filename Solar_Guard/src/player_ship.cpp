@@ -164,42 +164,92 @@ void player_ship::movement()
         engine_overheated = false;
     }
 
+    // Swap alternate frame variable for animation.
+    if (alternate_ab_frame < 3)
+    {
+        alternate_ab_frame += 1;
+    }
+    else
+    {
+        alternate_ab_frame = 0;
+    }
+
     // Afterburner sprite.
     if (bn::keypad::l_held() && bn::keypad::r_held() && !engine_overheated && engine_fuel.ceil_integer() > 0)
     {
-        switch (type)
+        if (alternate_ab_frame < 2)
         {
-            case 1:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(1));
-            break;
+            switch (type)
+            {
+                case 1:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(2));
+                break;
 
-            case 2:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(1));
-            break;
+                case 2:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(2));
+                break;
 
-            case 3:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(1));
-            break;
+                case 3:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(2));
+                break;
 
-            case 4:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(1));
-            break;
+                case 4:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(2));
+                break;
 
-            case 5:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(1));
-            break;
+                case 5:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(2));
+                break;
 
-            case 6:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(1));
-            break;
+                case 6:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(2));
+                break;
 
-            case 7:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(1));
-            break;
+                case 7:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(2));
+                break;
 
-            case 8:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(1));
-            break;
+                case 8:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(2));
+                break;
+            }
+        }
+        else
+        {
+            switch (type)
+            {
+                case 1:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(1));
+                break;
+
+                case 2:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(1));
+                break;
+
+                case 3:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(1));
+                break;
+
+                case 4:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(1));
+                break;
+
+                case 5:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(1));
+                break;
+
+                case 6:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(1));
+                break;
+
+                case 7:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(1));
+                break;
+
+                case 8:
+                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(1));
+                break;
+            }
         }
     }
     else
