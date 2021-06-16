@@ -21,6 +21,7 @@
 #include "menus.h"
 #include "music.h"
 #include "information.h"
+#include "ship_select.h"
 
 #include "briefings.h"
 #include "mission_1.h"
@@ -28,12 +29,6 @@
 #include "mission_3.h"
 #include "mission_4.h"
 #include "mission_5.h"
-
-namespace
-{
-    // An important int that determines which scene the game is in at any given time.
-    int current_scene = 0;
-}
 
 void title_screen()
 {
@@ -75,7 +70,8 @@ int main()
 
     while(true)
     {
-        current_scene = main_menu();
+        int current_scene = main_menu();
+        int selected_ship = 0;
         bn::core::update();
 
         switch (current_scene) {
@@ -85,43 +81,158 @@ int main()
                 break;
 
             case 11:
-                briefing_1();
-                bn::core::update();
+                // Play the briefing music (in main loop so it doesn't restart
+                // when going back to briefing screen from ship select screen).
+                bgm_tactical.play();
 
-                mission_1();
-                bn::core::update();
+                while (true)
+                {
+                    if (briefing_1() == 0)
+                    {
+                        bn::core::update();
+                        break;
+                    }
+
+                    selected_ship = ship_selection();
+                    bn::core::update();
+
+                    if (selected_ship > 0)
+                    {
+                        break;
+                    }
+                }
+
+                // Exit from briefing should go straight to main menu.
+                if (selected_ship > 0)
+                {
+                    mission_1(selected_ship);
+                    bn::core::update();
+                }
+
                 break;
 
             case 12:
-                briefing_2();
-                bn::core::update();
+                // Play the briefing music (in main loop so it doesn't restart
+                // when going back to briefing screen from ship select screen).
+                bgm_tactical.play();
 
-                mission_2();
-                bn::core::update();
+                while (true)
+                {
+                    if (briefing_2() == 0)
+                    {
+                        bn::core::update();
+                        break;
+                    }
+
+                    selected_ship = ship_selection();
+                    bn::core::update();
+
+                    if (selected_ship > 0)
+                    {
+                        break;
+                    }
+                }
+
+                // Exit from briefing should go straight to main menu.
+                if (selected_ship > 0)
+                {
+                    mission_2(selected_ship);
+                    bn::core::update();
+                }
+
                 break;
 
             case 13:
-                briefing_3();
-                bn::core::update();
+                // Play the briefing music (in main loop so it doesn't restart
+                // when going back to briefing screen from ship select screen).
+                bgm_tactical.play();
 
-                mission_3();
-                bn::core::update();
+                while (true)
+                {
+                    if (briefing_3() == 0)
+                    {
+                        bn::core::update();
+                        break;
+                    }
+
+                    selected_ship = ship_selection();
+                    bn::core::update();
+
+                    if (selected_ship > 0)
+                    {
+                        break;
+                    }
+                }
+
+                // Exit from briefing should go straight to main menu.
+                if (selected_ship > 0)
+                {
+                    mission_3(selected_ship);
+                    bn::core::update();
+                }
+
                 break;
 
             case 14:
-                briefing_4();
-                bn::core::update();
+                // Play the briefing music (in main loop so it doesn't restart
+                // when going back to briefing screen from ship select screen).
+                bgm_tactical.play();
 
-                mission_4();
-                bn::core::update();
+                while (true)
+                {
+                    if (briefing_4() == 0)
+                    {
+                        bn::core::update();
+                        break;
+                    }
+
+                    selected_ship = ship_selection();
+                    bn::core::update();
+
+                    if (selected_ship > 0)
+                    {
+                        break;
+                    }
+                }
+
+                // Exit from briefing should go straight to main menu.
+                if (selected_ship > 0)
+                {
+                    mission_4(selected_ship);
+                    bn::core::update();
+                }
+
                 break;
 
             case 15:
-                briefing_5();
-                bn::core::update();
+                // Play the briefing music (in main loop so it doesn't restart
+                // when going back to briefing screen from ship select screen).
+                bgm_tactical.play();
 
-                mission_5();
-                bn::core::update();
+                while (true)
+                {
+                    if (briefing_5() == 0)
+                    {
+                        bn::core::update();
+                        break;
+                    }
+
+                    selected_ship = ship_selection();
+                    bn::core::update();
+
+                    if (selected_ship > 0)
+                    {
+                        break;
+                    }
+                }
+
+                // Exit from briefing should go straight to main menu.
+                if (selected_ship > 0)
+                {
+                    mission_5(selected_ship);
+                    bn::core::update();
+                }
+
                 break;
 
             case 2:

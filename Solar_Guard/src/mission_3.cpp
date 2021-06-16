@@ -30,7 +30,7 @@
 #include "bn_log.h"
 #include "bn_string.h"
 
-void mission_3()
+void mission_3(int ship_selection)
 {
     // Mission constants.
     const bn::fixed x_limit = 20480;
@@ -40,7 +40,7 @@ void mission_3()
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_seamless_stars.create_bg(0, 0);
 
     // Create the objects.
-    player_ship player_ship(3);
+    player_ship player_ship(ship_selection);
     heads_up_display HUD;
 
     // Play the non-combat gameplay music.

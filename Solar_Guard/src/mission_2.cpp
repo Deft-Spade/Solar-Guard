@@ -28,7 +28,7 @@
 #include "player_ship.h"
 #include "heads_up_display.h"
 
-void mission_2()
+void mission_2(int ship_selection)
 {
     // Mission constants.
     const bn::fixed x_limit = 20480;
@@ -39,7 +39,7 @@ void mission_2()
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_stars_blue_background.create_bg(0, 0);
 
     // Create the objects.
-    player_ship player_ship(2);
+    player_ship player_ship(ship_selection);
     heads_up_display HUD;
 
     // Play the non-combat gameplay music.

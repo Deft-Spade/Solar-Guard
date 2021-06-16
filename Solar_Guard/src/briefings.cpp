@@ -22,13 +22,10 @@
 #include "music.h"
 #include "briefings.h"
 
-void briefing_1()
+int briefing_1()
 {
     // Set a background.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
-
-    // Play the non-combat gameplay music.
-    bgm_tactical.play();
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -49,20 +46,27 @@ void briefing_1()
     text_generator_compact.generate(-112, 61, "WE ARE DEPLOYING RESERVE FIGHTERS ACROSS EARTH'S ORBIT.", briefing_text);
     text_generator_compact.generate(-112, 70, "TO DESTROY THE EXCESS JUNK. PREPARE FOR DEPLOYMENT.", briefing_text);
 
-    // Game loop.
-    while(! bn::keypad::a_pressed())
+    // Briefing loop.
+    while(true)
     {
+        if (bn::keypad::a_pressed())
+        {
+            return 1;
+        }
+
+        if (bn::keypad::b_pressed())
+        {
+            return 0;
+        }
+
         bn::core::update();
     }
 }
 
-void briefing_2()
+int briefing_2()
 {
     // Set a background.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
-
-    // Play the non-combat gameplay music.
-    bgm_tactical.play();
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -83,20 +87,27 @@ void briefing_2()
     text_generator_compact.generate(-112, 61, "ANY DRIFITING ASTEROIDS THAT THREATEN THE TRANSPORT.", briefing_text);
     text_generator_compact.generate(-112, 70, "", briefing_text);
 
-    // Game loop.
-    while(! bn::keypad::a_pressed())
+    // Briefing loop.
+    while(true)
     {
+        if (bn::keypad::a_pressed())
+        {
+            return 1;
+        }
+
+        if (bn::keypad::b_pressed())
+        {
+            return 0;
+        }
+
         bn::core::update();
     }
 }
 
-void briefing_3()
+int briefing_3()
 {
     // Set a background.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
-
-    // Play the non-combat gameplay music.
-    bgm_tactical.play();
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -117,20 +128,27 @@ void briefing_3()
     text_generator_compact.generate(-112, 61, "ORDERS ARE TO ENGAGE AND DESTROY ENEMY FIGHTERS!", briefing_text);
     text_generator_compact.generate(-112, 70, "", briefing_text);
 
-    // Game loop.
-    while(! bn::keypad::a_pressed())
+    // Briefing loop.
+    while(true)
     {
+        if (bn::keypad::a_pressed())
+        {
+            return 1;
+        }
+
+        if (bn::keypad::b_pressed())
+        {
+            return 0;
+        }
+
         bn::core::update();
     }
 }
 
-void briefing_4()
+int briefing_4()
 {
     // Set a background.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
-
-    // Play the non-combat gameplay music.
-    bgm_tactical.play();
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -151,20 +169,27 @@ void briefing_4()
     text_generator_compact.generate(-112, 61, "IT IS IMPORTANT TO AVOID DETECTION.", briefing_text);
     text_generator_compact.generate(-112, 70, "DO NOT ENGAGE. STAY OUT OF SIGHT.", briefing_text);
 
-    // Game loop.
-    while(! bn::keypad::a_pressed())
+    // Briefing loop.
+    while(true)
     {
+        if (bn::keypad::a_pressed())
+        {
+            return 1;
+        }
+
+        if (bn::keypad::b_pressed())
+        {
+            return 0;
+        }
+
         bn::core::update();
     }
 }
 
-void briefing_5()
+int briefing_5()
 {
     // Set a background.
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
-
-    // Play the non-combat gameplay music.
-    bgm_tactical.play();
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -185,9 +210,19 @@ void briefing_5()
     text_generator_compact.generate(-112, 61, "RETURNING THEM TO THE CARRIER. TIME IS LIMITED.", briefing_text);
     text_generator_compact.generate(-112, 70, "", briefing_text);
 
-    // Game loop.
-    while(! bn::keypad::a_pressed())
+    // Briefing loop.
+    while(true)
     {
+        if (bn::keypad::a_pressed())
+        {
+            return 1;
+        }
+
+        if (bn::keypad::b_pressed())
+        {
+            return 0;
+        }
+
         bn::core::update();
     }
 }
