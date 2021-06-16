@@ -24,11 +24,7 @@
 #include "ship_select.h"
 
 #include "briefings.h"
-#include "mission_1.h"
-#include "mission_2.h"
-#include "mission_3.h"
-#include "mission_4.h"
-#include "mission_5.h"
+#include "missions.h"
 
 void title_screen()
 {
