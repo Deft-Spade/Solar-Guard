@@ -15,7 +15,7 @@
 #include "bn_regular_bg_items_bg_stars_blue_background.h"
 #include "bn_regular_bg_items_bg_stars_blue_foreground.h"
 #include "bn_regular_bg_items_bg_mission_3.h"
-#include "bn_regular_bg_items_bg_seamless_stars.h"
+#include "bn_regular_bg_items_bg_mission_4.h"
 #include "bn_regular_bg_items_bg_mission_5.h"
 #include "bn_regular_bg_items_bg_mission_5_background.h"
 
@@ -191,11 +191,11 @@ void mission_3(int ship_selection)
 void mission_4(int ship_selection)
 {
     // Mission constants.
-    const bn::fixed x_limit = 20480;
-    const bn::fixed y_limit = 20480;
+    const bn::fixed x_limit = 2048;
+    const bn::fixed y_limit = 2048;
 
     // Set a background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_seamless_stars.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_4.create_bg(0, 0);
 
     // Create the objects.
     player_ship player_ship(ship_selection);
