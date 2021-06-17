@@ -18,6 +18,7 @@
 #include "bn_regular_bg_items_bg_oga_page3.h"
 #include "bn_regular_bg_items_bg_oga_page4.h"
 #include "bn_regular_bg_items_bg_oga_page5.h"
+#include "bn_regular_bg_items_bg_oga_page6.h"
 
 #include "bn_sprite_text_generator.h"
 #include "font_menu.h"
@@ -133,11 +134,17 @@ int scene_oga_credits_page5()
     return loop_oga_credits();
 }
 
+int scene_oga_credits_page6()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_oga_page6.create_bg(0, 0);
+    return loop_oga_credits();
+}
+
 void scene_oga_credits()
 {
     // Menu operation variables.
     int current_page = 1;
-    const int number_of_pages = 5;
+    const int number_of_pages = 6;
 
     bgm_theme_upbeat.play();
 
@@ -153,6 +160,7 @@ void scene_oga_credits()
             case 3: user_input = scene_oga_credits_page3(); break;
             case 4: user_input = scene_oga_credits_page4(); break;
             case 5: user_input = scene_oga_credits_page5(); break;
+            case 6: user_input = scene_oga_credits_page6(); break;
             default: BN_ERROR("CURRENT PAGE VALUE INVALID: " + bn::to_string<16>(current_page)); break;
         }
 
