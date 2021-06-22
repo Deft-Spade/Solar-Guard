@@ -8,7 +8,7 @@
 
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
-#include "bn_regular_bg_items_bg_earth_horizon.h"
+#include "bn_regular_bg_items_bg_grid.h"
 
 #include "font_menu.h"
 #include "variable_8x16_sprite_font.h"
@@ -38,7 +38,7 @@ void scene_music_playback()
     const int max_tracks = 9;
 
     // The background.
-    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_earth_horizon.create_bg(0, -20);
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_grid.create_bg(0, -20);
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
@@ -48,8 +48,9 @@ void scene_music_playback()
 
     // Menu title and controls text.
     text_generator.generate(0, -screen_y_limit + 10, "Music Playback", text_menu);
+    text_generator.generate(0, screen_y_limit - 30, "Press LEFT/RIGHT to Switch Tracks", text_menu);
     text_generator.generate(0, screen_y_limit - 20, "Press A to Pause/Resume Playback", text_menu);
-    text_generator.generate(0, screen_y_limit - 10, "Press LEFT/RIGHT to Switch Tracks", text_menu);
+    text_generator.generate(0, screen_y_limit - 10, "Press B to Return to Main Menu", text_menu);
 
     while (true)
     {
@@ -71,7 +72,8 @@ void scene_music_playback()
             case 3:
                 switch_track(bgm_theme_upbeat);
                 text_song.clear();
-                text_generator.generate(0, 0, "Now Playing 'Upbeat' Track", text_song);
+                text_generator.generate(0, 0, "Now Playing Information"
+" Track", text_song);
                 break;
 
             case 4:
