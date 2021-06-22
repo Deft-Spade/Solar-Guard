@@ -1,6 +1,6 @@
 # *Solar System* by ShinyOgre
 
-[***Solar System***](https://opengameart.org/content/solar-system) by [ShinyOgre](https://opengameart.org/users/shinyogre) licensed [**CC-BY-SA 3.0**](https://creativecommons.org/licenses/by-sa/3.0/): [https://opengameart.org/content/solar-system](https://opengameart.org/content/solar-system)
+[***Solar System***](https://opengameart.org/content/solar-system) by [ShinyOgre](https://opengameart.org/users/shinyogre) licensed [**CC-BY-SA 3.0**](https://creativecommons.org/licenses/by-sa/3.0/): https://opengameart.org/content/solar-system
 
 ## License
 **Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)**

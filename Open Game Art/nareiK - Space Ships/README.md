@@ -1,6 +1,6 @@
 # *Space Ships* by nareiK
 
-[***Space Ships***](https://opengameart.org/content/space-ships-1) by [nareiK](https://opengameart.org/users/nareik) licensed [**CC-BY 3.0**](https://creativecommons.org/licenses/by/3.0/): [https://opengameart.org/content/space-ships-1](https://opengameart.org/content/space-ships-1)
+[***Space Ships***](https://opengameart.org/content/space-ships-1) by [nareiK](https://opengameart.org/users/nareik) licensed [**CC-BY 3.0**](https://creativecommons.org/licenses/by/3.0/): https://opengameart.org/content/space-ships-1
 
 ## License
 **Attribution 3.0 Unported (CC BY 3.0)**

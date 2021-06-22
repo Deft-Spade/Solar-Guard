@@ -46,7 +46,7 @@ void heads_up_display::draw_hud_shields(player_ship &player_ship)
     bn::fixed shields_display_value = player_ship.shields / player_ship.shields_max;
     bn::fixed shields_display_sprite = shields_display_value * 25;
     spr_shield.set_tiles(bn::sprite_items::spr_hud_shield.tiles_item().create_tiles(bn::max(0,bn::min(shields_display_sprite.floor_integer(), 25))));
-    spr_shield_text.set_tiles(bn::sprite_items::spr_hud_number_shield.tiles_item().create_tiles(bn::max(0,bn::min(bn::fixed(100 - shields_display_value * 100).floor_integer(), 100))));
+    spr_shield_text.set_tiles(bn::sprite_items::spr_hud_number_shield.tiles_item().create_tiles(bn::max(0,bn::min(bn::fixed(shields_display_value * 100).floor_integer(), 100))));
 }
 
 void heads_up_display::draw_hud_hull(player_ship &player_ship)
@@ -55,12 +55,7 @@ void heads_up_display::draw_hud_hull(player_ship &player_ship)
     bn::fixed hull_display_value = player_ship.hull / player_ship.hull_max;
     bn::fixed hull_display_sprite = hull_display_value * 25;
     spr_hull.set_tiles(bn::sprite_items::spr_hud_hull.tiles_item().create_tiles(bn::max(0,bn::min(hull_display_sprite.floor_integer(), 25))));
-    spr_hull_text.set_tiles(bn::sprite_items::spr_hud_number_hull.tiles_item().create_tiles(bn::max(0,bn::min(bn::fixed(100 - hull_display_value * 100).floor_integer(), 100))));
-}
-
-void heads_up_display::draw_ally_hull()
-{
-    // Ally hull, implement when ally (is implemented e.g. transport, base, carrier, etc.) is implemented.
+    spr_hull_text.set_tiles(bn::sprite_items::spr_hud_number_hull.tiles_item().create_tiles(bn::max(0,bn::min(bn::fixed(hull_display_value * 100).floor_integer(), 100))));
 }
 
 void heads_up_display::draw_hud_speed(player_ship &player_ship)

@@ -17,9 +17,6 @@
 #include "bn_sprite_items_spr_hud_speed.h"
 #include "bn_sprite_items_spr_hud_direction.h"
 
-#include "bn_sprite_items_spr_hud_ally_outline.h"
-#include "bn_sprite_items_spr_hud_ally_hull.h"
-
 #include "bn_sprite_items_spr_hud_engine.h"
 #include "bn_sprite_items_spr_hud_ultility.h"
 #include "bn_sprite_items_spr_hud_fuel.h"
@@ -61,9 +58,6 @@ public:
     bn::sprite_ptr spr_hull_tgt = bn::sprite_items::spr_hud_hull.create_sprite(78,-66);
     bn::sprite_ptr spr_outline_corner_target = bn::sprite_items::spr_hud_outline_corner.create_sprite(79,-70);
     bn::sprite_ptr spr_tgt_none = bn::sprite_items::spr_hud_outline_corner_no_tgt.create_sprite(114,-70);
-
-    //bn::sprite_ptr spr_ally_outline = bn::sprite_items::spr_hud_ally_outline.create_sprite(-94,-40);
-    //bn::sprite_ptr spr_ally_hull = bn::sprite_items::spr_hud_ally_hull.create_sprite(-87,-36);
 
     bn::sprite_ptr spr_engine = bn::sprite_items::spr_hud_engine.create_sprite(-95,0);
     bn::sprite_ptr spr_fuel = bn::sprite_items::spr_hud_fuel.create_sprite(-55,-24);

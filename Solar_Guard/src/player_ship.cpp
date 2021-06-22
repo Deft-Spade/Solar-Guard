@@ -13,12 +13,13 @@
 #include "bn_sprite_items_spr_sg_ship_7.h"
 #include "bn_sprite_items_spr_sg_ship_8.h"
 
-player_ship::player_ship(int arg_type)
+player_ship::player_ship(int ship_type, int x_pos, int y_pos)
 {
-    type = arg_type;
+    // Record the ship type in the relevant variable.
+    type = ship_type;
 
     // Set the player ship sprite to that of the selected ship.
-    switch (arg_type)
+    switch (type)
     {
         case 1:
             player_sprite = bn::sprite_items::spr_sg_ship_1.create_sprite(0,0);
@@ -52,6 +53,10 @@ player_ship::player_ship(int arg_type)
             player_sprite = bn::sprite_items::spr_sg_ship_8.create_sprite(0,0);
             break;
     }
+
+    // Set the player's initial position.
+    x = x_pos;
+    y = y_pos;
 }
 
 void player_ship::movement()

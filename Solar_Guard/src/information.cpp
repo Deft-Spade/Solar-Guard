@@ -19,6 +19,12 @@
 #include "bn_regular_bg_items_bg_oga_page4.h"
 #include "bn_regular_bg_items_bg_oga_page5.h"
 #include "bn_regular_bg_items_bg_oga_page6.h"
+#include "bn_regular_bg_items_bg_oga_page7.h"
+#include "bn_regular_bg_items_bg_oga_page8.h"
+#include "bn_regular_bg_items_bg_oga_page9.h"
+#include "bn_regular_bg_items_bg_oga_page10.h"
+#include "bn_regular_bg_items_bg_oga_page11.h"
+#include "bn_regular_bg_items_bg_oga_page12.h"
 
 #include "bn_sprite_text_generator.h"
 #include "font_menu.h"
@@ -140,11 +146,47 @@ int scene_oga_credits_page6()
     return loop_oga_credits();
 }
 
+int scene_oga_credits_page7()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_oga_page7.create_bg(0, 0);
+    return loop_oga_credits();
+}
+
+int scene_oga_credits_page8()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_oga_page8.create_bg(0, 0);
+    return loop_oga_credits();
+}
+
+int scene_oga_credits_page9()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_oga_page9.create_bg(0, 0);
+    return loop_oga_credits();
+}
+
+int scene_oga_credits_page10()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_oga_page10.create_bg(0, 0);
+    return loop_oga_credits();
+}
+
+int scene_oga_credits_page11()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_oga_page11.create_bg(0, 0);
+    return loop_oga_credits();
+}
+
+int scene_oga_credits_page12()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_oga_page12.create_bg(0, 0);
+    return loop_oga_credits();
+}
+
 void scene_oga_credits()
 {
     // Menu operation variables.
     int current_page = 1;
-    const int number_of_pages = 6;
+    const int number_of_pages = 12;
 
     bgm_theme_upbeat.play();
 
@@ -161,6 +203,12 @@ void scene_oga_credits()
             case 4: user_input = scene_oga_credits_page4(); break;
             case 5: user_input = scene_oga_credits_page5(); break;
             case 6: user_input = scene_oga_credits_page6(); break;
+            case 7: user_input = scene_oga_credits_page7(); break;
+            case 8: user_input = scene_oga_credits_page8(); break;
+            case 9: user_input = scene_oga_credits_page9(); break;
+            case 10: user_input = scene_oga_credits_page10(); break;
+            case 11: user_input = scene_oga_credits_page11(); break;
+            case 12: user_input = scene_oga_credits_page12(); break;
             default: BN_ERROR("CURRENT PAGE VALUE INVALID: " + bn::to_string<16>(current_page)); break;
         }
 

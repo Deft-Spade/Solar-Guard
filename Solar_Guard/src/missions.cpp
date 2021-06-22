@@ -35,7 +35,13 @@
 #include "music.h"
 #include "gameplay.h"
 #include "player_ship.h"
+#include "pirate_ship.h"
+#include "ally_carrier.h"
+#include "ally_civillian.h"
+#include "ally_station.h"
+#include "ally_transport.h"
 #include "heads_up_display.h"
+#include "hud_ally.h"
 
 void mission_1(int ship_selection)
 {
@@ -48,7 +54,7 @@ void mission_1(int ship_selection)
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_1.create_bg(0, 0);
 
     // Create the objects.
-    player_ship player_ship(ship_selection);
+    player_ship player_ship(ship_selection, 0, 0);
     heads_up_display HUD;
 
     // Play the non-combat gameplay music.
@@ -100,8 +106,9 @@ void mission_2(int ship_selection)
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_stars_blue_background.create_bg(0, 0);
 
     // Create the objects.
-    player_ship player_ship(ship_selection);
+    player_ship player_ship(ship_selection, 0, 0);
     heads_up_display HUD;
+    hud_ally HUD_Transport(0, 0);
 
     // Play the non-combat gameplay music.
     bgm_escort.play();
@@ -120,6 +127,7 @@ void mission_2(int ship_selection)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+        HUD_Transport.update(100,100);
 
         // Player movement (input and logic is handled in player object).
         player_ship.movement();
@@ -151,8 +159,9 @@ void mission_3(int ship_selection)
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_3.create_bg(0, 0);
 
     // Create the objects.
-    player_ship player_ship(ship_selection);
+    player_ship player_ship(ship_selection, 0, 0);
     heads_up_display HUD;
+    hud_ally HUD_Station(1, 0);
 
     // Play the non-combat gameplay music.
     bgm_solar_conflict.play();
@@ -171,6 +180,7 @@ void mission_3(int ship_selection)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+        HUD_Station.update(100,100);
 
         // Player movement (input and logic is handled in player object).
         player_ship.movement();
@@ -198,7 +208,7 @@ void mission_4(int ship_selection)
     bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_4.create_bg(0, 0);
 
     // Create the objects.
-    player_ship player_ship(ship_selection);
+    player_ship player_ship(ship_selection, 0, 0);
     heads_up_display HUD;
 
     // Play the non-combat gameplay music.
@@ -243,8 +253,11 @@ void mission_5(int ship_selection)
     bn::regular_bg_ptr gameplay_bg_rear = bn::regular_bg_items::bg_mission_5_background.create_bg(0, 0);
 
     // Create the objects.
-    player_ship player_ship(ship_selection);
+    ally_carrier ally_carrier;
+    player_ship player_ship(ship_selection, 1000, 1020);
     heads_up_display HUD;
+    hud_ally HUD_Carrier(2, 0);
+    hud_ally HUD_Civillian(3, 1);
 
     // Play the non-combat gameplay music.
     bgm_rescue.play();
@@ -253,6 +266,9 @@ void mission_5(int ship_selection)
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
     player_ship.player_sprite.set_camera(camera);
+    ally_carrier.carrier_sprite1.set_camera(camera);
+    ally_carrier.carrier_sprite2.set_camera(camera);
+    ally_carrier.carrier_sprite3.set_camera(camera);
 
     // Draw a basic text-based HUD.
     bn::sprite_text_generator text_generator(font_hud);
@@ -263,6 +279,8 @@ void mission_5(int ship_selection)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+        HUD_Carrier.update(ally_carrier.hull.ceil_integer(), ally_carrier.hull_max.ceil_integer());
+        HUD_Civillian.update(100,100);
 
         // Player movement (input and logic is handled in player object).
         player_ship.movement();

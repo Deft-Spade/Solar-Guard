@@ -1,6 +1,6 @@
 # *Textured space station* by MillionthVector
 
-[***Textured space station***](https://opengameart.org/content/textured-space-station) by [MillionthVector](http://millionthvector.blogspot.com/) (submitted to [Open Game Art](https://opengameart.org/) by [Bonsaiheldin](https://opengameart.org/users/bonsaiheldin)) licensed [**CC-BY 3.0**](https://creativecommons.org/licenses/by/3.0/): [https://opengameart.org/content/textured-space-station](https://opengameart.org/content/textured-space-station)
+[***Textured space station***](https://opengameart.org/content/textured-space-station) by [MillionthVector](http://millionthvector.blogspot.com/) (submitted to [Open Game Art](https://opengameart.org/) by [Bonsaiheldin](https://opengameart.org/users/bonsaiheldin)) licensed [**CC-BY 3.0**](https://creativecommons.org/licenses/by/3.0/): https://opengameart.org/content/textured-space-station
 
 MillionthVector's Blog: http://millionthvector.blogspot.com/
 

@@ -1,6 +1,6 @@
 # *Planet Orbit Background* by ArthCarvalho
 
-[***Planet Orbit Background***](https://opengameart.org/content/planet-orbit-background) by [ArthCarvalho](https://opengameart.org/users/arthcarvalho) licensed [**OGA-BY 3.0**](https://static.opengameart.org/OGA-BY-3.0.txt): [https://opengameart.org/content/planet-orbit-background](https://opengameart.org/content/planet-orbit-background)
+[***Planet Orbit Background***](https://opengameart.org/content/planet-orbit-background) by [ArthCarvalho](https://opengameart.org/users/arthcarvalho) licensed [**OGA-BY 3.0**](https://static.opengameart.org/OGA-BY-3.0.txt): https://opengameart.org/content/planet-orbit-background
 
 ## License
 **Open Game Art Attribution 3.0 Unported (OGA-BY 3.0)**

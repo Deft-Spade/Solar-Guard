@@ -11,7 +11,7 @@ class player_ship
 {
 
 public:
-    player_ship(int arg_type);
+    player_ship(int ship_type, int x_pos, int y_pos);
 
     int type = 0;
     bn::sprite_ptr player_sprite = bn::sprite_items::spr_sg_ship_1.create_sprite(0,0);

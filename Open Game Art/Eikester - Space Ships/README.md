@@ -1,6 +1,6 @@
 # *Space Ships* by Eikester
 
-[***Space Ships***](https://opengameart.org/content/space-ships-0) by [Eikester](https://opengameart.org/users/eikester) licensed [**CC-BY 3.0**](https://creativecommons.org/licenses/by/3.0/): [https://opengameart.org/content/space-ships-0](https://opengameart.org/content/space-ships-0)
+[***Space Ships***](https://opengameart.org/content/space-ships-0) by [Eikester](https://opengameart.org/users/eikester) licensed [**CC-BY 3.0**](https://creativecommons.org/licenses/by/3.0/): https://opengameart.org/content/space-ships-0
 
 ## License
 **Attribution 3.0 Unported (CC-BY 3.0)**
