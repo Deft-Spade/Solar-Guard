@@ -100,15 +100,15 @@ void player_ship::movement()
         {
             // Determine new x and y speeds.
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-            speed_x -= 0.1 * bn::degrees_cos(direction);
-            speed_y -= 0.1 * bn::degrees_sin(direction);
+            speed_x -= 0.05 * bn::degrees_cos(direction);
+            speed_y -= 0.05 * bn::degrees_sin(direction);
         }
         else
         {
             // Determine new x and y speeds.
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-            speed_x += 0.1 * bn::degrees_cos(direction);
-            speed_y += 0.1 * bn::degrees_sin(direction);
+            speed_x += 0.05 * bn::degrees_cos(direction);
+            speed_y += 0.05 * bn::degrees_sin(direction);
         }
 
         // Engine heating.
