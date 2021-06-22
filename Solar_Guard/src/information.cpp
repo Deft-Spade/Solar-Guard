@@ -54,9 +54,9 @@ void scene_controls()
     text_generator.generate(0, - 65, "CONTROLS", text_sprites);
     text_generator.set_left_alignment();
     text_generator.generate(-106, - 15, "LEFT/RIGHT > TURN SHIP", text_sprites);
-    text_generator.generate(-106, - 5, "R > ENGAGE ENGINE", text_sprites);
+    text_generator.generate(-106, - 5, "R > ENGAGE ENGINES", text_sprites);
     text_generator.generate(-106, + 5, "L > REDUCE SPEED", text_sprites);
-    text_generator.generate(-106, + 15, "L + R > ENGAGE AFTERBURNER", text_sprites);
+    text_generator.generate(-106, + 15, "L + R > ENGAGE REVERSE ENGINES", text_sprites);
 
     while (!bn::keypad::b_pressed())
     {

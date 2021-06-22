@@ -120,12 +120,12 @@ void heads_up_display::draw_hud_engine_status(player_ship &player_ship)
     {
         if (bn::keypad::l_held())
         {
-            // Afterburner indicator on HUD.
-            spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(1));
+            // Reverse indicator on HUD.
+            spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(2));
         }
         else
         {
-            // Engaged indicator on HUD.
+            // Active indicator on HUD.
             spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(0));
         }
     }
@@ -137,7 +137,7 @@ void heads_up_display::draw_hud_engine_status(player_ship &player_ship)
     else
     {
         // Idle indicator on HUD.
-        spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(2));
+        spr_engine.set_tiles(bn::sprite_items::spr_hud_engine.tiles_item().create_tiles(1));
     }
 }
 

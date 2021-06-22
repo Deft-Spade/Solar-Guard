@@ -95,33 +95,27 @@ void player_ship::movement()
     // Speed up and slow down.
     if(bn::keypad::r_held() && !engine_overheated && engine_fuel.ceil_integer() > 0)
     {
-        // Check for L also being held, engage afterburner if so.
+        // Check for L also being held, engage reverse if so.
         if (bn::keypad::l_held())
         {
             // Determine new x and y speeds.
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-            speed_x += 0.1 * bn::degrees_cos(direction);
-            speed_y += 0.1 * bn::degrees_sin(direction);
-
-            // Engine heating.
-            engine_heat = bn::min(engine_heat += 0.2, engine_heat_max);
-
-            // Fuel consumption.
-            engine_fuel = bn::max(bn::fixed(0), engine_fuel -= 0.02);
+            speed_x -= 0.1 * bn::degrees_cos(direction);
+            speed_y -= 0.1 * bn::degrees_sin(direction);
         }
         else
         {
             // Determine new x and y speeds.
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-            speed_x += 0.05 * bn::degrees_cos(direction);
-            speed_y += 0.05 * bn::degrees_sin(direction);
-
-            // Engine heating.
-            engine_heat = bn::min(engine_heat += 0.1, engine_heat_max);
-
-            // Fuel consumption.
-            engine_fuel = bn::max(bn::fixed(0), engine_fuel -= 0.005);
+            speed_x += 0.1 * bn::degrees_cos(direction);
+            speed_y += 0.1 * bn::degrees_sin(direction);
         }
+
+        // Engine heating.
+        engine_heat = bn::min(engine_heat += 0.1, engine_heat_max);
+
+        // Fuel consumption.
+        engine_fuel = bn::max(bn::fixed(0), engine_fuel -= 0.01);
 
         // Keep speed in check.
         if (directional_speed.ceil_integer() > speed_max.floor_integer())
@@ -179,120 +173,53 @@ void player_ship::movement()
         alternate_ab_frame = 0;
     }
 
-    // Afterburner sprite.
-    if (bn::keypad::l_held() && bn::keypad::r_held() && !engine_overheated && engine_fuel.ceil_integer() > 0)
+    // Engine sprite animation.
+    int engine_state_sprite_frame = 0;
+    if (!engine_overheated && engine_fuel.ceil_integer() > 0)
     {
-        if (alternate_ab_frame < 2)
+        if (bn::keypad::l_held() && bn::keypad::r_held())
         {
-            switch (type)
-            {
-                case 1:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(2));
-                break;
-
-                case 2:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(2));
-                break;
-
-                case 3:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(2));
-                break;
-
-                case 4:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(2));
-                break;
-
-                case 5:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(2));
-                break;
-
-                case 6:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(2));
-                break;
-
-                case 7:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(2));
-                break;
-
-                case 8:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(2));
-                break;
-            }
+            engine_state_sprite_frame = 3 + alternate_ab_frame / 2;
         }
-        else
+        else if (bn::keypad::r_held())
         {
-            switch (type)
-            {
-                case 1:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(1));
-                break;
-
-                case 2:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(1));
-                break;
-
-                case 3:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(1));
-                break;
-
-                case 4:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(1));
-                break;
-
-                case 5:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(1));
-                break;
-
-                case 6:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(1));
-                break;
-
-                case 7:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(1));
-                break;
-
-                case 8:
-                    player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(1));
-                break;
-            }
+            engine_state_sprite_frame = 1 + alternate_ab_frame / 2;
         }
     }
-    else
+
+    switch (type)
     {
-        switch (type)
-        {
-            case 1:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(0));
-            break;
+        case 1:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
 
-            case 2:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(0));
-            break;
+        case 2:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
 
-            case 3:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(0));
-            break;
+        case 3:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
 
-            case 4:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(0));
-            break;
+        case 4:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
 
-            case 5:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(0));
-            break;
+        case 5:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
 
-            case 6:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(0));
-            break;
+        case 6:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
 
-            case 7:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(0));
-            break;
+        case 7:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
 
-            case 8:
-                player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(0));
-            break;
-        }
+        case 8:
+            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(engine_state_sprite_frame));
+        break;
     }
 
     // Apply Movement
