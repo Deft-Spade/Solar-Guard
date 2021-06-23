@@ -32,8 +32,8 @@ public:
     bn::fixed speed_max = 5;
     bn::fixed directional_speed = 0;
     bn::fixed mov_angle = 0;
-    bn::fixed engine_fuel = 40;
-    bn::fixed engine_fuel_max = 40;
+    bn::fixed engine_fuel = 100;
+    bn::fixed engine_fuel_max = 100;
     bn::fixed engine_heat = 0;
     bn::fixed engine_heat_max = 100;
     bool engine_overheated = false;

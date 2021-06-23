@@ -94,6 +94,10 @@ void mission_1(int ship_selection)
     // Play the non-combat gameplay music.
     bgm_solar_patrol.play();
 
+    // Replace the map with the mission specific map.
+    HUD.spr_map.set_tiles(bn::sprite_items::spr_hud_map_mission1.tiles_item().create_tiles(0));
+    HUD.spr_map.set_palette(bn::sprite_items::spr_hud_map_mission1.palette_item());
+
     // Game loop.
     while(! bn::keypad::select_pressed())
     {
@@ -230,9 +234,9 @@ void mission_3(int ship_selection)
     // Play the non-combat gameplay music.
     bgm_solar_conflict.play();
 
-    // Draw a basic text-based HUD.
-    bn::sprite_text_generator text_generator(font_hud);
-    bn::vector<bn::sprite_ptr, 64> text_sprites;
+    // Replace the map with the mission specific map.
+    HUD.spr_map.set_tiles(bn::sprite_items::spr_hud_map_mission3.tiles_item().create_tiles(0));
+    HUD.spr_map.set_palette(bn::sprite_items::spr_hud_map_mission3.palette_item());
 
     // Game loop.
     while(! bn::keypad::select_pressed())
@@ -282,6 +286,10 @@ void mission_4(int ship_selection)
     // Play the non-combat gameplay music.
     bgm_solar_somber.play();
 
+    // Replace the map with the mission specific map.
+    HUD.spr_map.set_tiles(bn::sprite_items::spr_hud_map_mission4.tiles_item().create_tiles(0));
+    HUD.spr_map.set_palette(bn::sprite_items::spr_hud_map_mission4.palette_item());
+
     // Game loop.
     while(! bn::keypad::select_pressed())
     {
@@ -330,6 +338,10 @@ void mission_5(int ship_selection)
 
     // Play the non-combat gameplay music.
     bgm_rescue.play();
+
+    // Replace the map with the mission specific map.
+    HUD.spr_map.set_tiles(bn::sprite_items::spr_hud_map_mission5.tiles_item().create_tiles(0));
+    HUD.spr_map.set_palette(bn::sprite_items::spr_hud_map_mission5.palette_item());
 
     // Attach camera to the player ship.
     player_ship.player_sprite.set_camera(camera);

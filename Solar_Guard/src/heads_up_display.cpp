@@ -207,8 +207,8 @@ void heads_up_display::draw_hud_map(player_ship &player_ship, bn::fixed x_lim, b
                                     bn::to_string<16>(player_ship.y.round_integer()) + ")", hud_text_coordinates);
 
     // Map position update.
-    spr_map_position.set_x(spr_map.x() + (player_ship.x / x_lim) * 25);
-    spr_map_position.set_y(spr_map.y() + (player_ship.y / y_lim) * 25);
+    spr_map_position.set_x(spr_map.x() + (player_ship.x / x_lim) * 24);
+    spr_map_position.set_y(spr_map.y() + (player_ship.y / y_lim) * 24);
 }
 
 void heads_up_display::draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::fixed y_lim)

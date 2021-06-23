@@ -72,8 +72,7 @@ void scene_music_playback()
             case 3:
                 switch_track(bgm_theme_upbeat);
                 text_song.clear();
-                text_generator.generate(0, 0, "Now Playing Information"
-" Track", text_song);
+                text_generator.generate(0, 0, "Now Playing Information Track", text_song);
                 break;
 
             case 4:

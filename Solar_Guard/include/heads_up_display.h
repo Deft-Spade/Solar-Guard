@@ -30,6 +30,10 @@
 #include "bn_sprite_items_spr_hud_radar.h"
 
 #include "bn_sprite_items_spr_hud_map.h"
+#include "bn_sprite_items_spr_hud_map_mission1.h"
+#include "bn_sprite_items_spr_hud_map_mission3.h"
+#include "bn_sprite_items_spr_hud_map_mission4.h"
+#include "bn_sprite_items_spr_hud_map_mission5.h"
 #include "bn_sprite_items_spr_hud_map_position.h"
 
 // Includes for font graphics.
@@ -72,7 +76,7 @@ public:
 
     bn::sprite_ptr spr_radar = bn::sprite_items::spr_hud_radar.create_sprite(-92,52);
 
-    const bn::sprite_ptr spr_map = bn::sprite_items::spr_hud_map.create_sprite(93,53);
+    bn::sprite_ptr spr_map = bn::sprite_items::spr_hud_map.create_sprite(93,53);
     bn::sprite_ptr spr_map_position = bn::sprite_items::spr_hud_map_position.create_sprite(93,53);
 
     // Create text generators.
