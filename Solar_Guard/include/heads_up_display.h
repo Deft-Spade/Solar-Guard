@@ -71,8 +71,9 @@ public:
 
     bn::sprite_ptr spr_utility = bn::sprite_items::spr_hud_ultility.create_sprite(95,0);
     bn::sprite_ptr spr_ammo_energy = bn::sprite_items::spr_hud_energy.create_sprite(56,-24);
+    bn::sprite_ptr spr_ammo_energy_text = bn::sprite_items::spr_hud_number_energy.create_sprite(80,-8);
     bn::sprite_ptr spr_heat_utility = bn::sprite_items::spr_hud_heat.create_sprite(55,24);
-    //bn::sprite_ptr spr_fuel_utility_text = bn::sprite_items::spr_hud_number_heat.create_sprite(90,10);
+    bn::sprite_ptr spr_heat_utility_text = bn::sprite_items::spr_hud_number_heat.create_sprite(80,8);
 
     bn::sprite_ptr spr_radar = bn::sprite_items::spr_hud_radar.create_sprite(-92,52);
 
@@ -98,6 +99,8 @@ public:
     void draw_hud_engine_status(player_ship &player_ship);
     void draw_hud_engine_fuel(player_ship &player_ship);
     void draw_hud_engine_heat(player_ship &player_ship);
+    void draw_hud_gun_energy(player_ship &player_ship);
+    void draw_hud_gun_heat(player_ship &player_ship);
     void draw_hud_map(player_ship &player_ship, bn::fixed x_lim, bn::fixed y_lim);
 
     void draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::fixed y_lim);

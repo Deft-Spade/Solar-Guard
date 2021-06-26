@@ -45,6 +45,7 @@
 #include "ally_transport.h"
 #include "asteroid.h"
 #include "space_junk.h"
+#include "laser_player.h"
 
 void mission_1(int ship_selection)
 {
@@ -60,8 +61,11 @@ void mission_1(int ship_selection)
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
 
-    // Create the objects.
-    bn::array<space_junk, 20> orbital_junk = {
+    // Object Creation ----------------------------------------------------------- //
+
+    // Orbital junk.
+    const int array_orbital_junk_size = 20;
+    bn::array<space_junk, 20> array_orbital_junk = {
         space_junk(655,-950,camera,0),
         space_junk(1260,273,camera,1),
         space_junk(-1695,587,camera,2),
@@ -83,10 +87,23 @@ void mission_1(int ship_selection)
         space_junk(-838,491,camera,1),
         space_junk(-461,316,camera,2)
     };
+
+    // Player lasers.
+    const int array_player_lasers_size = 5;
+    int next_laser = 0;
+    bn::array<laser_player, 5> array_player_lasers = {
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera)
+    };
     player_ship player_ship(ship_selection, 0, 0);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
+
+    // --------------------------------------------------------------------------- //
 
     // Attach camera to the player ship.
     player_ship.player_sprite.set_camera(camera);
@@ -108,8 +125,16 @@ void mission_1(int ship_selection)
         if (player_ship.directional_speed.floor_integer() < player_ship.speed_max.floor_integer())
         player_ship.speed_y -= 0.002;
 
-        // Player movement (input and logic is handled in player object).
+        // Player operations.
         player_ship.movement();
+        player_ship.animation();
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+
+        // Player laser operations.
+        for (int i = 0; i < array_player_lasers_size; i++)
+        {
+            array_player_lasers[i].move();
+        }
 
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);

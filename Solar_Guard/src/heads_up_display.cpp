@@ -196,6 +196,61 @@ void heads_up_display::draw_hud_engine_heat(player_ship &player_ship)
                                        engine_heat_display_value.floor_integer() + player_ship.engine_overheated * 100));
 }
 
+void heads_up_display::draw_hud_gun_energy(player_ship &player_ship)
+{
+    // Engine Fuel
+    bn::fixed energy_division = player_ship.gun_energy / player_ship.gun_energy_max;
+    bn::fixed energy_display_value = energy_division * 100;
+
+    bn::fixed energy_display_sprite;
+    if (energy_display_value.ceil_integer() > 60)
+    {
+        energy_display_sprite = 14 + ((energy_display_value.ceil_integer() - 60) / (bn::fixed)40) * 9;
+    }
+    else if (energy_display_value.ceil_integer() > 20)
+    {
+        energy_display_sprite = 5 + ((energy_display_value.ceil_integer() - 20) / (bn::fixed)40) * 9;
+    }
+    else
+    {
+        energy_display_sprite = (energy_display_value.ceil_integer() / (bn::fixed)20) * 5;
+    }
+
+    spr_ammo_energy.set_tiles(bn::sprite_items::spr_hud_energy.tiles_item().create_tiles(bn::max(0,bn::min(energy_display_sprite.ceil_integer(), 23))));
+    spr_ammo_energy_text.set_tiles(bn::sprite_items::spr_hud_number_energy.tiles_item().create_tiles(energy_display_value.ceil_integer()));
+}
+
+void heads_up_display::draw_hud_gun_heat(player_ship &player_ship)
+{
+    // Gun Heat
+    bn::fixed gun_heat_division = player_ship.gun_heat / player_ship.gun_heat_max;
+    bn::fixed gun_heat_display_value = gun_heat_division * 100;
+
+    bn::fixed gun_heat_display_sprite;
+    if (gun_heat_display_value.floor_integer() >= 80)
+    {
+        gun_heat_display_sprite = 19 + ((gun_heat_display_value.floor_integer() - 80) / (bn::fixed)20) * 5;
+        if (gun_heat_display_sprite.floor_integer() == 24) gun_heat_display_sprite = 23;
+    }
+    else if (gun_heat_display_value.floor_integer() >= 60)
+    {
+        gun_heat_display_sprite = 14 + ((gun_heat_display_value.floor_integer() - 60) / (bn::fixed)20) * 5;
+    }
+    else if (gun_heat_display_value.floor_integer() >= 40)
+    {
+        gun_heat_display_sprite = 9 + ((gun_heat_display_value.floor_integer() - 40) / (bn::fixed)20) * 5;
+    }
+    else
+    {
+        gun_heat_display_sprite = (gun_heat_display_value.floor_integer() / (bn::fixed)40) * 9;
+    }
+
+    spr_heat_utility.set_tiles(bn::sprite_items::spr_hud_heat.tiles_item().create_tiles((24 * player_ship.gun_overheated) +
+                                                                                       bn::max(0,bn::min(gun_heat_display_sprite.floor_integer(),23))));
+    spr_heat_utility_text.set_tiles(bn::sprite_items::spr_hud_number_heat.tiles_item().create_tiles(
+                                       gun_heat_display_value.floor_integer() + player_ship.gun_overheated * 100));
+}
+
 void heads_up_display::draw_hud_map(player_ship &player_ship, bn::fixed x_lim, bn::fixed y_lim)
 {
     // Clear HUD text.
@@ -221,5 +276,7 @@ void heads_up_display::draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::f
     draw_hud_engine_status(player_ship);
     draw_hud_engine_fuel(player_ship);
     draw_hud_engine_heat(player_ship);
+    draw_hud_gun_energy(player_ship);
+    draw_hud_gun_heat(player_ship);
     draw_hud_map(player_ship, x_lim, y_lim);
 }

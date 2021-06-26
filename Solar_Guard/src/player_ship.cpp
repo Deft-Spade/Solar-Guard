@@ -1,4 +1,5 @@
 #include "player_ship.h"
+#include "laser_player.h"
 #include "bn_keypad.h"
 #include "bn_math.h"
 #include <math.h>
@@ -85,9 +86,6 @@ void player_ship::movement()
         }
     }
 
-    // Update sprite rotation.
-    player_sprite.set_rotation_angle(direction);
-
     // Determine curent magnitude and direction for refrence.
     directional_speed = bn::sqrt(speed_x * speed_x + speed_y * speed_y);             // https://www.onlinemathlearning.com/vector-magnitude.html
     mov_angle = atan2(speed_y.to_double(), speed_x.to_double()) * 180 / 3.14159265;  // https://www.cplusplus.com/reference/cmath/atan2/
@@ -163,6 +161,17 @@ void player_ship::movement()
         engine_overheated = false;
     }
 
+    // Apply Movement
+    x += speed_x;
+    y -= speed_y;   // Subtracting because y coordinate decreases when going upwards.
+
+    // Update the sprite's position.
+    player_sprite.set_x(x);
+    player_sprite.set_y(y);
+}
+
+void player_ship::animation()
+{
     // Swap alternate frame variable for animation.
     if (alternate_ab_frame < 3)
     {
@@ -172,6 +181,9 @@ void player_ship::movement()
     {
         alternate_ab_frame = 0;
     }
+
+    // Update sprite rotation.
+    player_sprite.set_rotation_angle(direction);
 
     // Engine sprite animation.
     int engine_state_sprite_frame = 0;
@@ -221,12 +233,69 @@ void player_ship::movement()
             player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(engine_state_sprite_frame));
         break;
     }
+}
 
-    // Apply Movement
-    x += speed_x;
-    y -= speed_y;   // Subtracting because y coordinate decreases when going upwards.
+void player_ship::fire_control(int &next_laser, const int &number_of_lasers, bn::array<laser_player, 5> &player_lasers)
+{
+    // Reduce cooldown value.
+    if (gun_firing_cooldown != 0)
+    {
+        gun_firing_cooldown -= 1;
+    }
 
-    // Update the sprite's position.
-    player_sprite.set_x(x);
-    player_sprite.set_y(y);
+    // Reduce gun heat.
+    if (gun_heat.to_float() > 0.2)
+    {
+        gun_heat -= 0.2;
+    }
+    else
+    {
+        gun_heat = 0;
+    }
+
+    // Set gun to no longer being overheated if it is and heat reaches 0%.
+    if (gun_overheated && gun_heat.ceil_integer() == 0)
+    {
+        gun_overheated = false;
+    }
+
+    // Check for necessary conditions.
+    if (bn::keypad::b_held() && gun_energy.ceil_integer() > 0 && gun_firing_cooldown == 0 && !gun_overheated)
+    {
+        // Set cooldown back to full delay;
+        gun_firing_cooldown = gun_cooldown_time;
+
+        // Reduce player ship's energy.
+        gun_energy -= 1;
+
+        // Increase gun heat.
+        if (gun_heat.to_float() < 92)
+        {
+            gun_heat += 8;
+        }
+        else
+        {
+            gun_heat = 100;
+        }
+
+        // Check if gun heat has reached 100%, set to overheated if so.
+        if (gun_heat.to_float() >= 100)
+        {
+            gun_overheated = true;
+            gun_heat = 100;
+        }
+
+        // Set the laser active.
+        player_lasers[next_laser].fire(0, x.round_integer(), y.round_integer(), speed_x, speed_y, direction);
+
+        // Indicate to use the laser after the recently used one next time.
+        if (next_laser != number_of_lasers - 1)
+        {
+            next_laser += 1;
+        }
+        else
+        {
+            next_laser = 0;
+        }
+    }
 }
