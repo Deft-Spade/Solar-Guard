@@ -14,3 +14,9 @@ space_junk::space_junk(int start_x, int start_y, bn::camera_ptr &camera, int jun
     // Set camera.
     sprite.set_camera(camera);
 }
+
+void space_junk::destroy()
+{
+    sprite.set_visible(false);
+    active = false;
+}

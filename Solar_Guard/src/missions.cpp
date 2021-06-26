@@ -133,7 +133,33 @@ void mission_1(int ship_selection)
         // Player laser operations.
         for (int i = 0; i < array_player_lasers_size; i++)
         {
-            array_player_lasers[i].move();
+            // Only operate if active.
+            if (array_player_lasers[i].active)
+            {
+                // Move the lasers forward.
+                array_player_lasers[i].move();
+
+                // Check for collision with every piece of orbital junk.
+                for (int j = 0; j < array_orbital_junk_size; j++)
+                {
+                    // Collision with bounding box 16x16 pixels.
+                    if (array_player_lasers[i].check_collision(array_orbital_junk[j].x.round_integer() - 6, array_orbital_junk[j].y.round_integer() - 6, 14, 14))
+                    {
+                        // Make the junk take damage.
+                        array_orbital_junk[j].hull -= 5;
+
+                        // Remove the laser since it has hit.
+                        array_player_lasers[i].hit();
+
+                        // Check if junk's hull is 0.
+                        if (array_orbital_junk[j].hull.ceil_integer() == 0)
+                        {
+                            // Destroy the junk (set it inactive).
+                            array_orbital_junk[j].destroy();
+                        }
+                    }
+                }
+            }
         }
 
         // Keep player's position within mission bounds.

@@ -14,7 +14,7 @@ laser_player::laser_player(bn::camera_ptr &camera)
 void laser_player::fire(int colour, int start_x, int start_y, bn::fixed shooter_x_speed, bn::fixed shooter_y_speed, bn::fixed shooter_direction)
 {
     // Set this laser to being active.
-    active = 1;
+    active = true;
     sprite.set_visible(true);
 
     // Reset remaining distance.
@@ -54,15 +54,16 @@ void laser_player::move()
         // Check if max distance reached and deactivate if so.
         if (distance == 0)
         {
-            active = 0;
+            active = false;
             sprite.set_visible(false);
         }
     }
 }
 
-bool laser_player::check_collision(int x_position, int y_position, int x_left, int y_top, int x_right, int y_bottom)
+bool laser_player::check_collision(int x_position, int y_position, int width, int height)
 {
-    if (x_position >= x_left && x_position <= x_right && y_position >= y_top && y_position <= y_bottom)
+    if (x.round_integer() >= x_position && x.round_integer() <= x_position + width - 1 &&
+        y.round_integer() >= y_position && y.round_integer() <= y_position + height - 1)
     {
         return true;
     }
@@ -70,4 +71,10 @@ bool laser_player::check_collision(int x_position, int y_position, int x_left, i
     {
         return false;
     }
+}
+
+void laser_player::hit()
+{
+    active = false;
+    sprite.set_visible(false);
 }
