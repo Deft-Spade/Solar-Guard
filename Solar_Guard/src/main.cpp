@@ -247,7 +247,7 @@ int main()
                 break;
 
             case 33:
-                scene_oga_credits();
+                scene_art_ack();
                 bn::core::update();
                 break;
 

@@ -11,7 +11,11 @@
 
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
-#include "bn_regular_bg_items_bg_mission_briefing.h"
+#include "bn_regular_bg_items_bg_briefing1.h"
+#include "bn_regular_bg_items_bg_briefing2.h"
+#include "bn_regular_bg_items_bg_briefing3.h"
+#include "bn_regular_bg_items_bg_briefing4.h"
+#include "bn_regular_bg_items_bg_briefing5.h"
 
 #include "font_menu.h"
 #include "variable_8x16_sprite_font.h"
@@ -25,7 +29,7 @@
 int briefing_1()
 {
     // Set a background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_briefing1.create_bg(0, 0);
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -39,12 +43,12 @@ int briefing_1()
 
     // Draw briefing text.
     text_generator_compact.set_left_alignment();
-    text_generator_compact.generate(-112, 25, "REPORTS HAVE COME IN FROM CIVILLIAN AND CORPORATE", briefing_text);
-    text_generator_compact.generate(-112, 34, "TRANSPORTS THAT SPACE JUNK ACCUMULATING WITHIN", briefing_text);
-    text_generator_compact.generate(-112, 43, "EARTH'S ORBIT IS MAKING TRANSIT DIFFICULT.", briefing_text);
-    text_generator_compact.generate(-112, 52, "", briefing_text);
-    text_generator_compact.generate(-112, 61, "WE ARE DEPLOYING RESERVE FIGHTERS ACROSS EARTH'S ORBIT.", briefing_text);
-    text_generator_compact.generate(-112, 70, "TO DESTROY THE EXCESS JUNK. PREPARE FOR DEPLOYMENT.", briefing_text);
+    text_generator_compact.generate(-112, 25, "SPACE JUNK HAS BEEN ACCUMULATING WITHIN EARTH'S ORBIT.", briefing_text);
+    text_generator_compact.generate(-112, 34, "THIS PRESENTS A HAZARD TO LOCAL SOLAR TRAFFIC.", briefing_text);
+    text_generator_compact.generate(-112, 43, "WE ARE DEPLOYING FIGHTERSTO DESTROY THE EXCESS JUNK.", briefing_text);
+    text_generator_compact.generate(-112, 52, "PREPARE FOR DEPLOYMENT.", briefing_text);
+    text_generator_compact.generate(-112, 61, "", briefing_text);
+    text_generator_compact.generate(-112, 70, "", briefing_text);
 
     // Briefing loop.
     while(true)
@@ -66,7 +70,7 @@ int briefing_1()
 int briefing_2()
 {
     // Set a background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_briefing2.create_bg(0, 0);
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -107,7 +111,7 @@ int briefing_2()
 int briefing_3()
 {
     // Set a background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_briefing3.create_bg(0, 0);
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -148,7 +152,7 @@ int briefing_3()
 int briefing_4()
 {
     // Set a background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_briefing4.create_bg(0, 0);
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
@@ -189,7 +193,7 @@ int briefing_4()
 int briefing_5()
 {
     // Set a background.
-    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_mission_briefing.create_bg(0, 0);
+    bn::regular_bg_ptr gameplay_bg = bn::regular_bg_items::bg_briefing5.create_bg(0, 0);
 
     // Setup drawing text.
     bn::sprite_text_generator text_generator(font_hud);
