@@ -193,7 +193,9 @@ void mission_2(int ship_selection)
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
 
-    // Create the objects.
+    // Object Creation ----------------------------------------------------------- //
+
+    // Asteroids
     bn::array<asteroid, 20> orbital_junk = {
         asteroid(-1473,-1595,camera,0),
         asteroid(1981,1959,camera,1),
@@ -216,11 +218,26 @@ void mission_2(int ship_selection)
         asteroid(-1731,1153,camera,1),
         asteroid(333,877,camera,0)
     };
+
+    // Player lasers.
+    const int array_player_lasers_size = 5;
+    int next_laser = 0;
+    bn::array<laser_player, 5> array_player_lasers = {
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera)
+    };
+
+    // Player Ship
     player_ship player_ship(ship_selection, 0, 0);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
     hud_ally HUD_Transport(0, 0);
+
+    // --------------------------------------------------------------------------- //
 
     // Attach camera to the player ship.
     player_ship.player_sprite.set_camera(camera);
@@ -239,8 +256,42 @@ void mission_2(int ship_selection)
         HUD.draw_hud(player_ship, x_limit, y_limit);
         HUD_Transport.update(100,100);
 
-        // Player movement (input and logic is handled in player object).
+        // Player operations.
         player_ship.movement();
+        player_ship.animation();
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+
+        // Player laser operations.
+        for (int i = 0; i < array_player_lasers_size; i++)
+        {
+            // Only operate if active.
+            if (array_player_lasers[i].active)
+            {
+                // Move the lasers forward.
+                array_player_lasers[i].move();
+
+                // Check for collision...
+                /*for (int j = 0; j < array_orbital_junk_size; j++)
+                {
+                    // Collision with bounding box 16x16 pixels.
+                    if (array_player_lasers[i].check_collision(array_orbital_junk[j].x.round_integer() - 6, array_orbital_junk[j].y.round_integer() - 6, 14, 14))
+                    {
+                        // Make the junk take damage.
+                        array_orbital_junk[j].hull -= 5;
+
+                        // Remove the laser since it has hit.
+                        array_player_lasers[i].hit();
+
+                        // Check if junk's hull is 0.
+                        if (array_orbital_junk[j].hull.ceil_integer() == 0)
+                        {
+                            // Destroy the junk (set it inactive).
+                            array_orbital_junk[j].destroy();
+                        }
+                    }
+                }*/
+            }
+        }
 
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
@@ -272,12 +323,27 @@ void mission_3(int ship_selection)
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
 
-    // Create the objects.
+    // Object Creation ----------------------------------------------------------- //
+
+    // Player lasers.
+    const int array_player_lasers_size = 5;
+    int next_laser = 0;
+    bn::array<laser_player, 5> array_player_lasers = {
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera)
+    };
+
+    // Player Ship
     player_ship player_ship(ship_selection, 0, 0);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
     hud_ally HUD_Station(1, 0);
+
+    // --------------------------------------------------------------------------- //
 
     // Attach camera to the player ship.
     player_ship.player_sprite.set_camera(camera);
@@ -296,8 +362,42 @@ void mission_3(int ship_selection)
         HUD.draw_hud(player_ship, x_limit, y_limit);
         HUD_Station.update(100,100);
 
-        // Player movement (input and logic is handled in player object).
+        // Player operations.
         player_ship.movement();
+        player_ship.animation();
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+
+        // Player laser operations.
+        for (int i = 0; i < array_player_lasers_size; i++)
+        {
+            // Only operate if active.
+            if (array_player_lasers[i].active)
+            {
+                // Move the lasers forward.
+                array_player_lasers[i].move();
+
+                // Check for collision...
+                /*for (int j = 0; j < array_orbital_junk_size; j++)
+                {
+                    // Collision with bounding box 16x16 pixels.
+                    if (array_player_lasers[i].check_collision(array_orbital_junk[j].x.round_integer() - 6, array_orbital_junk[j].y.round_integer() - 6, 14, 14))
+                    {
+                        // Make the junk take damage.
+                        array_orbital_junk[j].hull -= 5;
+
+                        // Remove the laser since it has hit.
+                        array_player_lasers[i].hit();
+
+                        // Check if junk's hull is 0.
+                        if (array_orbital_junk[j].hull.ceil_integer() == 0)
+                        {
+                            // Destroy the junk (set it inactive).
+                            array_orbital_junk[j].destroy();
+                        }
+                    }
+                }*/
+            }
+        }
 
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
@@ -325,11 +425,26 @@ void mission_4(int ship_selection)
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
 
-    // Create the objects.
+    // Object Creation ----------------------------------------------------------- //
+
+    // Player lasers.
+    const int array_player_lasers_size = 5;
+    int next_laser = 0;
+    bn::array<laser_player, 5> array_player_lasers = {
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera)
+    };
+
+    // Player Ship
     player_ship player_ship(ship_selection, 0, 0);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
+
+    // --------------------------------------------------------------------------- //
 
     // Attach camera to the player ship.
     player_ship.player_sprite.set_camera(camera);
@@ -347,8 +462,42 @@ void mission_4(int ship_selection)
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
 
-        // Player movement (input and logic is handled in player object).
+        // Player operations.
         player_ship.movement();
+        player_ship.animation();
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+
+        // Player laser operations.
+        for (int i = 0; i < array_player_lasers_size; i++)
+        {
+            // Only operate if active.
+            if (array_player_lasers[i].active)
+            {
+                // Move the lasers forward.
+                array_player_lasers[i].move();
+
+                // Check for collision...
+                /*for (int j = 0; j < array_orbital_junk_size; j++)
+                {
+                    // Collision with bounding box 16x16 pixels.
+                    if (array_player_lasers[i].check_collision(array_orbital_junk[j].x.round_integer() - 6, array_orbital_junk[j].y.round_integer() - 6, 14, 14))
+                    {
+                        // Make the junk take damage.
+                        array_orbital_junk[j].hull -= 5;
+
+                        // Remove the laser since it has hit.
+                        array_player_lasers[i].hit();
+
+                        // Check if junk's hull is 0.
+                        if (array_orbital_junk[j].hull.ceil_integer() == 0)
+                        {
+                            // Destroy the junk (set it inactive).
+                            array_orbital_junk[j].destroy();
+                        }
+                    }
+                }*/
+            }
+        }
 
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
@@ -378,14 +527,31 @@ void mission_5(int ship_selection)
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     gameplay_bg.set_camera(camera);
 
-    // Create the objects.
+    // Object Creation ----------------------------------------------------------- //
+
+    // Player lasers.
+    const int array_player_lasers_size = 5;
+    int next_laser = 0;
+    bn::array<laser_player, 5> array_player_lasers = {
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera),
+        laser_player(camera)
+    };
+
+    // Solar Guard Carrier
     ally_carrier ally_carrier;
+
+    // Player Ship
     player_ship player_ship(ship_selection, 1000, 1020);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
     hud_ally HUD_Carrier(2, 0);
     hud_ally HUD_Civillian(3, 1);
+
+    // --------------------------------------------------------------------------- //
 
     // Play the non-combat gameplay music.
     bgm_rescue.play();
@@ -414,8 +580,42 @@ void mission_5(int ship_selection)
         HUD_Carrier.update(ally_carrier.hull.ceil_integer(), ally_carrier.hull_max.ceil_integer());
         HUD_Civillian.update(100,100);
 
-        // Player movement (input and logic is handled in player object).
+        // Player operations.
         player_ship.movement();
+        player_ship.animation();
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+
+        // Player laser operations.
+        for (int i = 0; i < array_player_lasers_size; i++)
+        {
+            // Only operate if active.
+            if (array_player_lasers[i].active)
+            {
+                // Move the lasers forward.
+                array_player_lasers[i].move();
+
+                // Check for collision...
+                /*for (int j = 0; j < array_orbital_junk_size; j++)
+                {
+                    // Collision with bounding box 16x16 pixels.
+                    if (array_player_lasers[i].check_collision(array_orbital_junk[j].x.round_integer() - 6, array_orbital_junk[j].y.round_integer() - 6, 14, 14))
+                    {
+                        // Make the junk take damage.
+                        array_orbital_junk[j].hull -= 5;
+
+                        // Remove the laser since it has hit.
+                        array_player_lasers[i].hit();
+
+                        // Check if junk's hull is 0.
+                        if (array_orbital_junk[j].hull.ceil_integer() == 0)
+                        {
+                            // Destroy the junk (set it inactive).
+                            array_orbital_junk[j].destroy();
+                        }
+                    }
+                }*/
+            }
+        }
 
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
