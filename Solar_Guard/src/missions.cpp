@@ -6,7 +6,7 @@
 #include "bn_bg_palettes.h"
 #include "bn_sprite_text_generator.h"
 
-#include <string>
+#include "bn_string.h"
 
 #include "bn_regular_bg_ptr.h"
 #include "bn_regular_bg_item.h"
@@ -20,7 +20,7 @@
 #include "bn_regular_bg_items_bg_mission_5_background.h"
 
 #include "font_menu.h"
-#include "variable_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "font_hud.h"
 #include "font_hud_compact.h"
 #include "bn_sprite_items_spr_sg_ship_1.h"
@@ -47,7 +47,7 @@
 #include "space_junk.h"
 #include "laser_player.h"
 
-void mission_1(int ship_selection)
+int mission_1(int ship_selection)
 {
     // Mission constands.
     const bn::fixed x_limit = 1024;
@@ -65,6 +65,7 @@ void mission_1(int ship_selection)
 
     // Orbital junk.
     const int array_orbital_junk_size = 20;
+    int array_orbital_junk_left = 20;
     bn::array<space_junk, 20> array_orbital_junk = {
         space_junk(655,-950,camera,0),
         space_junk(1260,273,camera,1),
@@ -116,10 +117,11 @@ void mission_1(int ship_selection)
     HUD.spr_map.set_palette(bn::sprite_items::spr_hud_map_mission1.palette_item());
 
     // Game loop.
-    while(! bn::keypad::select_pressed())
+    while(true)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+        HUD.draw_hud_objective("DESTORY SPACE JUNK", 20 - array_orbital_junk_left, array_orbital_junk_size);
 
         // Gravitational acceleration downward.
         if (player_ship.directional_speed.floor_integer() < player_ship.speed_max.floor_integer())
@@ -156,6 +158,9 @@ void mission_1(int ship_selection)
                         {
                             // Destroy the junk (set it inactive).
                             array_orbital_junk[j].destroy();
+
+                            // Reduce amount of junk left.
+                            array_orbital_junk_left -= 1;
                         }
                     }
                 }
@@ -174,6 +179,24 @@ void mission_1(int ship_selection)
         // Rear background scrolling at slower speed for parallax.
         gameplay_bg_rear.set_x(-camera.x() / 2);
         gameplay_bg_rear.set_y(-camera.y() / 2);
+
+        // Check for mission completion.
+        if (array_orbital_junk_left == 0)
+        {
+            return 1;
+        }
+
+        // Check for mission failure.
+        if (player_ship.hull == 0)
+        {
+            return -1;
+        }
+
+        // Check for SELECT key indicating user exit.
+        if (bn::keypad::select_pressed())
+        {
+            return 0;
+        }
 
         bn::core::update();
     }
@@ -568,17 +591,13 @@ void mission_5(int ship_selection)
     ally_carrier.carrier_sprite2.set_camera(camera);
     ally_carrier.carrier_sprite3.set_camera(camera);
 
-    // Draw a basic text-based HUD.
-    bn::sprite_text_generator text_generator(font_hud);
-    bn::vector<bn::sprite_ptr, 64> text_sprites;
-
     // Game loop.
     while(! bn::keypad::select_pressed())
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
         HUD_Carrier.update(ally_carrier.hull.ceil_integer(), ally_carrier.hull_max.ceil_integer());
-        HUD_Civillian.update(100,100);
+        HUD_Civillian.update(100,100); 
 
         // Player operations.
         player_ship.movement();

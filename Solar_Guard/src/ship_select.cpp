@@ -24,7 +24,7 @@
 
 #include "bn_sprite_text_generator.h"
 #include "font_menu.h"
-#include "variable_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "font_hud.h"
 
 #include "bn_music_item.h"

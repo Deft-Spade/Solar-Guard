@@ -87,6 +87,7 @@ public:
     // Vector for hud text.
     bn::vector<bn::sprite_ptr, 6> hud_text_speed;
     bn::vector<bn::sprite_ptr, 6> hud_text_direction;
+    bn::vector<bn::sprite_ptr, 29> hud_text_objectives;
     bn::vector<bn::sprite_ptr, 32> hud_text_coordinates;
 
     // Functions
@@ -96,6 +97,7 @@ public:
     void draw_hud_speed(player_ship &player_ship);
     void draw_hud_direction(player_ship &player_ship);
     void draw_hud_target();
+    void draw_hud_objective(bn::string<20> objective, int progress, int target);
     void draw_hud_engine_status(player_ship &player_ship);
     void draw_hud_engine_fuel(player_ship &player_ship);
     void draw_hud_engine_heat(player_ship &player_ship);

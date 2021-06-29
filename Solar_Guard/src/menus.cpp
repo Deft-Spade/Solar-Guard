@@ -17,7 +17,7 @@
 #include "bn_regular_bg_items_bg_main_menu.h"
 
 #include "font_menu.h"
-#include "variable_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "bn_sprite_items_menu_arrow.h"
 
 #include "music.h"
@@ -182,7 +182,7 @@ int main_menu()
     bgm_theme_menu.play();
 
     // Draw the main menu text.
-    bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
+    bn::sprite_text_generator text_generator(font_menu);
     bn::vector<bn::sprite_ptr, 64> text_sprites;
     draw_mainmenu_text(text_generator, text_sprites);
 

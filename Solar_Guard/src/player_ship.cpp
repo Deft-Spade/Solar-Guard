@@ -53,6 +53,9 @@ player_ship::player_ship(int ship_type, int x_pos, int y_pos)
         case 8:
             player_sprite = bn::sprite_items::spr_sg_ship_8.create_sprite(0,0);
             break;
+
+        default:
+            break;
     }
 
     // Set the player's initial position.
@@ -201,37 +204,15 @@ void player_ship::animation()
 
     switch (type)
     {
-        case 1:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
-
-        case 2:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
-
-        case 3:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
-
-        case 4:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
-
-        case 5:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
-
-        case 6:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
-
-        case 7:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
-
-        case 8:
-            player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(engine_state_sprite_frame));
-        break;
+        case 1: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 2: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 3: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 4: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 5: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 6: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 7: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 8: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        default: break;
     }
 }
 

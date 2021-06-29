@@ -11,7 +11,7 @@
 #include "bn_regular_bg_items_bg_grid.h"
 
 #include "font_menu.h"
-#include "variable_8x16_sprite_font.h"
+#include "font_menu.h"
 
 #include "bn_music_item.h"
 #include "bn_music_items.h"
@@ -41,7 +41,7 @@ void scene_music_playback()
     const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_grid.create_bg(0, -20);
 
     // Setup drawing text.
-    bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
+    bn::sprite_text_generator text_generator(font_menu);
     text_generator.set_center_alignment();
     bn::vector<bn::sprite_ptr, 32> text_menu;
     bn::vector<bn::sprite_ptr, 32> text_song;

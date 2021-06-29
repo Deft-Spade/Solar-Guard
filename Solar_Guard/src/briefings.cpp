@@ -18,7 +18,7 @@
 #include "bn_regular_bg_items_bg_briefing5.h"
 
 #include "font_menu.h"
-#include "variable_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "font_hud.h"
 #include "font_hud_compact.h"
 #include "bn_sprite_items_menu_arrow.h"
@@ -43,12 +43,12 @@ int briefing_1()
 
     // Draw briefing text.
     text_generator_compact.set_left_alignment();
-    text_generator_compact.generate(-112, 25, "SPACE JUNK HAS BEEN ACCUMULATING WITHIN EARTH'S ORBIT.", briefing_text);
-    text_generator_compact.generate(-112, 34, "THIS PRESENTS A HAZARD TO LOCAL SOLAR TRAFFIC.", briefing_text);
-    text_generator_compact.generate(-112, 43, "WE ARE DEPLOYING FIGHTERSTO DESTROY THE EXCESS JUNK.", briefing_text);
-    text_generator_compact.generate(-112, 52, "PREPARE FOR DEPLOYMENT.", briefing_text);
-    text_generator_compact.generate(-112, 61, "", briefing_text);
-    text_generator_compact.generate(-112, 70, "", briefing_text);
+    text_generator_compact.generate(-106, 25, "SPACE JUNK HAS BEEN ACCUMULATING WITHIN EARTH'S", briefing_text);
+    text_generator_compact.generate(-106, 34, "ORBIT. THIS PRESENTS A HAZARD TO LOCAL SOLAR TRAFFIC.", briefing_text);
+    text_generator_compact.generate(-106, 43, "WE ARE DEPLOYING FIGHTERS TO DESTROY THE EXCESS JUNK.", briefing_text);
+    text_generator_compact.generate(-106, 52, "PREPARE FOR DEPLOYMENT.", briefing_text);
+    text_generator_compact.generate(-106, 61, "", briefing_text);
+    text_generator_compact.generate(-106, 70, "", briefing_text);
 
     // Briefing loop.
     while(true)
@@ -84,12 +84,12 @@ int briefing_2()
 
     // Draw briefing text.
     text_generator_compact.set_left_alignment();
-    text_generator_compact.generate(-112, 25, "A TRANSPORT HAS REQUESTED ASSISTANCE IN NAVIGATING", briefing_text);
-    text_generator_compact.generate(-112, 34, "THROUGH AN ASTEROID FIELD.", briefing_text);
-    text_generator_compact.generate(-112, 43, "", briefing_text);
-    text_generator_compact.generate(-112, 52, "ESCORT THE TRANSPORT THROUGH THE FIELD AND DESTROY", briefing_text);
-    text_generator_compact.generate(-112, 61, "ANY DRIFITING ASTEROIDS THAT THREATEN THE TRANSPORT.", briefing_text);
-    text_generator_compact.generate(-112, 70, "", briefing_text);
+    text_generator_compact.generate(-106, 25, "A TRANSPORT HAS REQUESTED ASSISTANCE IN NAVIGATING", briefing_text);
+    text_generator_compact.generate(-106, 34, "THROUGH AN ASTEROID FIELD.", briefing_text);
+    text_generator_compact.generate(-106, 43, "", briefing_text);
+    text_generator_compact.generate(-106, 52, "ESCORT THE TRANSPORT THROUGH THE FIELD AND DESTROY", briefing_text);
+    text_generator_compact.generate(-106, 61, "ANY DRIFITING ASTEROIDS THAT THREATEN THE TRANSPORT.", briefing_text);
+    text_generator_compact.generate(-106, 70, "", briefing_text);
 
     // Briefing loop.
     while(true)
@@ -125,12 +125,12 @@ int briefing_3()
 
     // Draw briefing text.
     text_generator_compact.set_left_alignment();
-    text_generator_compact.generate(-112, 25, "WARNING! NO-FLY-ZONE PERIMETER BREACHED!", briefing_text);
-    text_generator_compact.generate(-112, 34, "ENEMY SHIPS ATTACKING!", briefing_text);
-    text_generator_compact.generate(-112, 43, "IDENTIFIED AS PIRATE ACTIVITY!", briefing_text);
-    text_generator_compact.generate(-112, 52, "ALL FIGHTERS SCRAMBLE!", briefing_text);
-    text_generator_compact.generate(-112, 61, "ORDERS ARE TO ENGAGE AND DESTROY ENEMY FIGHTERS!", briefing_text);
-    text_generator_compact.generate(-112, 70, "", briefing_text);
+    text_generator_compact.generate(-106, 25, "WARNING! NO-FLY-ZONE PERIMETER BREACHED!", briefing_text);
+    text_generator_compact.generate(-106, 34, "ENEMY SHIPS ATTACKING!", briefing_text);
+    text_generator_compact.generate(-106, 43, "IDENTIFIED AS PIRATE ACTIVITY!", briefing_text);
+    text_generator_compact.generate(-106, 52, "ALL FIGHTERS SCRAMBLE!", briefing_text);
+    text_generator_compact.generate(-106, 61, "ORDERS ARE TO ENGAGE AND DESTROY ENEMY FIGHTERS!", briefing_text);
+    text_generator_compact.generate(-106, 70, "", briefing_text);
 
     // Briefing loop.
     while(true)
@@ -166,12 +166,12 @@ int briefing_4()
 
     // Draw briefing text.
     text_generator_compact.set_left_alignment();
-    text_generator_compact.generate(-112, 25, "MILITARY INTELLIGENCE BELIEVES THE PIRATES MAY BE", briefing_text);
-    text_generator_compact.generate(-112, 34, "OPERATING AN OUTPOST WITHIN THE ASTEROID BELT.", briefing_text);
-    text_generator_compact.generate(-112, 43, "", briefing_text);
-    text_generator_compact.generate(-112, 52, "ORDERS ARE TO PERFORM STEALTH RECON.", briefing_text);
-    text_generator_compact.generate(-112, 61, "IT IS IMPORTANT TO AVOID DETECTION.", briefing_text);
-    text_generator_compact.generate(-112, 70, "DO NOT ENGAGE. STAY OUT OF SIGHT.", briefing_text);
+    text_generator_compact.generate(-106, 25, "MILITARY INTELLIGENCE BELIEVES THE PIRATES MAY BE", briefing_text);
+    text_generator_compact.generate(-106, 34, "OPERATING AN OUTPOST WITHIN THE ASTEROID BELT.", briefing_text);
+    text_generator_compact.generate(-106, 43, "", briefing_text);
+    text_generator_compact.generate(-106, 52, "ORDERS ARE TO PERFORM STEALTH RECON.", briefing_text);
+    text_generator_compact.generate(-106, 61, "IT IS IMPORTANT TO AVOID DETECTION.", briefing_text);
+    text_generator_compact.generate(-106, 70, "DO NOT ENGAGE. STAY OUT OF SIGHT.", briefing_text);
 
     // Briefing loop.
     while(true)
@@ -207,12 +207,12 @@ int briefing_5()
 
     // Draw briefing text.
     text_generator_compact.set_left_alignment();
-    text_generator_compact.generate(-112, 25, "WE HAVE PICKED UP A DISTRESS CALL FROM A CIVILLIAN", briefing_text);
-    text_generator_compact.generate(-112, 34, "CRAFT. IT APPEARS THAT THE SHIP'S ENGINES HAVE FAILED", briefing_text);
-    text_generator_compact.generate(-112, 43, "NEAR THE SUN, WHICH IT IS NOW DRIFTING TOWARDS. FLY", briefing_text);
-    text_generator_compact.generate(-112, 52, "TO THE STRICKEN CRAFT AND RESCUE ANY OCCUPANTS,", briefing_text);
-    text_generator_compact.generate(-112, 61, "RETURNING THEM TO THE CARRIER. TIME IS LIMITED.", briefing_text);
-    text_generator_compact.generate(-112, 70, "", briefing_text);
+    text_generator_compact.generate(-106, 25, "WE HAVE PICKED UP A DISTRESS CALL FROM A CIVILLIAN", briefing_text);
+    text_generator_compact.generate(-106, 34, "CRAFT. IT APPEARS THAT THE SHIP'S ENGINES HAVE FAILED", briefing_text);
+    text_generator_compact.generate(-106, 43, "NEAR THE SUN, WHICH IT IS NOW DRIFTING TOWARDS. FLY", briefing_text);
+    text_generator_compact.generate(-106, 52, "TO THE STRICKEN CRAFT AND RESCUE ANY OCCUPANTS,", briefing_text);
+    text_generator_compact.generate(-106, 61, "RETURNING THEM TO THE CARRIER. TIME IS LIMITED.", briefing_text);
+    text_generator_compact.generate(-106, 70, "", briefing_text);
 
     // Briefing loop.
     while(true)

@@ -103,6 +103,14 @@ void heads_up_display::draw_hud_target()
     // Write code to manage this here when targeting implemented.
 }
 
+void heads_up_display::draw_hud_objective(bn::string<20> objective, int progress, int target)
+{
+    hud_text_objectives.clear();
+    //text_generator.set_left_alignment();
+    text_generator.generate(-118, -60, objective, hud_text_objectives);
+    text_generator.generate(-118, -53, bn::to_string<4>(progress) + "/" + bn::to_string<4>(target), hud_text_objectives);
+}
+
 void heads_up_display::draw_hud_engine_status(player_ship &player_ship)
 {
     // Update of engine status.

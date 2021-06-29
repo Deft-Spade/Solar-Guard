@@ -30,7 +30,7 @@
 
 #include "bn_sprite_text_generator.h"
 #include "font_menu.h"
-#include "variable_8x16_sprite_font.h"
+#include "font_menu.h"
 #include "font_hud.h"
 
 #include "bn_music_item.h"
@@ -253,7 +253,7 @@ void scene_art_ack()
             case 12: user_input = scene_art_ack_page12(); break;
             case 13: user_input = scene_art_ack_page13(); break;
             case 113: user_input = page13_image(); break;
-            default: BN_ERROR("CURRENT PAGE VALUE INVALID: " + bn::to_string<16>(current_page)); break;
+            default: BN_ERROR("CURRENT PAGE VALUE INVALID: " + bn::to_string<32>(current_page)); break;
         }
 
         switch (user_input)
@@ -285,6 +285,8 @@ void scene_art_ack()
                 break;
 
             case 2: current_page += 100; break;
+
+            default: BN_ERROR("USER INPUT VALUE INVALID: " + bn::to_string<32>(user_input)); break;
         }
 
         bn::core::update();

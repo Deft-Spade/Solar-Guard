@@ -15,7 +15,7 @@
 #include "bn_regular_bg_items_bg_main_menu.h"
 
 #include "font_menu.h"
-#include "variable_8x16_sprite_font.h"
+#include "font_menu.h"
 
 #include "splash_screens.h"
 #include "menus.h"
@@ -25,6 +25,7 @@
 
 #include "briefings.h"
 #include "missions.h"
+#include "mission_result.h"
 
 void title_screen()
 {
@@ -35,7 +36,7 @@ void title_screen()
     bgm_theme_title.play();
 
     // Draw the text.
-    bn::sprite_text_generator text_generator(variable_8x16_sprite_font);
+    bn::sprite_text_generator text_generator(font_menu);
     text_generator.set_center_alignment();
     bn::vector<bn::sprite_ptr, 32> text_sprites;
     text_generator.generate(0, 55, "Press START", text_sprites);
@@ -101,7 +102,24 @@ int main()
                 // Exit from briefing should go straight to main menu.
                 if (selected_ship > 0)
                 {
-                    mission_1(selected_ship);
+                    int mission_result = mission_1(selected_ship);
+                    bn::core::update();
+
+                    switch (mission_result)
+                    {
+                        case 1:
+                            mission_success(1);
+                            bn::core::update();
+                            break;
+                        case 0:
+                            break;
+                        case -1:
+                            mission_failure(1);
+                            bn::core::update();
+                            break;
+                        default: break;
+                    }
+
                     bn::core::update();
                 }
 
