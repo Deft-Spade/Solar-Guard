@@ -169,6 +169,12 @@ int mission_1(int ship_selection)
             }
         }
 
+        // Space junk operation.
+        for (int i = 0; i < array_orbital_junk_size; i++)
+        {
+            array_orbital_junk[i].radar_dot(player_ship);
+        }
+
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
         player_ship.y = bn::min(bn::max(-y_limit, player_ship.y), y_limit);
@@ -207,8 +213,8 @@ int mission_1(int ship_selection)
 void mission_2(int ship_selection)
 {
     // Mission constants.
-    const bn::fixed x_limit = 4000;
-    const bn::fixed y_limit = 4000;
+    const bn::fixed x_limit = 5000;
+    const bn::fixed y_limit = 5000;
 
     // Set a parallax two-layer background.
     bn::regular_bg_ptr gameplay_bg_rear = bn::regular_bg_items::bg_stars_blue_foreground.create_bg(0, 0);
@@ -221,7 +227,9 @@ void mission_2(int ship_selection)
     // Object Creation ----------------------------------------------------------- //
 
     // Asteroids
-    bn::array<asteroid, 20> orbital_junk = {
+    const int array_asteroids_size = 20;
+    int array_asteroids_left = 20;
+    bn::array<asteroid, 20> array_asteroids = {
         asteroid(-1473,-1595,camera,0),
         asteroid(1981,1959,camera,1),
         asteroid(-1036,-1213,camera,1),
@@ -244,6 +252,9 @@ void mission_2(int ship_selection)
         asteroid(333,877,camera,0)
     };
 
+    // Transport
+    ally_transport ally_transport;
+
     // Player lasers.
     const int array_player_lasers_size = 5;
     int next_laser = 0;
@@ -256,7 +267,7 @@ void mission_2(int ship_selection)
     };
 
     // Player Ship
-    player_ship player_ship(ship_selection, 0, 0);
+    player_ship player_ship(ship_selection, -4800, 4900);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
@@ -264,8 +275,9 @@ void mission_2(int ship_selection)
 
     // --------------------------------------------------------------------------- //
 
-    // Attach camera to the player ship.
+    // Attach camera to the player ship and transport.
     player_ship.player_sprite.set_camera(camera);
+    ally_transport.sprite.set_camera(camera);
 
     // Play the non-combat gameplay music.
     bgm_escort.play();
@@ -285,6 +297,17 @@ void mission_2(int ship_selection)
         player_ship.movement();
         player_ship.animation();
         player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+
+        // Transport operations.
+        ally_transport.move();
+        ally_transport.radar_dot(player_ship);
+        ally_transport.map_dot(x_limit.round_integer(), y_limit.round_integer());
+
+        // Asteroid operations.
+        for (int i = 0; i < array_asteroids_size; i++)
+        {
+            array_asteroids[i].radar_dot(player_ship);
+        }
 
         // Player laser operations.
         for (int i = 0; i < array_player_lasers_size; i++)
@@ -566,10 +589,10 @@ void mission_5(int ship_selection)
     };
 
     // Solar Guard Carrier
-    ally_carrier ally_carrier;
+    ally_carrier ally_carrier(x_limit.round_integer(), y_limit.round_integer());
 
     // Player Ship
-    player_ship player_ship(ship_selection, 1000, 1020);
+    player_ship player_ship(ship_selection, 1500, 1520);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
@@ -589,9 +612,9 @@ void mission_5(int ship_selection)
     player_ship.player_sprite.set_camera(camera);
 
     // Attach the camera to the carrier sprites.
-    ally_carrier.carrier_sprite1.set_camera(camera);
-    ally_carrier.carrier_sprite2.set_camera(camera);
-    ally_carrier.carrier_sprite3.set_camera(camera);
+    ally_carrier.sprite1.set_camera(camera);
+    ally_carrier.sprite2.set_camera(camera);
+    ally_carrier.sprite3.set_camera(camera);
 
     // Game loop.
     while(! bn::keypad::select_pressed())
@@ -605,6 +628,9 @@ void mission_5(int ship_selection)
         player_ship.movement();
         player_ship.animation();
         player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+
+        // Carrier operations.
+        ally_carrier.radar_dot(player_ship);
 
         // Player laser operations.
         for (int i = 0; i < array_player_lasers_size; i++)

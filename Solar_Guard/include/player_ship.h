@@ -28,7 +28,7 @@ public:
     bn::fixed hull_recharge_amount = 20;
     bn::fixed x = 0;
     bn::fixed y = 0;
-    bn::fixed direction = 0;
+    bn::fixed direction = 90;
     bn::fixed speed_x = 0;
     bn::fixed speed_y = 0;
     bn::fixed speed_max = 5;
