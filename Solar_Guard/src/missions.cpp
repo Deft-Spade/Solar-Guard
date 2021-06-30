@@ -121,7 +121,7 @@ int mission_1(int ship_selection)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
-        HUD.draw_hud_objective("DESTORY SPACE JUNK", 20 - array_orbital_junk_left, array_orbital_junk_size);
+        HUD.draw_hud_objective(1, 20 - array_orbital_junk_left);
 
         // Gravitational acceleration downward.
         if (player_ship.directional_speed.floor_integer() < player_ship.speed_max.floor_integer())
@@ -282,16 +282,13 @@ void mission_2(int ship_selection)
     // Play the non-combat gameplay music.
     bgm_escort.play();
 
-    // Draw a basic text-based HUD.
-    bn::sprite_text_generator text_generator(font_hud);
-    bn::vector<bn::sprite_ptr, 64> text_sprites;
-
     // Game loop.
     while(! bn::keypad::select_pressed())
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
-        HUD_Transport.update(100,100);
+        HUD.draw_hud_objective(2, 50 + bn::fixed(50 * (ally_transport.x / 4900)).round_integer());
+        HUD_Transport.update(ally_transport.hull.ceil_integer(), ally_transport.hull_max.ceil_integer());
 
         // Player operations.
         player_ship.movement();

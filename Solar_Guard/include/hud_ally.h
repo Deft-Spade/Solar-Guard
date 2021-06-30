@@ -14,9 +14,9 @@
 class hud_ally
 {
 public:
-    bn::sprite_ptr spr_ally_outline = bn::sprite_items::spr_hud_ally_outline.create_sprite(-94,-40);
-    bn::sprite_ptr spr_ally_hull = bn::sprite_items::spr_hud_ally_hull.create_sprite(-87,-36);
-    bn::sprite_ptr spr_ally_hull_text = bn::sprite_items::spr_hud_number_hull.create_sprite(-110,-36);
+    bn::sprite_ptr spr_ally_outline = bn::sprite_items::spr_hud_ally_outline.create_sprite(-94,-29);
+    bn::sprite_ptr spr_ally_hull = bn::sprite_items::spr_hud_ally_hull.create_sprite(-87,-25);
+    bn::sprite_ptr spr_ally_hull_text = bn::sprite_items::spr_hud_number_hull.create_sprite(-110,-25);
 
     hud_ally(int ally_type, int ally_number);
     void update(int ally_hull, int ally_hull_max);

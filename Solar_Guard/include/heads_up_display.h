@@ -17,6 +17,9 @@
 #include "bn_sprite_items_spr_hud_speed.h"
 #include "bn_sprite_items_spr_hud_direction.h"
 
+#include "bn_sprite_items_spr_hud_objective1.h"
+#include "bn_sprite_items_spr_hud_objective2.h"
+
 #include "bn_sprite_items_spr_hud_engine.h"
 #include "bn_sprite_items_spr_hud_ultility.h"
 #include "bn_sprite_items_spr_hud_fuel.h"
@@ -63,6 +66,8 @@ public:
     bn::sprite_ptr spr_outline_corner_target = bn::sprite_items::spr_hud_outline_corner.create_sprite(79,-70);
     bn::sprite_ptr spr_tgt_none = bn::sprite_items::spr_hud_outline_corner_no_tgt.create_sprite(114,-70);
 
+    bn::sprite_ptr spr_objective = bn::sprite_items::spr_hud_objective1.create_sprite(-86, -46);
+
     bn::sprite_ptr spr_engine = bn::sprite_items::spr_hud_engine.create_sprite(-95,0);
     bn::sprite_ptr spr_fuel = bn::sprite_items::spr_hud_fuel.create_sprite(-55,-24);
     bn::sprite_ptr spr_fuel_text = bn::sprite_items::spr_hud_number_fuel.create_sprite(-79,-8);
@@ -97,7 +102,7 @@ public:
     void draw_hud_speed(player_ship &player_ship);
     void draw_hud_direction(player_ship &player_ship);
     void draw_hud_target();
-    void draw_hud_objective(bn::string<20> objective, int progress, int target);
+    void draw_hud_objective(int mission, int progress);
     void draw_hud_engine_status(player_ship &player_ship);
     void draw_hud_engine_fuel(player_ship &player_ship);
     void draw_hud_engine_heat(player_ship &player_ship);

@@ -103,12 +103,15 @@ void heads_up_display::draw_hud_target()
     // Write code to manage this here when targeting implemented.
 }
 
-void heads_up_display::draw_hud_objective(bn::string<20> objective, int progress, int target)
+void heads_up_display::draw_hud_objective(int mission, int progress)
 {
-    hud_text_objectives.clear();
-    //text_generator.set_left_alignment();
-    text_generator.generate(-118, -60, objective, hud_text_objectives);
-    text_generator.generate(-118, -53, bn::to_string<4>(progress) + "/" + bn::to_string<4>(target), hud_text_objectives);
+    // Objective display on HUD.
+    switch (mission)
+    {
+        case 1: spr_objective.set_tiles(bn::sprite_items::spr_hud_objective1.tiles_item().create_tiles(progress)); break;
+        case 2: spr_objective.set_tiles(bn::sprite_items::spr_hud_objective2.tiles_item().create_tiles(progress)); break;
+        default: break;
+    }
 }
 
 void heads_up_display::draw_hud_engine_status(player_ship &player_ship)
