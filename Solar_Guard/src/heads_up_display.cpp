@@ -43,7 +43,7 @@ heads_up_display::heads_up_display()
 void heads_up_display::draw_hud_shields(player_ship &player_ship)
 {
     // Player Shields
-    bn::fixed shields_display_value = player_ship.shields / player_ship.shields_max;
+    bn::fixed shields_display_value = player_ship.shields / player_ship.shields_max[player_ship.type];
     bn::fixed shields_display_sprite = shields_display_value * 25;
     spr_shield.set_tiles(bn::sprite_items::spr_hud_shield.tiles_item().create_tiles(bn::max(0,bn::min(shields_display_sprite.floor_integer(), 25))));
     spr_shield_text.set_tiles(bn::sprite_items::spr_hud_number_shield.tiles_item().create_tiles(bn::max(0,bn::min(bn::fixed(shields_display_value * 100).floor_integer(), 100))));
@@ -52,7 +52,7 @@ void heads_up_display::draw_hud_shields(player_ship &player_ship)
 void heads_up_display::draw_hud_hull(player_ship &player_ship)
 {
     // Player Hull
-    bn::fixed hull_display_value = player_ship.hull / player_ship.hull_max;
+    bn::fixed hull_display_value = player_ship.hull / player_ship.hull_max[player_ship.type];
     bn::fixed hull_display_sprite = hull_display_value * 25;
     spr_hull.set_tiles(bn::sprite_items::spr_hud_hull.tiles_item().create_tiles(bn::max(0,bn::min(hull_display_sprite.floor_integer(), 25))));
     spr_hull_text.set_tiles(bn::sprite_items::spr_hud_number_hull.tiles_item().create_tiles(bn::max(0,bn::min(bn::fixed(hull_display_value * 100).floor_integer(), 100))));
@@ -67,7 +67,7 @@ void heads_up_display::draw_hud_speed(player_ship &player_ship)
     bn::fixed speed_display_value = (player_ship.directional_speed / 2) * 60;
     text_generator_compact.set_left_alignment();
     text_generator_compact.generate(19, -76, bn::to_string<8>(speed_display_value.floor_integer()) + "M/S", hud_text_speed);
-    bn::fixed speed_display_sprite = (player_ship.directional_speed / player_ship.speed_max) * 30;
+    bn::fixed speed_display_sprite = (player_ship.directional_speed / player_ship.speed_max[player_ship.type]) * 30;
     spr_speed.set_tiles(bn::sprite_items::spr_hud_speed.tiles_item().create_tiles(bn::min(speed_display_sprite.floor_integer(),30)));
 }
 
@@ -94,7 +94,7 @@ void heads_up_display::draw_hud_direction(player_ship &player_ship)
     //text_generator_compact.set_left_alignment();
     //text_generator_compact.generate(20, -68, bn::to_string<6>(display_dir_mov) + "DEG", hud_text_direction);
 
-    spr_direction.set_tiles(bn::sprite_items::spr_hud_direction.tiles_item().create_tiles(bn::min(bn::fixed((display_dir_mov.to_float() / 360) * 40).round_integer(),39)));
+    spr_direction.set_tiles(bn::sprite_items::spr_hud_direction.tiles_item().create_tiles(bn::min(bn::fixed((display_dir_mov.to_double() / 360) * 40).round_integer(),39)));
 }
 
 void heads_up_display::draw_hud_target()
@@ -155,7 +155,7 @@ void heads_up_display::draw_hud_engine_status(player_ship &player_ship)
 void heads_up_display::draw_hud_engine_fuel(player_ship &player_ship)
 {
     // Engine Fuel
-    bn::fixed fuel_division = player_ship.engine_fuel / player_ship.engine_fuel_max;
+    bn::fixed fuel_division = player_ship.engine_fuel / player_ship.engine_fuel_max[player_ship.type];
     bn::fixed fuel_display_value = fuel_division * 100;
 
     bn::fixed fuel_display_sprite;
@@ -179,7 +179,7 @@ void heads_up_display::draw_hud_engine_fuel(player_ship &player_ship)
 void heads_up_display::draw_hud_engine_heat(player_ship &player_ship)
 {
     // Engine Heat
-    bn::fixed engine_heat_division = player_ship.engine_heat / player_ship.engine_heat_max;
+    bn::fixed engine_heat_division = player_ship.engine_heat / player_ship.engine_heat_max[player_ship.type];
     bn::fixed engine_heat_display_value = engine_heat_division * 100;
 
     bn::fixed engine_heat_display_sprite;
@@ -210,7 +210,7 @@ void heads_up_display::draw_hud_engine_heat(player_ship &player_ship)
 void heads_up_display::draw_hud_gun_energy(player_ship &player_ship)
 {
     // Engine Fuel
-    bn::fixed energy_division = player_ship.gun_energy / player_ship.gun_energy_max;
+    bn::fixed energy_division = player_ship.gun_energy / player_ship.gun_energy_max[player_ship.type];
     bn::fixed energy_display_value = energy_division * 100;
 
     bn::fixed energy_display_sprite;
@@ -234,7 +234,7 @@ void heads_up_display::draw_hud_gun_energy(player_ship &player_ship)
 void heads_up_display::draw_hud_gun_heat(player_ship &player_ship)
 {
     // Gun Heat
-    bn::fixed gun_heat_division = player_ship.gun_heat / player_ship.gun_heat_max;
+    bn::fixed gun_heat_division = player_ship.gun_heat / player_ship.gun_heat_max[player_ship.type];
     bn::fixed gun_heat_display_value = gun_heat_division * 100;
 
     bn::fixed gun_heat_display_sprite;

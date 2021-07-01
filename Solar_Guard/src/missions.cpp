@@ -99,7 +99,7 @@ int mission_1(int ship_selection)
         laser_player(camera),
         laser_player(camera)
     };
-    player_ship player_ship(ship_selection, 0, 0);
+    player_ship player_ship(ship_selection - 1, 0, 0);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
@@ -124,7 +124,7 @@ int mission_1(int ship_selection)
         HUD.draw_hud_objective(1, 20 - array_orbital_junk_left);
 
         // Gravitational acceleration downward.
-        if (player_ship.directional_speed.floor_integer() < player_ship.speed_max.floor_integer())
+        if (player_ship.directional_speed.floor_integer() < player_ship.speed_max[player_ship.type].floor_integer())
         player_ship.speed_y -= 0.002;
 
         // Player operations.
@@ -195,7 +195,7 @@ int mission_1(int ship_selection)
         }
 
         // Check for mission failure.
-        if (player_ship.hull == 0)
+        if (player_ship.hull.ceil_integer() == 0)
         {
             return -1;
         }
@@ -267,7 +267,7 @@ void mission_2(int ship_selection)
     };
 
     // Player Ship
-    player_ship player_ship(ship_selection, -4800, 4900);
+    player_ship player_ship(ship_selection - 1, -4800, 4900);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
@@ -382,7 +382,7 @@ void mission_3(int ship_selection)
     };
 
     // Player Ship
-    player_ship player_ship(ship_selection, 0, 0);
+    player_ship player_ship(ship_selection - 1, 0, 0);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
@@ -484,7 +484,7 @@ void mission_4(int ship_selection)
     };
 
     // Player Ship
-    player_ship player_ship(ship_selection, 0, 0);
+    player_ship player_ship(ship_selection - 1, 0, 0);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
@@ -589,7 +589,7 @@ void mission_5(int ship_selection)
     ally_carrier ally_carrier(x_limit.round_integer(), y_limit.round_integer());
 
     // Player Ship
-    player_ship player_ship(ship_selection, 1500, 1520);
+    player_ship player_ship(ship_selection - 1, 1500, 1520);
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;

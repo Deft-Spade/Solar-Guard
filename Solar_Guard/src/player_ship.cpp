@@ -22,41 +22,24 @@ player_ship::player_ship(int ship_type, int x_pos, int y_pos)
     // Set the player ship sprite to that of the selected ship.
     switch (type)
     {
-        case 1:
-            player_sprite = bn::sprite_items::spr_sg_ship_1.create_sprite(0,0);
-            break;
-
-        case 2:
-            player_sprite = bn::sprite_items::spr_sg_ship_2.create_sprite(0,0);
-            break;
-
-        case 3:
-            player_sprite = bn::sprite_items::spr_sg_ship_3.create_sprite(0,0);
-            break;
-
-        case 4:
-            player_sprite = bn::sprite_items::spr_sg_ship_4.create_sprite(0,0);
-            break;
-
-        case 5:
-            player_sprite = bn::sprite_items::spr_sg_ship_5.create_sprite(0,0);
-            break;
-
-        case 6:
-            player_sprite = bn::sprite_items::spr_sg_ship_6.create_sprite(0,0);
-            break;
-
-        case 7:
-            player_sprite = bn::sprite_items::spr_sg_ship_7.create_sprite(0,0);
-            break;
-
-        case 8:
-            player_sprite = bn::sprite_items::spr_sg_ship_8.create_sprite(0,0);
-            break;
+        case 0: player_sprite = bn::sprite_items::spr_sg_ship_1.create_sprite(0,0); break;
+        case 1: player_sprite = bn::sprite_items::spr_sg_ship_2.create_sprite(0,0); break;
+        case 2: player_sprite = bn::sprite_items::spr_sg_ship_3.create_sprite(0,0); break;
+        case 3: player_sprite = bn::sprite_items::spr_sg_ship_4.create_sprite(0,0); break;
+        case 4: player_sprite = bn::sprite_items::spr_sg_ship_5.create_sprite(0,0); break;
+        case 5: player_sprite = bn::sprite_items::spr_sg_ship_6.create_sprite(0,0); break;
+        case 6: player_sprite = bn::sprite_items::spr_sg_ship_7.create_sprite(0,0); break;
+        case 7: player_sprite = bn::sprite_items::spr_sg_ship_8.create_sprite(0,0); break;
 
         default:
             break;
     }
+
+    // Set various parameters to their maximum.
+    shields = shields_max[type];
+    hull = hull_max[type];
+    gun_energy = gun_energy_max[type];
+    engine_fuel = engine_fuel_max[type];
 
     // Set the player's initial position.
     x = x_pos;
@@ -68,24 +51,24 @@ void player_ship::movement()
     // Turn ship.
     if(bn::keypad::left_held())
     {
-        if (direction.ceil_integer() != 359)
+        if (bn::fixed(direction + turn_rate[type]).to_double() < 360)
         {
-            direction += 1;
+            direction += turn_rate[type];
         }
         else
         {
-            direction = 0;
+            direction = direction + turn_rate[type] - 360;
         }
     }
     else if(bn::keypad::right_held())
     {
-        if (direction.ceil_integer() != 0)
+        if (bn::fixed(direction - turn_rate[type]).to_double() > 0)
         {
-            direction -= 1;
+            direction -= turn_rate[type];
         }
         else
         {
-            direction = 359;
+            direction = direction - turn_rate[type] + 360;
         }
     }
 
@@ -101,46 +84,52 @@ void player_ship::movement()
         {
             // Determine new x and y speeds.
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-            speed_x -= 0.05 * bn::degrees_cos(direction);
-            speed_y -= 0.05 * bn::degrees_sin(direction);
+            speed_x -= accel_back[type] * bn::degrees_cos(direction);
+            speed_y -= accel_back[type] * bn::degrees_sin(direction);
+
+            // Fuel consumption.
+            engine_fuel = bn::max(bn::fixed(0), engine_fuel -= engine_fuel_rear_burn[type]);
+
+            // Engine heating.
+            engine_heat = bn::min(engine_heat += engine_heat_rear_increase_rate[type], engine_heat_max[type]);
         }
         else
         {
             // Determine new x and y speeds.
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-            speed_x += 0.05 * bn::degrees_cos(direction);
-            speed_y += 0.05 * bn::degrees_sin(direction);
+            speed_x += accel_front[type] * bn::degrees_cos(direction);
+            speed_y += accel_front[type] * bn::degrees_sin(direction);
+
+            // Fuel consumption.
+            engine_fuel = bn::max(bn::fixed(0), engine_fuel -= engine_fuel_front_burn[type]);
+
+            // Engine heating.
+            engine_heat = bn::min(engine_heat += engine_heat_front_increase_rate[type], engine_heat_max[type]);
         }
 
-        // Engine heating.
-        engine_heat = bn::min(engine_heat += 0.2, engine_heat_max);
-
-        // Fuel consumption.
-        engine_fuel = bn::max(bn::fixed(0), engine_fuel -= 0.01);
-
         // Keep speed in check.
-        if (directional_speed.ceil_integer() > speed_max.floor_integer())
+        if (directional_speed.ceil_integer() > speed_max[type].floor_integer())
         {
             // Retain direction but reset magnitude to maximum allowed speed.
             // https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
-            speed_x = speed_x * speed_max / directional_speed;
-            speed_y = speed_y * speed_max / directional_speed;
+            speed_x = speed_x * speed_max[type] / directional_speed;
+            speed_y = speed_y * speed_max[type] / directional_speed;
         }
     }
     else
     {
         // Engine cooldown.
-        engine_heat = bn::max(bn::fixed(0), engine_heat -= 0.3);
+        engine_heat = bn::max(bn::fixed(0), engine_heat -= engine_heat_cooldown_rate[type]);
 
         if(bn::keypad::l_held() && !bn::keypad::r_held())
         {
             // Check if current overall speed is greater than deceleration amount.
-            if (directional_speed.to_double() > 0.02)
+            if (directional_speed.to_double() > decel_brake[type].to_double())
             {
                 // Retain direction but reduce magnitude by a deceleration amount.
                 // https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
-                speed_x = speed_x * (directional_speed - 0.02) / directional_speed;
-                speed_y = speed_y * (directional_speed - 0.02) / directional_speed;
+                speed_x = speed_x * (directional_speed - decel_brake[type]) / directional_speed;
+                speed_y = speed_y * (directional_speed - decel_brake[type]) / directional_speed;
             }
             else
             {
@@ -153,7 +142,7 @@ void player_ship::movement()
     }
 
     // Switch to overheated if engine heat reaches 100%.
-    if (!engine_overheated && engine_heat.floor_integer() == engine_heat_max.floor_integer())
+    if (!engine_overheated && engine_heat.floor_integer() == engine_heat_max[type].floor_integer())
     {
         engine_overheated = true;
     }
@@ -204,14 +193,14 @@ void player_ship::animation()
 
     switch (type)
     {
-        case 1: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(engine_state_sprite_frame)); break;
-        case 2: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(engine_state_sprite_frame)); break;
-        case 3: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(engine_state_sprite_frame)); break;
-        case 4: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(engine_state_sprite_frame)); break;
-        case 5: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(engine_state_sprite_frame)); break;
-        case 6: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(engine_state_sprite_frame)); break;
-        case 7: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(engine_state_sprite_frame)); break;
-        case 8: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 0: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_1.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 1: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_2.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 2: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_3.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 3: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_4.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 4: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_5.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 5: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_6.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 6: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_7.tiles_item().create_tiles(engine_state_sprite_frame)); break;
+        case 7: player_sprite.set_tiles(bn::sprite_items::spr_sg_ship_8.tiles_item().create_tiles(engine_state_sprite_frame)); break;
         default: break;
     }
 }
@@ -225,17 +214,17 @@ void player_ship::fire_control(int &next_laser, const int &number_of_lasers, bn:
     }
 
     // Reduce gun heat.
-    if (gun_heat.to_float() > 0.2)
+    if (gun_heat.to_double() > gun_heat_cooldown_rate[type].to_double())
     {
-        gun_heat -= 0.2;
+        gun_heat -= gun_heat_cooldown_rate[type];
     }
     else
     {
         gun_heat = 0;
     }
 
-    // Set gun to no longer being overheated if it is and heat reaches 0%.
-    if (gun_overheated && gun_heat.ceil_integer() == 0)
+    // Set gun to no longer being overheated if it is and heat reaches the cooldown threshold.
+    if (gun_overheated && gun_heat.ceil_integer() == engine_heat_cooldown_threshold[type].round_integer())
     {
         gun_overheated = false;
     }
@@ -250,20 +239,20 @@ void player_ship::fire_control(int &next_laser, const int &number_of_lasers, bn:
         gun_energy -= 1;
 
         // Increase gun heat.
-        if (gun_heat.to_float() < 92)
+        if (gun_heat.to_double() + gun_heat_increase_rate[type].to_double() < gun_heat_max[type].to_double())
         {
-            gun_heat += 8;
+            gun_heat += gun_heat_increase_rate[type];
         }
         else
         {
-            gun_heat = 100;
+            gun_heat = gun_heat_max[type];
         }
 
         // Check if gun heat has reached 100%, set to overheated if so.
-        if (gun_heat.to_float() >= 100)
+        if (gun_heat.to_double() >= gun_heat_max[type].to_double())
         {
             gun_overheated = true;
-            gun_heat = 100;
+            gun_heat = gun_heat_max[type];
         }
 
         // Set the laser active.
