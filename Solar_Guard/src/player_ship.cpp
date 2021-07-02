@@ -84,8 +84,8 @@ void player_ship::movement()
         {
             // Determine new x and y speeds.
             // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
-            speed_x -= accel_back[type] * bn::degrees_cos(direction);
-            speed_y -= accel_back[type] * bn::degrees_sin(direction);
+            speed_x += accel_back[type] * bn::degrees_cos(direction + 180 % 360);
+            speed_y += accel_back[type] * bn::degrees_sin(direction + 180 % 360);
 
             // Fuel consumption.
             engine_fuel = bn::max(bn::fixed(0), engine_fuel -= engine_fuel_rear_burn[type]);
@@ -126,10 +126,10 @@ void player_ship::movement()
             // Check if current overall speed is greater than deceleration amount.
             if (directional_speed.to_double() > decel_brake[type].to_double())
             {
-                // Retain direction but reduce magnitude by a deceleration amount.
-                // https://stackoverflow.com/questions/41317291/setting-the-magnitude-of-a-2d-vector
-                speed_x = speed_x * (directional_speed - decel_brake[type]) / directional_speed;
-                speed_y = speed_y * (directional_speed - decel_brake[type]) / directional_speed;
+                // Apply force that opposes current momentum.
+                // https://www.physicsclassroom.com/Class/vectors/u3l1e.cfm
+                speed_x += decel_brake[type] * bn::degrees_cos(mov_angle + 180 % 360);
+                speed_y += decel_brake[type] * bn::degrees_sin(mov_angle + 180 % 360);
             }
             else
             {
