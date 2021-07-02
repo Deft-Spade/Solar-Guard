@@ -110,6 +110,9 @@ void heads_up_display::draw_hud_objective(int mission, int progress)
     {
         case 1: spr_objective.set_tiles(bn::sprite_items::spr_hud_objective1.tiles_item().create_tiles(progress)); break;
         case 2: spr_objective.set_tiles(bn::sprite_items::spr_hud_objective2.tiles_item().create_tiles(progress)); break;
+        case 3: spr_objective.set_tiles(bn::sprite_items::spr_hud_objective3.tiles_item().create_tiles(progress)); break;
+        case 4: spr_objective.set_tiles(bn::sprite_items::spr_hud_objective4.tiles_item().create_tiles(progress)); break;
+        case 5: spr_objective.set_tiles(bn::sprite_items::spr_hud_objective5.tiles_item().create_tiles(progress)); break;
         default: break;
     }
 }

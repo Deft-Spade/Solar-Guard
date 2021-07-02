@@ -19,6 +19,9 @@
 
 #include "bn_sprite_items_spr_hud_objective1.h"
 #include "bn_sprite_items_spr_hud_objective2.h"
+#include "bn_sprite_items_spr_hud_objective3.h"
+#include "bn_sprite_items_spr_hud_objective4.h"
+#include "bn_sprite_items_spr_hud_objective5.h"
 
 #include "bn_sprite_items_spr_hud_engine.h"
 #include "bn_sprite_items_spr_hud_ultility.h"
@@ -66,7 +69,7 @@ public:
     bn::sprite_ptr spr_outline_corner_target = bn::sprite_items::spr_hud_outline_corner.create_sprite(79,-70);
     bn::sprite_ptr spr_tgt_none = bn::sprite_items::spr_hud_outline_corner_no_tgt.create_sprite(114,-70);
 
-    bn::sprite_ptr spr_objective = bn::sprite_items::spr_hud_objective1.create_sprite(-86, -46);
+    bn::sprite_ptr spr_objective = bn::sprite_items::spr_hud_objective1.create_sprite(-86, -47);
 
     bn::sprite_ptr spr_engine = bn::sprite_items::spr_hud_engine.create_sprite(-95,0);
     bn::sprite_ptr spr_fuel = bn::sprite_items::spr_hud_fuel.create_sprite(-55,-24);

@@ -22,7 +22,7 @@
 #include "bn_sprite_affine_second_attributes_hbe_ptr.h"
 #include "bn_sprite_regular_second_attributes_hbe_ptr.h"
 
-hud_ally::hud_ally(int ally_type, int ally_number)
+hud_ally::hud_ally(int ally_type)
 {
     /* Set correct sprite outline according to ally_type's value.
      * 0: Transport
@@ -31,14 +31,6 @@ hud_ally::hud_ally(int ally_type, int ally_number)
      * 3: Civillian
      */
     spr_ally_outline.set_tiles(bn::sprite_items::spr_hud_ally_outline.tiles_item().create_tiles(ally_type));
-
-    // Reposition sprite if not the first ally.
-    if (ally_number != 0)
-    {
-        spr_ally_outline.set_y(spr_ally_outline.y() + 16);
-        spr_ally_hull.set_y(spr_ally_hull.y() + 16);
-        spr_ally_hull_text.set_y(spr_ally_hull_text.y() + 16);
-    }
 }
 
 void hud_ally::update(int ally_hull, int ally_hull_max)

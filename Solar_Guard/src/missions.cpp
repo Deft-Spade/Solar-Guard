@@ -271,7 +271,7 @@ void mission_2(int ship_selection)
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
-    hud_ally HUD_Transport(0, 0);
+    hud_ally HUD_Transport(0);
 
     // --------------------------------------------------------------------------- //
 
@@ -386,7 +386,7 @@ void mission_3(int ship_selection)
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
-    hud_ally HUD_Station(1, 0);
+    hud_ally HUD_Station(1);
 
     // --------------------------------------------------------------------------- //
 
@@ -405,6 +405,7 @@ void mission_3(int ship_selection)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+        HUD.draw_hud_objective(3, 0);
         HUD_Station.update(100,100);
 
         // Player operations.
@@ -506,6 +507,7 @@ void mission_4(int ship_selection)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+        HUD.draw_hud_objective(4, 0);
 
         // Player operations.
         player_ship.movement();
@@ -593,8 +595,7 @@ void mission_5(int ship_selection)
 
     // Create HUD last so it 'naturally' sits above other sprites.
     heads_up_display HUD;
-    hud_ally HUD_Carrier(2, 0);
-    hud_ally HUD_Civillian(3, 1);
+    hud_ally HUD_Carrier(2);
 
     // --------------------------------------------------------------------------- //
 
@@ -618,8 +619,8 @@ void mission_5(int ship_selection)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
+        HUD.draw_hud_objective(5, 0);
         HUD_Carrier.update(ally_carrier.hull.ceil_integer(), ally_carrier.hull_max.ceil_integer());
-        HUD_Civillian.update(100,100); 
 
         // Player operations.
         player_ship.movement();
