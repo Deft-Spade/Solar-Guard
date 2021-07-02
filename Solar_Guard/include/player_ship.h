@@ -47,7 +47,7 @@ public:
     bn::fixed mov_angle = 0;
 
     bn::fixed engine_fuel = 0;
-    const bn::array<bn::fixed, number_of_ships> engine_fuel_max = { 30, 60, 40, 40, 50, 80, 80, 120 };
+    const bn::array<bn::fixed, number_of_ships> engine_fuel_max = { 30, 50, 40, 40, 60, 40, 50, 100 };
     const bn::array<bn::fixed, number_of_ships> engine_fuel_front_burn = { 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01 };
     const bn::array<bn::fixed, number_of_ships> engine_fuel_rear_burn = { 0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005 };
     bn::fixed engine_heat = 0;
