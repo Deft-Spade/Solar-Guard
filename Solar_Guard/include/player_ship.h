@@ -41,7 +41,7 @@ public:
     // A value of 0.1 doesn't apply any movement change and 0.02/0.03 apply the same movement/
     // I suspect this is due to precision limitations.
     const bn::array<bn::fixed, number_of_ships> accel_front = { 0.05, 0.04, 0.06, 0.07, 0.05, 0.10, 0.08, 0.04 };
-    const bn::array<bn::fixed, number_of_ships> accel_back = { 0.04, 0.02, 0.04, 0.07, 0.05, 0.04, 0.04, 0.02 };
+    const bn::array<bn::fixed, number_of_ships> accel_back = { 0.04, 0.02, 0.04, 0.07, 0.05, 0.04, 0.02, 0.02 };
     const bn::array<bn::fixed, number_of_ships> decel_brake = { 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02 };
     bn::fixed directional_speed = 0;
     bn::fixed mov_angle = 0;
