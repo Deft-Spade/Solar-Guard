@@ -27,6 +27,7 @@
 #include "bn_regular_bg_items_bg_art_ack_page12.h"
 #include "bn_regular_bg_items_bg_art_ack_page13.h"
 #include "bn_regular_bg_items_bg_art_ack_page13_image.h"
+#include "bn_regular_bg_items_bg_art_ack_page14.h"
 
 #include "bn_sprite_text_generator.h"
 #include "font_menu.h"
@@ -224,11 +225,17 @@ int scene_art_ack_page13()
     return loop_art_ack_credits();
 }
 
+int scene_art_ack_page14()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_art_ack_page14.create_bg(0, 0);
+    return loop_art_ack_credits();
+}
+
 void scene_art_ack()
 {
     // Menu operation variables.
     int current_page = 1;
-    const int number_of_pages = 13;
+    const int number_of_pages = 14;
 
     bgm_theme_upbeat.play();
 
@@ -253,6 +260,7 @@ void scene_art_ack()
             case 12: user_input = scene_art_ack_page12(); break;
             case 13: user_input = scene_art_ack_page13(); break;
             case 113: user_input = page13_image(); break;
+            case 14: user_input = scene_art_ack_page14(); break;
             default: BN_ERROR("CURRENT PAGE VALUE INVALID: " + bn::to_string<32>(current_page)); break;
         }
 
