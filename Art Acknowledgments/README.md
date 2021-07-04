@@ -1,4 +1,4 @@
-# Art Acknowledgements
+# Art Acknowledgments
 
 The graphics used in *Solar Guard* that aren't original are mostly (but not always) sourced from [Open Game Art](https://opengameart.org/content/planet-orbit-background).
 

@@ -117,7 +117,7 @@ int submenu_information(bn::sprite_text_generator &text_generator, bn::vector<bn
     text_generator.set_left_alignment();
     text_generator.generate(-(bn::display::width() / 2) + 20, - 20, "Controls", text_sprites);
     text_generator.generate(-(bn::display::width() / 2) + 20, + 0, "Credits", text_sprites);
-    text_generator.generate(-(bn::display::width() / 2) + 20, + 20, "Art Acknowledgements", text_sprites);
+    text_generator.generate(-(bn::display::width() / 2) + 20, + 20, "Art Acknowledgments", text_sprites);
 
     // Extra update to process another frame to set A to not pressed
     // to avoid mission selection activation in the same frame as the
