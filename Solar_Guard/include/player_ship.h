@@ -49,7 +49,7 @@ public:
     bn::fixed engine_fuel = 0;
     const bn::array<bn::fixed, number_of_ships> engine_fuel_max = { 30, 50, 40, 40, 60, 40, 50, 100 };
     const bn::array<bn::fixed, number_of_ships> engine_fuel_front_burn = { 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01 };
-    const bn::array<bn::fixed, number_of_ships> engine_fuel_rear_burn = { 0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005 };
+    const bn::array<bn::fixed, number_of_ships> engine_fuel_rear_burn = { 0.005, 0.005, 0.005, 0.01, 0.01, 0.005, 0.005, 0.005 };
     bn::fixed engine_heat = 0;
     const bn::array<bn::fixed, number_of_ships> engine_heat_max = { 100, 100, 100, 100, 100, 100, 100, 100 };
     const bn::array<bn::fixed, number_of_ships> engine_heat_front_increase_rate = { 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 };
