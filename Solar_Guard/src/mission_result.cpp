@@ -137,14 +137,24 @@ void mission_failure(int mission_failure_number)
             text_generator_compact.generate(-106, 70, "", briefing_text);
             break;
 
-        case 2:
+        case 21:
             text_generator_compact.set_left_alignment();
-            text_generator_compact.generate(-106, 25, "A SHIP WAS LOST DURING THE OPERATION.", briefing_text);
-            text_generator_compact.generate(-106, 34, "ESCORT OPERATION FAILED.", briefing_text);
-            text_generator_compact.generate(-106, 43, "", briefing_text);
-            text_generator_compact.generate(-106, 52, "", briefing_text);
+            text_generator_compact.generate(-106, 25, "THE SOLAR GUARD FIGHTER WAS LOST DURING THE.", briefing_text);
+            text_generator_compact.generate(-106, 34, "ESCORT OPERATION DUE TO CRITICAL HULL FAILURE.", briefing_text);
+            text_generator_compact.generate(-106, 43, "ARISING FROM DAMAGE SUSTAINED FROM ASTEROID", briefing_text);
+            text_generator_compact.generate(-106, 52, "COLLISIONS.", briefing_text);
             text_generator_compact.generate(-106, 61, "", briefing_text);
-            text_generator_compact.generate(-106, 70, "", briefing_text);
+            text_generator_compact.generate(-106, 70, "ESCORT MISSION FAILED.", briefing_text);
+            break;
+
+        case 22:
+            text_generator_compact.set_left_alignment();
+            text_generator_compact.generate(-106, 25, "THE ESCORTED TRANSPORT WAS LOST DURING THE", briefing_text);
+            text_generator_compact.generate(-106, 34, "ESCORT OPERATION DUE TO CRITICAL HULL FAILURE.", briefing_text);
+            text_generator_compact.generate(-106, 43, "ARISING FROM DAMAGE SUSTAINED FROM ASTEROID", briefing_text);
+            text_generator_compact.generate(-106, 52, "COLLISIONS.", briefing_text);
+            text_generator_compact.generate(-106, 61, "", briefing_text);
+            text_generator_compact.generate(-106, 70, "SCORT MISSION FAILED.", briefing_text);
             break;
 
         case 3:
@@ -169,11 +179,11 @@ void mission_failure(int mission_failure_number)
 
         case 5:
             text_generator_compact.set_left_alignment();
-            text_generator_compact.generate(-106, 25, "EITHER THE PILOT OR CIVILLIAN(S) WERE LOST.", briefing_text);
-            text_generator_compact.generate(-106, 34, "RESCUE MISSION FAILED.", briefing_text);
-            text_generator_compact.generate(-106, 43, "", briefing_text);
+            text_generator_compact.generate(-106, 25, "A CIVILLIAN ESCAPE POD WAS LOST.", briefing_text);
+            text_generator_compact.generate(-106, 34, "IT FLEW OUTSIDE OF THE MISSION BOUNDS, INTO THE", briefing_text);
+            text_generator_compact.generate(-106, 43, "NO-FLY ZONE AROUND THE SUN.", briefing_text);
             text_generator_compact.generate(-106, 52, "", briefing_text);
-            text_generator_compact.generate(-106, 61, "", briefing_text);
+            text_generator_compact.generate(-106, 61, "RESCUE MISSION FAILED.", briefing_text);
             text_generator_compact.generate(-106, 70, "", briefing_text);
             break;
 

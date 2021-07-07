@@ -592,7 +592,7 @@ void mission_4(int ship_selection)
     }
 }
 
-void mission_5(int ship_selection)
+int mission_5(int ship_selection)
 {
     // Mission constants.
     const bn::fixed x_limit = 2048;
@@ -737,6 +737,27 @@ void mission_5(int ship_selection)
         // Rear background scrolling at slower speed for parallax.
         gameplay_bg_rear.set_x(-camera.x() / 2);
         gameplay_bg_rear.set_y(-camera.y() / 2);
+
+        // Check for mission completion.
+        if (ally_civillian_pods_left == 0)
+        {
+            return 1;
+        }
+
+        // Check for mission failure.
+        for (int i = 0; i < ally_civillian_pods_size; i++)
+        {
+            // Don't register mission failure if a player hits the mission bounds, only if the escape pod drifts out of mission bounds on its own.
+            if (ally_civillian_pods[i].status == 1)
+            {
+                // If an escape pod flies outside of the mission bounds, that results in mission failure.
+                if (ally_civillian_pods[i].x.ceil_integer() > x_limit.round_integer() || ally_civillian_pods[i].x.floor_integer() < -x_limit.round_integer() ||
+                    ally_civillian_pods[i].y.ceil_integer() > y_limit.round_integer() || ally_civillian_pods[i].y.floor_integer() < -y_limit.round_integer())
+                {
+                    return -1;
+                }
+            }
+        }
 
         bn::core::update();
     }

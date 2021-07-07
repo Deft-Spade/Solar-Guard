@@ -243,7 +243,24 @@ int main()
                 // Exit from briefing should go straight to main menu.
                 if (selected_ship > 0)
                 {
-                    mission_5(selected_ship);
+                    int mission_result = mission_5(selected_ship);
+                    bn::core::update();
+
+                    switch (mission_result)
+                    {
+                        case 1:
+                            mission_success(5);
+                            bn::core::update();
+                            break;
+                        case 0:
+                            break;
+                        case -1:
+                            mission_failure(5);
+                            bn::core::update();
+                            break;
+                        default: break;
+                    }
+
                     bn::core::update();
                 }
 
