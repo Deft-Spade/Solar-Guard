@@ -176,6 +176,14 @@ int mission_1(int ship_selection)
             array_orbital_junk[i].radar_dot(player_ship);
         }
 
+        // Remove player ship's momentum if they touch mission bounds.
+        if (player_ship.x.ceil_integer() > x_limit.round_integer() || player_ship.x.floor_integer() < -x_limit.round_integer() ||
+            player_ship.y.ceil_integer() > y_limit.round_integer() || player_ship.y.floor_integer() < -y_limit.round_integer())
+        {
+            player_ship.speed_x = 0;
+            player_ship.speed_y = 0;
+        }
+
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
         player_ship.y = bn::min(bn::max(-y_limit, player_ship.y), y_limit);
@@ -339,6 +347,14 @@ void mission_2(int ship_selection)
             }
         }
 
+        // Remove player ship's momentum if they touch mission bounds.
+        if (player_ship.x.ceil_integer() > x_limit.round_integer() || player_ship.x.floor_integer() < -x_limit.round_integer() ||
+            player_ship.y.ceil_integer() > y_limit.round_integer() || player_ship.y.floor_integer() < -y_limit.round_integer())
+        {
+            player_ship.speed_x = 0;
+            player_ship.speed_y = 0;
+        }
+
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
         player_ship.y = bn::min(bn::max(-y_limit, player_ship.y), y_limit);
@@ -446,6 +462,14 @@ void mission_3(int ship_selection)
             }
         }
 
+        // Remove player ship's momentum if they touch mission bounds.
+        if (player_ship.x.ceil_integer() > x_limit.round_integer() || player_ship.x.floor_integer() < -x_limit.round_integer() ||
+            player_ship.y.ceil_integer() > y_limit.round_integer() || player_ship.y.floor_integer() < -y_limit.round_integer())
+        {
+            player_ship.speed_x = 0;
+            player_ship.speed_y = 0;
+        }
+
         // Keep player's position within mission bounds.
         player_ship.x = bn::min(bn::max(-x_limit, player_ship.x), x_limit);
         player_ship.y = bn::min(bn::max(-y_limit, player_ship.y), y_limit);
@@ -545,6 +569,14 @@ void mission_4(int ship_selection)
                     }
                 }*/
             }
+        }
+
+        // Remove player ship's momentum if they touch mission bounds.
+        if (player_ship.x.ceil_integer() > x_limit.round_integer() || player_ship.x.floor_integer() < -x_limit.round_integer() ||
+            player_ship.y.ceil_integer() > y_limit.round_integer() || player_ship.y.floor_integer() < -y_limit.round_integer())
+        {
+            player_ship.speed_x = 0;
+            player_ship.speed_y = 0;
         }
 
         // Keep player's position within mission bounds.
@@ -683,6 +715,14 @@ void mission_5(int ship_selection)
                     }
                 }*/
             }
+        }
+
+        // Remove player ship's momentum if they touch mission bounds.
+        if (player_ship.x.ceil_integer() > x_limit.round_integer() || player_ship.x.floor_integer() < -x_limit.round_integer() ||
+            player_ship.y.ceil_integer() > y_limit.round_integer() || player_ship.y.floor_integer() < -y_limit.round_integer())
+        {
+            player_ship.speed_x = 0;
+            player_ship.speed_y = 0;
         }
 
         // Keep player's position within mission bounds.
