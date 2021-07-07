@@ -20,10 +20,10 @@ public:
     bn::fixed y = 0;
 
     bn::sprite_ptr sprite = bn::sprite_items::spr_asteroid.create_sprite(0,0);
+    bn::sprite_ptr sprite_radar_dot = bn::sprite_items::spr_hud_map_position.create_sprite(-92,53,3);
 
     asteroid(int start_x, int start_y, bn::camera_ptr &camera, int asteroid_type);
     void radar_dot(player_ship &player_ship);
-    bn::sprite_ptr sprite_radar_dot = bn::sprite_items::spr_hud_map_position.create_sprite(-92,53,3);
 };
 
 #endif // ASTEROID_H

@@ -23,7 +23,7 @@ public:
     bn::sprite_ptr sprite_radar_dot = bn::sprite_items::spr_hud_map_position.create_sprite(-92,53,1);
     bn::sprite_ptr sprite_map_dot = bn::sprite_items::spr_hud_map_position.create_sprite(93,53,1);
 
-    ally_carrier(int x_lim, int y_lim);
+    ally_carrier(int x_lim, int y_lim, bn::camera_ptr &camera);
     void radar_dot(player_ship &player_ship);
 };
 

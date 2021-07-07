@@ -41,6 +41,7 @@
 #include "pirate_ship.h"
 #include "ally_carrier.h"
 #include "ally_civillian.h"
+#include "ally_civillian_pod.h"
 #include "ally_station.h"
 #include "ally_transport.h"
 #include "asteroid.h"
@@ -576,6 +577,19 @@ void mission_5(int ship_selection)
 
     // Object Creation ----------------------------------------------------------- //
 
+    // Civliian Ship
+    ally_civillian ally_civ = ally_civillian(camera);
+
+    // Escape Pods
+    const int ally_civillian_pods_size = 3;
+    int ally_civillian_pods_left = 3;
+    bool player_carrying_pod = false;
+    bn::array<ally_civillian_pod, 3> ally_civillian_pods = {
+        ally_civillian_pod(-1300, 300, camera, -0.1, -0.3),
+        ally_civillian_pod(-1000, -800, camera, -0.2, -0.2),
+        ally_civillian_pod(1100, -500, camera, -0.3, -0.1)
+    };
+
     // Player lasers.
     const int array_player_lasers_size = 5;
     int next_laser = 0;
@@ -588,7 +602,7 @@ void mission_5(int ship_selection)
     };
 
     // Solar Guard Carrier
-    ally_carrier ally_carrier(x_limit.round_integer(), y_limit.round_integer());
+    ally_carrier ally_carrier(x_limit.round_integer(), y_limit.round_integer(), camera);
 
     // Player Ship
     player_ship player_ship(ship_selection - 1, 1500, 1520);
@@ -609,17 +623,12 @@ void mission_5(int ship_selection)
     // Attach camera to the player ship.
     player_ship.player_sprite.set_camera(camera);
 
-    // Attach the camera to the carrier sprites.
-    ally_carrier.sprite1.set_camera(camera);
-    ally_carrier.sprite2.set_camera(camera);
-    ally_carrier.sprite3.set_camera(camera);
-
     // Game loop.
     while(! bn::keypad::select_pressed())
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
-        HUD.draw_hud_objective(5, 0);
+        HUD.draw_hud_objective(5, ally_civillian_pods_size - ally_civillian_pods_left);
         HUD_Carrier.update(ally_carrier.hull.ceil_integer(), ally_carrier.hull_max.ceil_integer());
 
         // Player operations.
@@ -629,6 +638,20 @@ void mission_5(int ship_selection)
 
         // Carrier operations.
         ally_carrier.radar_dot(player_ship);
+
+        // Civillian ship operations.
+        ally_civ.movement();
+        ally_civ.radar_dot(player_ship);
+        ally_civ.map_dot(x_limit.round_integer(), y_limit.round_integer());
+
+        // Escape pod operations.
+        for (int i = 0; i < ally_civillian_pods_size; i++)
+        {
+            ally_civillian_pods[i].movement(player_ship);
+            ally_civillian_pods[i].state_update(player_ship, player_carrying_pod, ally_carrier, ally_civillian_pods_left);
+            ally_civillian_pods[i].radar_dot(player_ship);
+            ally_civillian_pods[i].map_dot(x_limit.round_integer(), y_limit.round_integer());
+        }
 
         // Player laser operations.
         for (int i = 0; i < array_player_lasers_size; i++)

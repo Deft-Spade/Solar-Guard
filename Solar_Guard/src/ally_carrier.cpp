@@ -2,12 +2,17 @@
 
 #include "bn_math.h"
 
-ally_carrier::ally_carrier(int x_lim, int y_lim)
+ally_carrier::ally_carrier(int x_lim, int y_lim, bn::camera_ptr &camera)
 {
     // Set map position.
     sprite_map_dot.set_bg_priority(0);
     sprite_map_dot.set_x(93 + (x / x_lim) * 24);
     sprite_map_dot.set_y(53 + (y / y_lim) * 24);
+
+    // Attach the camera to the carrier sprites.
+    sprite1.set_camera(camera);
+    sprite2.set_camera(camera);
+    sprite3.set_camera(camera);
 }
 
 void ally_carrier::radar_dot(player_ship &player_ship)
