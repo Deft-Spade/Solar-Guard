@@ -27,6 +27,7 @@ public:
     void radar_dot(player_ship &player_ship);
     //void map_dot(int x_lim, int y_lim);
     bool check_collision(int x_position, int y_position, int width, int height);
+    int check_smallest_axis_distance(int x_position, int y_position);
 };
 
 #endif // ASTEROID_H

@@ -356,8 +356,9 @@ int mission_2(int ship_selection)
             array_asteroids[i].radar_dot(player_ship);
             //array_asteroids[i].map_dot(x_limit.round_integer(), y_limit.round_integer());
 
-            // Only check for collision if active.
-            if (array_asteroids[i].active)
+            // Only check collisions against player and lasers if near player.
+            if (array_asteroids[i].check_smallest_axis_distance(player_ship.x.round_integer(), player_ship.y.round_integer()) < 150 &&
+                array_asteroids[i].active)
             {
                 // Check for collision with player.
                 if (array_asteroids[i].check_collision(player_ship.x.round_integer(), player_ship.y.round_integer(), 25, 25))
@@ -372,6 +373,36 @@ int mission_2(int ship_selection)
                     player_ship.damage(40);
                 }
 
+                // Check for collision with lasers.
+                // Lasers have limited range, therefore their check only needs to run when player is close.
+                for (int j = 0; j < array_player_lasers_size; j++)
+                {
+                    // Collision with bounding box 16x16 pixels.
+                    if (array_asteroids[i].active &&
+                        array_player_lasers[j].check_collision(array_asteroids[i].x.round_integer(),
+                                                               array_asteroids[i].y.round_integer(), 20, 20))
+                    {
+                        // Make the junk take damage.
+                        array_asteroids[i].hull -= 5;
+
+                        // Remove the laser since it has hit.
+                        array_player_lasers[j].hit();
+
+                        // Check if asteroid's hull is 0.
+                        if (array_asteroids[i].hull.ceil_integer() == 0)
+                        {
+                            // Destroy the asteroid (set it inactive).
+                            array_asteroids[i].active = false;
+                            array_asteroids[i].sprite.set_visible(false);
+                        }
+                    }
+                }
+            }
+
+            // Only check collisions against transport if near transport.
+            if (array_asteroids[i].check_smallest_axis_distance(ally_transport.x.round_integer(), ally_transport.y.round_integer()) < 150 &&
+                array_asteroids[i].active)
+            {
                 // Check for collision with transport.
                 if (array_asteroids[i].check_collision(ally_transport.x.round_integer(), ally_transport.y.round_integer(), 25, 25))
                 {
@@ -395,31 +426,7 @@ int mission_2(int ship_selection)
             if (array_player_lasers[i].active)
             {
                 // Move the lasers forward.
-                array_player_lasers[i].move();
-
-                // Check for collision with aesteroid.
-                for (int j = 0; j < array_asteroids_size; j++)
-                {
-                    // Collision with bounding box 16x16 pixels.
-                    if (array_asteroids[j].active &&
-                        array_player_lasers[i].check_collision(array_asteroids[j].x.round_integer(),
-                                                               array_asteroids[j].y.round_integer(), 20, 20))
-                    {
-                        // Make the junk take damage.
-                        array_asteroids[j].hull -= 5;
-
-                        // Remove the laser since it has hit.
-                        array_player_lasers[i].hit();
-
-                        // Check if asteroid's hull is 0.
-                        if (array_asteroids[j].hull.ceil_integer() == 0)
-                        {
-                            // Destroy the asteroid (set it inactive).
-                            array_asteroids[j].active = false;
-                            array_asteroids[j].sprite.set_visible(false);
-                        }
-                    }
-                }
+                array_player_lasers[i].move();   
             }
         }
 

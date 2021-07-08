@@ -63,7 +63,7 @@ void asteroid::radar_dot(player_ship &player_ship)
 
 bool asteroid::check_collision(int x_position, int y_position, int half_width, int half_height)
 {
-    if (bn::abs(x.round_integer() - x_position) <= half_width && bn::abs(y.round_integer() - x_position) <= half_height)
+    if (bn::abs(x.round_integer() - x_position) <= half_width && bn::abs(y.round_integer() - y_position) <= half_height)
     {
         return true;
     }
@@ -71,4 +71,9 @@ bool asteroid::check_collision(int x_position, int y_position, int half_width, i
     {
         return false;
     }
+}
+
+int asteroid::check_smallest_axis_distance(int x_position, int y_position)
+{
+    return bn::min(bn::abs(x.round_integer() - x_position), bn::abs(y.round_integer() - y_position));
 }
