@@ -324,7 +324,14 @@ void player_ship::damage(bn::fixed amount)
         {
             hull -= amount;
         }
+
+        if (hull.to_double() < 0)
+        {
+            hull = 0;
+        }
     }
 
     shields_recharge_delay = shields_recharge_delay_max[type];
+    shields_recharge_timer = 0;
+    hull_recharge_timer = hull_recharge_rate[type];
 }

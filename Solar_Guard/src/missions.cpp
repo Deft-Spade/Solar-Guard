@@ -176,6 +176,23 @@ int mission_1(int ship_selection)
         for (int i = 0; i < array_orbital_junk_size; i++)
         {
             array_orbital_junk[i].radar_dot(player_ship);
+            array_orbital_junk[i].map_dot(x_limit.round_integer(), y_limit.round_integer());
+
+            // Only check for collision if active.
+            if (array_orbital_junk[i].active)
+            {
+                // Check for collision with player.
+                if (array_orbital_junk[i].check_collision(player_ship.x.round_integer() - 8, player_ship.y.round_integer() - 8, 16, 16))
+                {
+                    // Destroy the asteroid.
+                    array_orbital_junk[i].hull = 0;
+                    array_orbital_junk[i].active = false;
+                    array_orbital_junk[i].sprite.set_visible(false);
+
+                    // Do damage to the player.
+                    player_ship.damage(15);
+                }
+            }
         }
 
         // Remove player ship's momentum if they touch mission bounds.
