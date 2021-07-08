@@ -360,7 +360,7 @@ int mission_2(int ship_selection)
             if (array_asteroids[i].active)
             {
                 // Check for collision with player.
-                if (array_asteroids[i].check_collision(player_ship.x.round_integer() - 25, player_ship.y.round_integer() - 25, 50, 50))
+                if (array_asteroids[i].check_collision(player_ship.x.round_integer(), player_ship.y.round_integer(), 25, 25))
                 {
                     // Destroy the asteroid.
                     array_asteroids[i].hull = 0;
@@ -373,7 +373,7 @@ int mission_2(int ship_selection)
                 }
 
                 // Check for collision with transport.
-                if (array_asteroids[i].check_collision(ally_transport.x.round_integer() - 25, ally_transport.y.round_integer() - 25, 50, 50))
+                if (array_asteroids[i].check_collision(ally_transport.x.round_integer(), ally_transport.y.round_integer(), 25, 25))
                 {
                     // Destroy the asteroid.
                     array_asteroids[i].hull = 0;
@@ -402,8 +402,8 @@ int mission_2(int ship_selection)
                 {
                     // Collision with bounding box 16x16 pixels.
                     if (array_asteroids[j].active &&
-                        array_player_lasers[i].check_collision(array_asteroids[j].x.round_integer() - 25,
-                                                               array_asteroids[j].y.round_integer() - 25, 50, 50))
+                        array_player_lasers[i].check_collision(array_asteroids[j].x.round_integer(),
+                                                               array_asteroids[j].y.round_integer(), 20, 20))
                     {
                         // Make the junk take damage.
                         array_asteroids[j].hull -= 5;
