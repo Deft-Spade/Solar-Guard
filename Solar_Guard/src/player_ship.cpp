@@ -36,8 +36,6 @@ player_ship::player_ship(int ship_type, int x_pos, int y_pos)
     }
 
     // Set various parameters to their maximum.
-    shields = shields_max[type];
-    hull = hull_max[type];
     gun_energy = gun_energy_max[type];
     engine_fuel = engine_fuel_max[type];
 
@@ -268,4 +266,65 @@ void player_ship::fire_control(int &next_laser, const int &number_of_lasers, bn:
             next_laser = 0;
         }
     }
+}
+
+void player_ship::shield_regeneration()
+{
+    if (shields.to_double() < 100 && shields_recharge_delay == 0)
+    {
+        if (shields_recharge_timer == 0)
+        {
+            shields += 1;
+            shields_recharge_timer = shields_recharge_rate[type];
+        }
+        else
+        {
+            shields_recharge_timer -= 1;
+        }
+    }
+    else
+    {
+        shields_recharge_delay -= 1;
+    }
+}
+
+void player_ship::hull_repair()
+{
+    if (hull_recharge_portion[type] != 0)
+    {
+        if ((hull.floor_integer() % hull_recharge_portion[type]) != 0)
+        {
+            if (hull_recharge_timer == 0)
+            {
+                hull += 1;
+                hull_recharge_timer = hull_recharge_rate[type];
+            }
+            else
+            {
+                hull_recharge_timer -= 1;
+            }
+        }
+    }
+}
+
+void player_ship::damage(bn::fixed amount)
+{
+    if (shields.to_double() >= amount.to_double())
+    {
+        shields -= amount;
+    }
+    else
+    {
+        if (shields.floor_integer() > 0)
+        {
+            hull -= amount - shields;
+            shields = 0;
+        }
+        else
+        {
+            hull -= amount;
+        }
+    }
+
+    shields_recharge_delay = shields_recharge_delay_max[type];
 }

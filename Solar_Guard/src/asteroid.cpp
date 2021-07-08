@@ -44,3 +44,32 @@ void asteroid::radar_dot(player_ship &player_ship)
         sprite_radar_dot.set_visible(false);
     }
 }
+
+void asteroid::map_dot(int x_lim, int y_lim)
+{
+    if (active)
+    {
+        // Map position update.
+        sprite_map_dot.set_bg_priority(0);
+        sprite_map_dot.set_x(93 + (x / x_lim) * 24);
+        sprite_map_dot.set_y(53 + (y / y_lim) * 24);
+    }
+    else
+    {
+        // Remove dot from map.
+        sprite_map_dot.set_visible(false);
+    }
+}
+
+bool asteroid::check_collision(int x_position, int y_position, int width, int height)
+{
+    if (x.round_integer() >= x_position && x.round_integer() <= x_position + width - 1 &&
+        y.round_integer() >= y_position && y.round_integer() <= y_position + height - 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

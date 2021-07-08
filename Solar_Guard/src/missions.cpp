@@ -129,9 +129,11 @@ int mission_1(int ship_selection)
         player_ship.speed_y -= 0.002;
 
         // Player operations.
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
         player_ship.movement();
         player_ship.animation();
-        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+        player_ship.shield_regeneration();
+        player_ship.hull_repair();
 
         // Player laser operations.
         for (int i = 0; i < array_player_lasers_size; i++)
@@ -300,9 +302,11 @@ void mission_2(int ship_selection)
         HUD_Transport.update(ally_transport.hull.ceil_integer(), ally_transport.hull_max.ceil_integer());
 
         // Player operations.
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
         player_ship.movement();
         player_ship.animation();
-        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+        player_ship.shield_regeneration();
+        player_ship.hull_repair();
 
         // Transport operations.
         ally_transport.move();
@@ -312,7 +316,25 @@ void mission_2(int ship_selection)
         // Asteroid operations.
         for (int i = 0; i < array_asteroids_size; i++)
         {
+            // Dot on radar.
             array_asteroids[i].radar_dot(player_ship);
+            array_asteroids[i].map_dot(x_limit.round_integer(), y_limit.round_integer());
+
+            // Only check for collision if active.
+            if (array_asteroids[i].active)
+            {
+                // Check for collision with player.
+                if (array_asteroids[i].check_collision(player_ship.x.round_integer() - 25, player_ship.y.round_integer() - 25, 50, 50))
+                {
+                    // Destroy the asteroid.
+                    array_asteroids[i].hull = 0;
+                    array_asteroids[i].active = false;
+                    array_asteroids[i].sprite.set_visible(false);
+
+                    // Do damage to the player.
+                    player_ship.damage(40);
+                }
+            }
         }
 
         // Player laser operations.
@@ -426,9 +448,11 @@ void mission_3(int ship_selection)
         HUD_Station.update(100,100);
 
         // Player operations.
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
         player_ship.movement();
         player_ship.animation();
-        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+        player_ship.shield_regeneration();
+        player_ship.hull_repair();
 
         // Player laser operations.
         for (int i = 0; i < array_player_lasers_size; i++)
@@ -535,9 +559,11 @@ void mission_4(int ship_selection)
         HUD.draw_hud_objective(4, 0);
 
         // Player operations.
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
         player_ship.movement();
         player_ship.animation();
-        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+        player_ship.shield_regeneration();
+        player_ship.hull_repair();
 
         // Player laser operations.
         for (int i = 0; i < array_player_lasers_size; i++)
@@ -664,9 +690,11 @@ int mission_5(int ship_selection)
         HUD_Carrier.update(ally_carrier.hull.ceil_integer(), ally_carrier.hull_max.ceil_integer());
 
         // Player operations.
+        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
         player_ship.movement();
         player_ship.animation();
-        player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
+        player_ship.shield_regeneration();
+        player_ship.hull_repair();
 
         // Carrier operations.
         ally_carrier.radar_dot(player_ship);

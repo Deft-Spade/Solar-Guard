@@ -20,15 +20,18 @@ public:
     int type = 0;
     bn::sprite_ptr player_sprite = bn::sprite_items::spr_sg_ship_1.create_sprite(0,0);
 
-    bn::fixed shields = 0;
-    const bn::array<bn::fixed, number_of_ships> shields_max = { 100, 100, 100, 100, 100, 100, 100, 100 };
-    const bn::array<bn::fixed, number_of_ships> shield_recharge_rate = { 1, 1, 1, 1, 1, 1, 1, 1 };
-    const bn::array<bn::fixed, number_of_ships> shield_recharge_delay = { 100, 100, 100, 100, 100, 100, 100, 100 };
+    bn::fixed shields = 100;
+    const bn::array<bn::fixed, number_of_ships> shields_damage_factor = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    int shields_recharge_timer = 0;
+    const bn::array<int, number_of_ships> shields_recharge_rate = { 5, 5, 5, 5, 5, 5, 5, 5 };
+    int shields_recharge_delay = 0;
+    const bn::array<int, number_of_ships> shields_recharge_delay_max = { 360, 360, 360, 360, 360, 360, 360, 360 };
 
-    bn::fixed hull = 0;
-    const bn::array<bn::fixed, number_of_ships> hull_max = { 100, 100, 100, 100, 100, 100, 100, 100 };
-    const bn::array<bn::fixed, number_of_ships> hull_recharge_rate = { 60, 60, 60, 60, 60, 60, 60, 60 };
-    const bn::array<bn::fixed, number_of_ships> hull_recharge_amount = { 20, 20, 20, 20, 20, 20, 20, 20 };
+    bn::fixed hull = 100;
+    const bn::array<bn::fixed, number_of_ships> hull_damage_factor = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    int hull_recharge_timer = 0;
+    const bn::array<int, number_of_ships> hull_recharge_rate = { 0, 0, 300, 180, 60, 0, 0, 0 };
+    const bn::array<int, number_of_ships> hull_recharge_portion = { 20, 20, 20, 20, 20, 20, 20, 20 };
 
     bn::fixed x = 0;
     bn::fixed y = 0;
@@ -73,6 +76,9 @@ public:
     void movement();
     void animation();
     void fire_control(int &next_laser, const int &number_of_lasers, bn::array<laser_player, 5> &player_lasers);
+    void shield_regeneration();
+    void hull_repair();
+    void damage(bn::fixed amount);
 };
 
 #endif // PLAYER_SHIP_H
