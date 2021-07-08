@@ -19,7 +19,7 @@ public:
     bn::sprite_ptr spr_ally_hull_text = bn::sprite_items::spr_hud_number_hull.create_sprite(-110,-18);
 
     hud_ally(int ally_type);
-    void update(int ally_hull, int ally_hull_max);
+    void update(bn::fixed ally_hull);
 };
 
 #endif // HUD_ALLY_H

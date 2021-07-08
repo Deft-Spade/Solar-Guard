@@ -12,8 +12,7 @@
 class ally_transport
 {
 public:
-    bn::fixed hull = 1000;
-    bn::fixed hull_max = 1000;
+    bn::fixed hull = 100;
     bn::fixed x = -4900;
     bn::fixed y = 4900;
     int rotation = 45;

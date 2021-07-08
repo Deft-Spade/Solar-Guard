@@ -12,8 +12,7 @@
 class ally_civillian
 {
 public:
-    bn::fixed hull = 1000;
-    bn::fixed hull_max = 1000;
+    bn::fixed hull = 100;
     bn::fixed x = -400;
     bn::fixed y = -400;
     bn::fixed x_speed = -0.05;

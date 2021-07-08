@@ -57,8 +57,8 @@ void mission_success(int mission_success_number)
 
         case 2:
             text_generator_compact.set_left_alignment();
-            text_generator_compact.generate(-106, 25, "TRANSPORT SUCCESSFULLY ESCORTED.", briefing_text);
-            text_generator_compact.generate(-106, 34, "", briefing_text);
+            text_generator_compact.generate(-106, 25, "THE TRANSPORT WAS SUCCESSFULLY ESCORTED THROUGH THE", briefing_text);
+            text_generator_compact.generate(-106, 34, "ASTEROID FIELD. GOOD WORK.", briefing_text);
             text_generator_compact.generate(-106, 43, "", briefing_text);
             text_generator_compact.generate(-106, 52, "", briefing_text);
             text_generator_compact.generate(-106, 61, "", briefing_text);
@@ -154,7 +154,7 @@ void mission_failure(int mission_failure_number)
             text_generator_compact.generate(-106, 43, "ARISING FROM DAMAGE SUSTAINED FROM ASTEROID", briefing_text);
             text_generator_compact.generate(-106, 52, "COLLISIONS.", briefing_text);
             text_generator_compact.generate(-106, 61, "", briefing_text);
-            text_generator_compact.generate(-106, 70, "SCORT MISSION FAILED.", briefing_text);
+            text_generator_compact.generate(-106, 70, "ESCORT MISSION FAILED.", briefing_text);
             break;
 
         case 3:

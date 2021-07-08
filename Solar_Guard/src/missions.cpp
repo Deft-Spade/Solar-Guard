@@ -5,7 +5,6 @@
 #include "bn_sprite_ptr.h"
 #include "bn_bg_palettes.h"
 #include "bn_sprite_text_generator.h"
-
 #include "bn_string.h"
 
 #include "bn_regular_bg_ptr.h"
@@ -67,7 +66,7 @@ int mission_1(int ship_selection)
     // Orbital junk.
     const int array_orbital_junk_size = 20;
     int array_orbital_junk_left = 20;
-    bn::array<space_junk, 20> array_orbital_junk = {
+    bn::array<space_junk, array_orbital_junk_size> array_orbital_junk = {
         space_junk(655,-950,camera,0),
         space_junk(865,273,camera,1),
         space_junk(-341,587,camera,2),
@@ -238,7 +237,7 @@ int mission_1(int ship_selection)
     }
 }
 
-void mission_2(int ship_selection)
+int mission_2(int ship_selection)
 {
     // Mission constants.
     const bn::fixed x_limit = 5000;
@@ -255,29 +254,49 @@ void mission_2(int ship_selection)
     // Object Creation ----------------------------------------------------------- //
 
     // Asteroids
-    const int array_asteroids_size = 20;
-    int array_asteroids_left = 20;
-    bn::array<asteroid, 20> array_asteroids = {
-        asteroid(-1473,-1595,camera,0),
-        asteroid(1981,1959,camera,1),
-        asteroid(-1036,-1213,camera,1),
-        asteroid(353,-1105,camera,0),
-        asteroid(909,-1976,camera,0),
-        asteroid(-1241,1690,camera,1),
-        asteroid(1609,789,camera,0),
-        asteroid(-1119,40,camera,0),
-        asteroid(759,-86,camera,1),
-        asteroid(-1182,671,camera,0),
-        asteroid(-1992,-159,camera,1),
-        asteroid(1002,-611,camera,1),
-        asteroid(1449,-293,camera,0),
-        asteroid(-790,-194,camera,1),
-        asteroid(-58,61,camera,1),
-        asteroid(0,469,camera,0),
-        asteroid(-450,-1334,camera,0),
-        asteroid(800,100,camera,1),
-        asteroid(-1731,1153,camera,1),
-        asteroid(333,877,camera,0)
+    const int array_asteroids_size = 40;
+    int array_asteroids_left = 40;
+    bn::array<asteroid, array_asteroids_size> array_asteroids = {
+        asteroid(657,-634,camera,0),
+        asteroid(-743,-758,camera,1),
+        asteroid(3095,-3013,camera,1),
+        asteroid(3490,-3460,camera,0),
+        asteroid(3242,-3256,camera,0),
+        asteroid(2166,-877,camera,1),
+        asteroid(-3881,762,camera,0),
+        asteroid(347,-548,camera,0),
+        asteroid(241,-552,camera,1),
+        asteroid(2166,-2100,camera,0),
+        asteroid(1331,4045,camera,1),
+        asteroid(-1494,-158,camera,1),
+        asteroid(-455,-684,camera,0),
+        asteroid(4525,-731,camera,1),
+        asteroid(753,120,camera,1),
+        asteroid(3995,-4056,camera,0),
+        asteroid(450,-347,camera,0),
+        asteroid(-743,794,camera,1),
+        asteroid(-256,214,camera,1),
+        asteroid(67,-75,camera,0),
+        asteroid(1104,-1858,camera,0),
+        asteroid(-2344,2454,camera,1),
+        asteroid(3432,-3642,camera,1),
+        asteroid(-3127,3196,camera,0),
+        asteroid(-909,879,camera,0),
+        asteroid(1241,-1200,camera,1),
+        asteroid(3264,-3222,camera,0),
+        asteroid(1119,-1100,camera,0),
+        asteroid(2359,-2431,camera,1),
+        asteroid(333,-377,camera,0),
+        asteroid(-100,150,camera,1),
+        asteroid(2247,-2347,camera,1),
+        asteroid(2007,-1900,camera,0),
+        asteroid(2758,-2769,camera,1),
+        asteroid(1894,-1954,camera,1),
+        asteroid(-1981,2001,camera,0),
+        asteroid(48,-68,camera,0),
+        asteroid(-2322,2333,camera,1),
+        asteroid(4691,-4652,camera,1),
+        asteroid(3245,-3187,camera,0)
     };
 
     // Transport
@@ -311,12 +330,12 @@ void mission_2(int ship_selection)
     bgm_escort.play();
 
     // Game loop.
-    while(! bn::keypad::select_pressed())
+    while(true)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
         HUD.draw_hud_objective(2, 50 + bn::fixed(50 * (ally_transport.x / 4900)).round_integer());
-        HUD_Transport.update(ally_transport.hull.ceil_integer(), ally_transport.hull_max.ceil_integer());
+        HUD_Transport.update(ally_transport.hull);
 
         // Player operations.
         player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
@@ -335,7 +354,7 @@ void mission_2(int ship_selection)
         {
             // Dot on radar.
             array_asteroids[i].radar_dot(player_ship);
-            array_asteroids[i].map_dot(x_limit.round_integer(), y_limit.round_integer());
+            //array_asteroids[i].map_dot(x_limit.round_integer(), y_limit.round_integer());
 
             // Only check for collision if active.
             if (array_asteroids[i].active)
@@ -347,9 +366,24 @@ void mission_2(int ship_selection)
                     array_asteroids[i].hull = 0;
                     array_asteroids[i].active = false;
                     array_asteroids[i].sprite.set_visible(false);
+                    array_asteroids_left -= 1;
 
                     // Do damage to the player.
                     player_ship.damage(40);
+                }
+
+                // Check for collision with transport.
+                if (array_asteroids[i].check_collision(ally_transport.x.round_integer() - 25, ally_transport.y.round_integer() - 25, 50, 50))
+                {
+                    // Destroy the asteroid.
+                    array_asteroids[i].hull = 0;
+                    array_asteroids[i].active = false;
+                    array_asteroids[i].sprite.set_visible(false);
+                    array_asteroids_left -= 1;
+
+                    // Do damage to the transport.
+                    ally_transport.hull -= 15;
+                    if (ally_transport.hull.to_double() < 0) ally_transport.hull = 0;
                 }
             }
         }
@@ -363,26 +397,29 @@ void mission_2(int ship_selection)
                 // Move the lasers forward.
                 array_player_lasers[i].move();
 
-                // Check for collision...
-                /*for (int j = 0; j < array_orbital_junk_size; j++)
+                // Check for collision with aesteroid.
+                for (int j = 0; j < array_asteroids_size; j++)
                 {
                     // Collision with bounding box 16x16 pixels.
-                    if (array_player_lasers[i].check_collision(array_orbital_junk[j].x.round_integer() - 6, array_orbital_junk[j].y.round_integer() - 6, 14, 14))
+                    if (array_asteroids[j].active &&
+                        array_player_lasers[i].check_collision(array_asteroids[j].x.round_integer() - 25,
+                                                               array_asteroids[j].y.round_integer() - 25, 50, 50))
                     {
                         // Make the junk take damage.
-                        array_orbital_junk[j].hull -= 5;
+                        array_asteroids[j].hull -= 5;
 
                         // Remove the laser since it has hit.
                         array_player_lasers[i].hit();
 
-                        // Check if junk's hull is 0.
-                        if (array_orbital_junk[j].hull.ceil_integer() == 0)
+                        // Check if asteroid's hull is 0.
+                        if (array_asteroids[j].hull.ceil_integer() == 0)
                         {
-                            // Destroy the junk (set it inactive).
-                            array_orbital_junk[j].destroy();
+                            // Destroy the asteroid (set it inactive).
+                            array_asteroids[j].active = false;
+                            array_asteroids[j].sprite.set_visible(false);
                         }
                     }
-                }*/
+                }
             }
         }
 
@@ -407,11 +444,34 @@ void mission_2(int ship_selection)
         gameplay_bg_rear.set_x(-camera.x() / 2);
         gameplay_bg_rear.set_y(-camera.y() / 2);
 
+        // Check for mission completion.
+        if (ally_transport.x.floor_integer() == 4900)
+        {
+            return 1;
+        }
+
+        // Check for mission failure.
+        if (player_ship.hull.ceil_integer() == 0)
+        {
+            return -1;
+        }
+
+        if (ally_transport.hull.ceil_integer() == 0)
+        {
+            return -2;
+        }
+
+        // Check for SELECT key indicating user exit.
+        if (bn::keypad::select_pressed())
+        {
+            return 0;
+        }
+
         bn::core::update();
     }
 }
 
-void mission_3(int ship_selection)
+int mission_3(int ship_selection)
 {
     // Mission constants.
     const bn::fixed x_limit = 2048;
@@ -457,12 +517,12 @@ void mission_3(int ship_selection)
     HUD.spr_map.set_palette(bn::sprite_items::spr_hud_map_mission3.palette_item());
 
     // Game loop.
-    while(! bn::keypad::select_pressed())
+    while(true)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
         HUD.draw_hud_objective(3, 0);
-        HUD_Station.update(100,100);
+        HUD_Station.update(100);
 
         // Player operations.
         player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
@@ -520,11 +580,17 @@ void mission_3(int ship_selection)
         bn::fixed cam_y_pos = bn::max(bn::fixed(bn::min(player_ship.y, y_limit - 80)), -y_limit + 80);
         camera.set_position(cam_x_pos, cam_y_pos);
 
+        // Check for SELECT key indicating user exit.
+        if (bn::keypad::select_pressed())
+        {
+            return 0;
+        }
+
         bn::core::update();
     }
 }
 
-void mission_4(int ship_selection)
+int mission_4(int ship_selection)
 {
     // Mission constants.
     const bn::fixed x_limit = 2048;
@@ -569,7 +635,7 @@ void mission_4(int ship_selection)
     HUD.spr_map.set_palette(bn::sprite_items::spr_hud_map_mission4.palette_item());
 
     // Game loop.
-    while(! bn::keypad::select_pressed())
+    while(true)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
@@ -630,6 +696,12 @@ void mission_4(int ship_selection)
         bn::fixed cam_x_pos = bn::max(bn::fixed(bn::min(player_ship.x, x_limit - 120)), -x_limit + 120);
         bn::fixed cam_y_pos = bn::max(bn::fixed(bn::min(player_ship.y, y_limit - 80)), -y_limit + 80);
         camera.set_position(cam_x_pos, cam_y_pos);
+
+        // Check for SELECT key indicating user exit.
+        if (bn::keypad::select_pressed())
+        {
+            return 0;
+        }
 
         bn::core::update();
     }
@@ -699,12 +771,12 @@ int mission_5(int ship_selection)
     player_ship.player_sprite.set_camera(camera);
 
     // Game loop.
-    while(! bn::keypad::select_pressed())
+    while(true)
     {
         // Draw HUD.
         HUD.draw_hud(player_ship, x_limit, y_limit);
         HUD.draw_hud_objective(5, ally_civillian_pods_size - ally_civillian_pods_left);
-        HUD_Carrier.update(ally_carrier.hull.ceil_integer(), ally_carrier.hull_max.ceil_integer());
+        HUD_Carrier.update(ally_carrier.hull);
 
         // Player operations.
         player_ship.fire_control(next_laser, array_player_lasers_size, array_player_lasers);
@@ -802,6 +874,12 @@ int mission_5(int ship_selection)
                     return -1;
                 }
             }
+        }
+
+        // Check for SELECT key indicating user exit.
+        if (bn::keypad::select_pressed())
+        {
+            return 0;
         }
 
         bn::core::update();

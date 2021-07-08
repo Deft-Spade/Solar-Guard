@@ -12,8 +12,7 @@
 class ally_carrier
 {
 public:
-    bn::fixed hull = 1000;
-    bn::fixed hull_max = 1000;
+    bn::fixed hull = 100;
     bn::fixed x = 1500;
     bn::fixed y = 1500;
 

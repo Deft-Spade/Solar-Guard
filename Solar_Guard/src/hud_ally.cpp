@@ -33,9 +33,9 @@ hud_ally::hud_ally(int ally_type)
     spr_ally_outline.set_tiles(bn::sprite_items::spr_hud_ally_outline.tiles_item().create_tiles(ally_type));
 }
 
-void hud_ally::update(int ally_hull, int ally_hull_max)
+void hud_ally::update(bn::fixed ally_hull)
 {
-    bn::fixed hull_division = ally_hull / ally_hull_max;
-    spr_ally_hull.set_tiles(bn::sprite_items::spr_hud_ally_hull.tiles_item().create_tiles(bn::fixed(hull_division * 15).ceil_integer()));
-    spr_ally_hull_text.set_tiles(bn::sprite_items::spr_hud_number_hull.tiles_item().create_tiles(bn::fixed(hull_division * 100).ceil_integer()));
+    int meter_sprite = 0;
+    spr_ally_hull.set_tiles(bn::sprite_items::spr_hud_ally_hull.tiles_item().create_tiles(bn::max(0, bn::min(bn::fixed(ally_hull / (double)6.66).floor_integer(), 15))));
+    spr_ally_hull_text.set_tiles(bn::sprite_items::spr_hud_number_hull.tiles_item().create_tiles(ally_hull.floor_integer()));
 }

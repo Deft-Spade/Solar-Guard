@@ -99,7 +99,6 @@ int main()
                     }
                 }
 
-                // Exit from briefing should go straight to main menu.
                 if (selected_ship > 0)
                 {
                     int mission_result = mission_1(selected_ship);
@@ -147,10 +146,30 @@ int main()
                     }
                 }
 
-                // Exit from briefing should go straight to main menu.
                 if (selected_ship > 0)
                 {
-                    mission_2(selected_ship);
+                    int mission_result = mission_2(selected_ship);
+                    bn::core::update();
+
+                    switch (mission_result)
+                    {
+                        case 1:
+                            mission_success(2);
+                            bn::core::update();
+                            break;
+                        case 0:
+                            break;
+                        case -1:
+                            mission_failure(21);
+                            bn::core::update();
+                            break;
+                        case -2:
+                            mission_failure(22);
+                            bn::core::update();
+                            break;
+                        default: break;
+                    }
+
                     bn::core::update();
                 }
 
@@ -178,10 +197,26 @@ int main()
                     }
                 }
 
-                // Exit from briefing should go straight to main menu.
                 if (selected_ship > 0)
                 {
-                    mission_3(selected_ship);
+                    int mission_result = mission_3(selected_ship);
+                    bn::core::update();
+
+                    switch (mission_result)
+                    {
+                        case 1:
+                            mission_success(3);
+                            bn::core::update();
+                            break;
+                        case 0:
+                            break;
+                        case -1:
+                            mission_failure(3);
+                            bn::core::update();
+                            break;
+                        default: break;
+                    }
+
                     bn::core::update();
                 }
 
@@ -209,10 +244,26 @@ int main()
                     }
                 }
 
-                // Exit from briefing should go straight to main menu.
                 if (selected_ship > 0)
                 {
-                    mission_4(selected_ship);
+                    int mission_result = mission_4(selected_ship);
+                    bn::core::update();
+
+                    switch (mission_result)
+                    {
+                        case 1:
+                            mission_success(4);
+                            bn::core::update();
+                            break;
+                        case 0:
+                            break;
+                        case -1:
+                            mission_failure(4);
+                            bn::core::update();
+                            break;
+                        default: break;
+                    }
+
                     bn::core::update();
                 }
 
@@ -240,7 +291,6 @@ int main()
                     }
                 }
 
-                // Exit from briefing should go straight to main menu.
                 if (selected_ship > 0)
                 {
                     int mission_result = mission_5(selected_ship);
