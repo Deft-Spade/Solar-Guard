@@ -38,6 +38,7 @@
 #include "bn_music_items.h"
 #include "bn_music_actions.h"
 #include "music.h"
+#include "bn_sound_items.h"
 
 namespace
 {
@@ -196,6 +197,8 @@ int page13_image()
     bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_art_ack_page13_image.create_bg(0, 50);
     int scroll_position = 0;
 
+    bn::sound_items::sfx_menu_select.play();
+
     while (true)
     {
         if (bn::keypad::up_held() && scroll_position > 0)
@@ -259,7 +262,7 @@ void scene_art_ack()
             case 11: user_input = scene_art_ack_page11(); break;
             case 12: user_input = scene_art_ack_page12(); break;
             case 13: user_input = scene_art_ack_page13(); break;
-            case 113: user_input = page13_image(); break;
+            case 113: user_input = page13_image(); bn::sound_items::sfx_menu_back.play(); break;
             case 14: user_input = scene_art_ack_page14(); break;
             default: BN_ERROR("CURRENT PAGE VALUE INVALID: " + bn::to_string<32>(current_page)); break;
         }
@@ -277,6 +280,7 @@ void scene_art_ack()
                 {
                     current_page = number_of_pages;
                 }
+                bn::sound_items::sfx_menu_move.play();
                 break;
 
             case 0: return; break;
@@ -290,6 +294,7 @@ void scene_art_ack()
                 {
                     current_page = 1;
                 }
+                bn::sound_items::sfx_menu_move.play();
                 break;
 
             case 2: current_page += 100; break;

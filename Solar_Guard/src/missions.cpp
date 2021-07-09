@@ -157,6 +157,9 @@ int mission_1(int ship_selection)
                         // Remove the laser since it has hit.
                         array_player_lasers[i].hit();
 
+                        // Play laser hit sound.
+                        bn::sound_items::sfx_laser_hit.play();
+
                         // Check if junk's hull is 0.
                         if (array_orbital_junk[j].hull.ceil_integer() == 0)
                         {
@@ -190,6 +193,9 @@ int mission_1(int ship_selection)
 
                     // Do damage to the player.
                     player_ship.damage(15);
+
+                    // Play collision sound.
+                    bn::sound_items::sfx_collision.play();
                 }
             }
         }
@@ -371,6 +377,9 @@ int mission_2(int ship_selection)
 
                     // Do damage to the player.
                     player_ship.damage(40);
+
+                    // Play collision sound.
+                    bn::sound_items::sfx_collision.play();
                 }
 
                 // Check for collision with lasers.
@@ -395,6 +404,9 @@ int mission_2(int ship_selection)
                             array_asteroids[i].active = false;
                             array_asteroids[i].sprite.set_visible(false);
                         }
+
+                        // Play collision sound.
+                        bn::sound_items::sfx_collision.play();
                     }
                 }
             }
@@ -415,6 +427,12 @@ int mission_2(int ship_selection)
                     // Do damage to the transport.
                     ally_transport.hull -= 15;
                     if (ally_transport.hull.to_double() < 0) ally_transport.hull = 0;
+
+                    // Play collision sound if player is nearby.
+                    if (array_asteroids[i].check_smallest_axis_distance(player_ship.x.round_integer(), player_ship.y.round_integer()) < 200)
+                    {
+                        bn::sound_items::sfx_collision.play();
+                    }
                 }
             }
         }

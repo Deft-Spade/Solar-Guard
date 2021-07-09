@@ -6,6 +6,15 @@
 #include "bn_sprite_animate_actions.h"
 
 #include "bn_sprite_items_spr_sg_ship_1.h"
+#include "bn_sprite_items_spr_sg_ship_2.h"
+#include "bn_sprite_items_spr_sg_ship_3.h"
+#include "bn_sprite_items_spr_sg_ship_4.h"
+#include "bn_sprite_items_spr_sg_ship_5.h"
+#include "bn_sprite_items_spr_sg_ship_6.h"
+#include "bn_sprite_items_spr_sg_ship_7.h"
+#include "bn_sprite_items_spr_sg_ship_8.h"
+
+#include "bn_sound_items.h"
 
 #include "laser_player.h"
 
@@ -72,6 +81,8 @@ public:
     const bn::array<bn::fixed, number_of_ships> gun_heat_increase_rate = { 10, 10, 8, 6, 4, 6, 6, 6 };
     const bn::array<bn::fixed, number_of_ships> gun_heat_cooldown_rate = { 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 };
     bool gun_overheated = false;
+
+    //bn::sound_item sound_laser_fire =
 
     void movement();
     void animation();

@@ -21,6 +21,7 @@
 #include "bn_sprite_items_menu_arrow.h"
 
 #include "music.h"
+#include "bn_sound_items.h"
 
 namespace
 {
@@ -41,6 +42,8 @@ void draw_mainmenu_text(bn::sprite_text_generator &text_generator, bn::vector<bn
     text_generator.generate(-(bn::display::width() / 2) + 20, 0, "Music Playback", text_sprites);
     text_generator.generate(-(bn::display::width() / 2) + 20, + 20, "Information", text_sprites);
 }
+
+// The submenus contain duplicate code, the submenu functions should be refactored into one function with more arguments at some point.
 
 int submenu_missions(bn::sprite_text_generator &text_generator, bn::vector<bn::sprite_ptr, 64> &text_sprites, bn::sprite_ptr &menu_selector)
 {
@@ -64,6 +67,9 @@ int submenu_missions(bn::sprite_text_generator &text_generator, bn::vector<bn::s
     // sub-menu selection activation from the main menu.
     bn::core::update();
 
+    // Play select sound since submenu was selected from main menu.
+    bn::sound_items::sfx_menu_select.play();
+
     // Menu operation loop (exits upon pressing A, relies on
     // current_selection being set correctly by indicator position).
     while(true)
@@ -72,11 +78,13 @@ int submenu_missions(bn::sprite_text_generator &text_generator, bn::vector<bn::s
         if(bn::keypad::down_pressed() && mission_selection < max_missions)
         {
             mission_selection++;
+            bn::sound_items::sfx_menu_move.play();
         }
 
         if(bn::keypad::up_pressed() && mission_selection > 1)
         {
             mission_selection--;
+            bn::sound_items::sfx_menu_move.play();
         }
 
         // Set the menu selection arrow sprite to the selection's position.
@@ -124,6 +132,9 @@ int submenu_information(bn::sprite_text_generator &text_generator, bn::vector<bn
     // sub-menu selection activation from the main menu.
     bn::core::update();
 
+    // Play select sound since submenu was selected from main menu.
+    bn::sound_items::sfx_menu_select.play();
+
     // Menu operation loop (exits upon pressing A, relies on
     // current_selection being set correctly by indicator position).
     while(true)
@@ -132,11 +143,13 @@ int submenu_information(bn::sprite_text_generator &text_generator, bn::vector<bn
         if(bn::keypad::down_pressed() && option_selection < max_options)
         {
             option_selection++;
+            bn::sound_items::sfx_menu_move.play();
         }
 
         if(bn::keypad::up_pressed() && option_selection > 1)
         {
             option_selection--;
+            bn::sound_items::sfx_menu_move.play();
         }
 
         // Set the menu selection arrow sprite to the selection's position.
@@ -203,11 +216,13 @@ int main_menu()
         if(bn::keypad::down_pressed() && current_selection < max_items)
         {
             current_selection++;
+            bn::sound_items::sfx_menu_move.play();
         }
 
         if(bn::keypad::up_pressed() && current_selection > 1)
         {
             current_selection--;
+            bn::sound_items::sfx_menu_move.play();
         }
 
         // Set the menu selection arrow sprite to the selection's position.
@@ -233,6 +248,11 @@ int main_menu()
                         // Return out of the main menu's own loop.
                         return current_scene;
                     }
+                    else
+                    {
+                        // Play menu back sound since user has backed out of submenu.
+                        bn::sound_items::sfx_menu_back.play();
+                    }
                     break;
 
                 case 2:
@@ -254,6 +274,11 @@ int main_menu()
 
                         // Return out of the main menu's own loop.
                         return current_scene;
+                    }
+                    else
+                    {
+                        // Play menu back sound since user has backed out of submenu.
+                        bn::sound_items::sfx_menu_back.play();
                     }
                     break;
 

@@ -18,6 +18,7 @@
 #include "bn_music_actions.h"
 
 #include "music.h"
+#include "bn_sound_items.h"
 
 namespace
 {
@@ -124,10 +125,12 @@ void scene_music_playback()
                 if(bn::music::paused())
                 {
                     bn::music::resume();
+                    bn::sound_items::sfx_menu_select.play();
                 }
                 else
                 {
                     bn::music::pause();
+                    bn::sound_items::sfx_menu_back.play();
                 }
             }
 
@@ -143,6 +146,8 @@ void scene_music_playback()
                     selected_track--;
                 }
 
+                bn::sound_items::sfx_menu_move.play();
+
                 break;
             }
 
@@ -157,6 +162,8 @@ void scene_music_playback()
                 {
                     selected_track++;
                 }
+
+                bn::sound_items::sfx_menu_move.play();
 
                 break;
             }

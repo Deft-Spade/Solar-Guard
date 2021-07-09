@@ -4,16 +4,6 @@
 #include "bn_math.h"
 #include <math.h>
 
-#include "bn_sprite_ptr.h"
-#include "bn_sprite_items_spr_sg_ship_1.h"
-#include "bn_sprite_items_spr_sg_ship_2.h"
-#include "bn_sprite_items_spr_sg_ship_3.h"
-#include "bn_sprite_items_spr_sg_ship_4.h"
-#include "bn_sprite_items_spr_sg_ship_5.h"
-#include "bn_sprite_items_spr_sg_ship_6.h"
-#include "bn_sprite_items_spr_sg_ship_7.h"
-#include "bn_sprite_items_spr_sg_ship_8.h"
-
 player_ship::player_ship(int ship_type, int x_pos, int y_pos)
 {
     // Record the ship type in the relevant variable.
@@ -236,6 +226,9 @@ void player_ship::fire_control(int &next_laser, const int &number_of_lasers, bn:
         // Reduce player ship's energy.
         gun_energy -= 1;
 
+        // Play laser sound.
+        bn::sound_items::sfx_laser_fire.play();
+
         // Increase gun heat.
         if (gun_heat.to_double() + gun_heat_increase_rate[type].to_double() < gun_heat_max[type].to_double())
         {
@@ -269,13 +262,16 @@ void player_ship::fire_control(int &next_laser, const int &number_of_lasers, bn:
 }
 
 void player_ship::shield_regeneration()
-{
+{    
     if (shields.to_double() < 100 && shields_recharge_delay == 0)
     {
         if (shields_recharge_timer == 0)
         {
             shields += 1;
             shields_recharge_timer = shields_recharge_rate[type];
+
+            if (shields.round_integer() % 5 == 0)
+            bn::sound_items::sfx_recharge.play();
         }
         else
         {

@@ -31,6 +31,7 @@
 #include "bn_music_items.h"
 #include "bn_music_actions.h"
 #include "music.h"
+#include "bn_sound_items.h"
 
 namespace
 {
@@ -172,6 +173,8 @@ int ship_selection()
                     current_page -= 1;
                 }
             }
+
+            bn::sound_items::sfx_menu_move.play();
         }
 
         bn::core::update();

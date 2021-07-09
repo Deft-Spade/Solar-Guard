@@ -20,6 +20,7 @@
 #include "splash_screens.h"
 #include "menus.h"
 #include "music.h"
+#include "bn_sound_items.h"
 #include "information.h"
 #include "ship_select.h"
 
@@ -63,6 +64,7 @@ int main()
 
     // Initial title screen.
     title_screen();
+    //bn::sound_items::sfx_menu_select.play();
     bn::core::update();
 
     while(true)
@@ -74,6 +76,7 @@ int main()
         switch (current_scene) {
             case 0:
                 title_screen();
+                //bn::sound_items::sfx_menu_select.play();
                 bn::core::update();
                 break;
 
@@ -82,13 +85,18 @@ int main()
                 // when going back to briefing screen from ship select screen).
                 bgm_tactical.play();
 
+                bn::sound_items::sfx_menu_select.play();
+
                 while (true)
                 {
                     if (briefing_1() == 0)
                     {
+                        bn::sound_items::sfx_menu_back.play();
                         bn::core::update();
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_select.play();
 
                     selected_ship = ship_selection();
                     bn::core::update();
@@ -97,6 +105,8 @@ int main()
                     {
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_back.play();
                 }
 
                 if (selected_ship > 0)
@@ -129,13 +139,18 @@ int main()
                 // when going back to briefing screen from ship select screen).
                 bgm_tactical.play();
 
+                bn::sound_items::sfx_menu_select.play();
+
                 while (true)
                 {
                     if (briefing_2() == 0)
                     {
+                        bn::sound_items::sfx_menu_back.play();
                         bn::core::update();
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_select.play();
 
                     selected_ship = ship_selection();
                     bn::core::update();
@@ -144,6 +159,8 @@ int main()
                     {
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_back.play();
                 }
 
                 if (selected_ship > 0)
@@ -180,13 +197,18 @@ int main()
                 // when going back to briefing screen from ship select screen).
                 bgm_tactical.play();
 
+                bn::sound_items::sfx_menu_select.play();
+
                 while (true)
                 {
                     if (briefing_3() == 0)
                     {
+                        bn::sound_items::sfx_menu_back.play();
                         bn::core::update();
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_select.play();
 
                     selected_ship = ship_selection();
                     bn::core::update();
@@ -195,6 +217,8 @@ int main()
                     {
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_back.play();
                 }
 
                 if (selected_ship > 0)
@@ -227,13 +251,18 @@ int main()
                 // when going back to briefing screen from ship select screen).
                 bgm_tactical.play();
 
+                bn::sound_items::sfx_menu_select.play();
+
                 while (true)
                 {
                     if (briefing_4() == 0)
                     {
+                        bn::sound_items::sfx_menu_back.play();
                         bn::core::update();
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_select.play();
 
                     selected_ship = ship_selection();
                     bn::core::update();
@@ -242,6 +271,8 @@ int main()
                     {
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_back.play();
                 }
 
                 if (selected_ship > 0)
@@ -274,13 +305,18 @@ int main()
                 // when going back to briefing screen from ship select screen).
                 bgm_tactical.play();
 
+                bn::sound_items::sfx_menu_select.play();
+
                 while (true)
                 {
                     if (briefing_5() == 0)
                     {
+                        bn::sound_items::sfx_menu_back.play();
                         bn::core::update();
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_select.play();
 
                     selected_ship = ship_selection();
                     bn::core::update();
@@ -289,6 +325,8 @@ int main()
                     {
                         break;
                     }
+
+                    bn::sound_items::sfx_menu_back.play();
                 }
 
                 if (selected_ship > 0)
@@ -317,22 +355,30 @@ int main()
                 break;
 
             case 2:
+                bn::sound_items::sfx_menu_select.play();
                 scene_music_playback();
+                bn::sound_items::sfx_menu_back.play();
                 bn::core::update();
                 break;
 
             case 31:
+                bn::sound_items::sfx_menu_select.play();
                 scene_controls();
+                bn::sound_items::sfx_menu_back.play();
                 bn::core::update();
                 break;
 
             case 32:
+                bn::sound_items::sfx_menu_select.play();
                 scene_credits();
+                bn::sound_items::sfx_menu_back.play();
                 bn::core::update();
                 break;
 
             case 33:
+                bn::sound_items::sfx_menu_select.play();
                 scene_art_ack();
+                bn::sound_items::sfx_menu_back.play();
                 bn::core::update();
                 break;
 
