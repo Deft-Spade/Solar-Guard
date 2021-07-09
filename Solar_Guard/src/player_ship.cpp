@@ -218,7 +218,7 @@ void player_ship::fire_control(int &next_laser, const int &number_of_lasers, bn:
     }
 
     // Check for necessary conditions.
-    if (bn::keypad::b_held() && gun_energy.ceil_integer() > 0 && gun_firing_cooldown == 0 && !gun_overheated)
+    if (bn::keypad::a_held() && gun_energy.ceil_integer() > 0 && gun_firing_cooldown == 0 && !gun_overheated)
     {
         // Set cooldown back to full delay;
         gun_firing_cooldown = gun_cooldown_time;

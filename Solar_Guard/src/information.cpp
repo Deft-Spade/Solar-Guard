@@ -58,7 +58,7 @@ void scene_controls()
     text_generator.generate(0, - 65, "CONTROLS", text_sprites);
     text_generator.set_left_alignment();
     text_generator.generate(-106, - 20, "LEFT/RIGHT > TURN SHIP", text_sprites);
-    text_generator.generate(-106, - 10, "B > FIRE LASER", text_sprites);
+    text_generator.generate(-106, - 10, "A > FIRE LASER", text_sprites);
     text_generator.generate(-106, 0, "R > ENGAGE ENGINES", text_sprites);
     text_generator.generate(-106, + 10, "L > REDUCE SPEED", text_sprites);
     text_generator.generate(-106, + 20, "L + R > ENGAGE REVERSE ENGINES", text_sprites);

@@ -72,8 +72,8 @@ public:
 
     int alternate_ab_frame = 0;
 
-    int gun_firing_cooldown = 0;
     const int gun_cooldown_time = 15;
+    int gun_firing_cooldown = gun_cooldown_time;
     bn::fixed gun_energy = 0;
     const bn::array<bn::fixed, number_of_ships> gun_energy_max = { 400, 400, 400, 400, 400, 400, 400, 400 };
     bn::fixed gun_heat = 0;
