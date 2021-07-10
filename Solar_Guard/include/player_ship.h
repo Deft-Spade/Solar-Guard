@@ -75,7 +75,7 @@ public:
     const bn::array<bn::fixed, number_of_ships> hull_damage_factor = { 1, 1, 1, 1, 1, 1, 1, 1 };
     int hull_recharge_timer = 0;
     const bn::array<int, number_of_ships> hull_recharge_rate = { 0, 0, 300, 180, 60, 0, 0, 0 };
-    const bn::array<int, number_of_ships> hull_recharge_portion = { 20, 20, 20, 20, 20, 20, 20, 20 };
+    const bn::array<int, number_of_ships> hull_recharge_portion = { 0, 0, 20, 20, 20, 0, 0, 0 };
 
     bn::fixed x = 0;
     bn::fixed y = 0;
