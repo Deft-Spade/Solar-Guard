@@ -122,9 +122,9 @@ int briefing_2()
     text_generator_compact.generate(-106, 25, "A TRANSPORT HAS REQUESTED ASSISTANCE ESCORT THROUGH", briefing_text);
     text_generator_compact.generate(-106, 34, "AN ASTEROID FIELD. DESTROY ANY ASTEROIDS IN THE WAY.", briefing_text);
     text_generator_compact.generate(-106, 43, "", briefing_text);
-    text_generator_compact.generate(-106, 52, "KNOWN ISSUE: THE CPU IS OVERLOADED WHEN LASERS ARE", briefing_text);
-    text_generator_compact.generate(-106, 61, "FIRED DUE TO ADDED COLLISION CHECKING. THIS CAUSES", briefing_text);
-    text_generator_compact.generate(-106, 70, "BRIEF SLOWDOWN WHILE THE LASERS ARE PRESENT.", briefing_text);
+    text_generator_compact.generate(-106, 52, "KNOWN ISSUE: THE CPU MAY BE OVERLOADED WHEN LASERS", briefing_text);
+    text_generator_compact.generate(-106, 61, "ARE FIRED DUE TO THE ADDITIONAL COLLISION CHECKING.", briefing_text);
+    text_generator_compact.generate(-106, 70, "GAME SLOWDOWN MAY OCCUR WHILE LASERS ARE PRESENT.", briefing_text);
 
     // Briefing loop.
     while(true)

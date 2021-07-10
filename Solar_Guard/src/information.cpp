@@ -118,9 +118,9 @@ void scene_known_issues()
     text_generator.set_center_alignment();
     text_generator.generate(0, - 65, "KNOWN ISSUES", text_sprites);
     text_generator.set_left_alignment();
-    text_generator_compact.generate(-108, - 50, "> FIRING LASERS IN MISSION 2 CAUSES CPU OVERLOAD.", text_sprites);
+    text_generator_compact.generate(-108, - 50, "> FIRING LASERS IN MISSION 2 CAN CAUSE CPU OVERLOAD.", text_sprites);
     text_generator_compact.generate(-108, - 40, "  THIS IS DUE TO THE ADDITIONAL COLLISION CHECKING.", text_sprites);
-    text_generator_compact.generate(-108, - 30, "  THIS RESULTS IN TEMPORARY GAME SLOW DOWN.", text_sprites);
+    text_generator_compact.generate(-108, - 30, "  THIS OCCASIONALLY MAKES GAME SLOW DOWN OCCUR.", text_sprites);
     text_generator_compact.generate(-108, - 20, "", text_sprites);
     text_generator_compact.generate(-108, - 10, "> THE AMOUNT OF ASTEROIDS IN MISSION 2 IS NOT AS MANY", text_sprites);
     text_generator_compact.generate(-108, +  0, "  AS INTENDED DUE TO SPRITE QUANTITIY LIMITATIONS.", text_sprites);
