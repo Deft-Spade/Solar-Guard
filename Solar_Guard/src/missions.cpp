@@ -228,7 +228,7 @@ int mission_1(int ship_selection)
                     array_orbital_junk[i].sprite.set_visible(false);
 
                     // Do damage to the player.
-                    player_ship.damage(15);
+                    player_ship.damage(30);
 
                     // Play collision sound.
                     bn::sound_items::sfx_collision.play();
@@ -417,7 +417,7 @@ int mission_2(int ship_selection)
                     array_asteroids_left -= 1;
 
                     // Do damage to the player.
-                    player_ship.damage(40);
+                    player_ship.damage(80);
 
                     // Play collision sound.
                     bn::sound_items::sfx_collision.play();
