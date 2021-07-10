@@ -150,17 +150,18 @@ int submenu_missions(bn::sprite_text_generator &text_generator, bn::vector<bn::s
 int submenu_information(bn::sprite_text_generator &text_generator, bn::vector<bn::sprite_ptr, 64> &text_sprites, bn::sprite_ptr &menu_selector)
 {
     int option_selection = 1;
-    int max_options = 3;
-    int ms_orign_y = -20 * (max_options / 2);
+    int max_options = 4;
+    int ms_orign_y = -30;
 
     // Draw the sub-menu text.
     text_sprites.clear();
     text_generator.set_center_alignment();
     text_generator.generate(0, -text_y_limit, "Information", text_sprites);
     text_generator.set_left_alignment();
-    text_generator.generate(-(bn::display::width() / 2) + 20, - 20, "Controls", text_sprites);
-    text_generator.generate(-(bn::display::width() / 2) + 20, + 0, "Credits", text_sprites);
-    text_generator.generate(-(bn::display::width() / 2) + 20, + 20, "Art Acknowledgments", text_sprites);
+    text_generator.generate(-(bn::display::width() / 2) + 20, - 30, "Controls", text_sprites);
+    text_generator.generate(-(bn::display::width() / 2) + 20, - 10, "Known Issues", text_sprites);
+    text_generator.generate(-(bn::display::width() / 2) + 20, + 10, "Credits", text_sprites);
+    text_generator.generate(-(bn::display::width() / 2) + 20, + 30, "Art Acknowledgments", text_sprites);
 
     // Extra update to process another frame to set A to not pressed
     // to avoid mission selection activation in the same frame as the

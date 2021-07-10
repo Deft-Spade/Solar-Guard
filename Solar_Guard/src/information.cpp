@@ -68,6 +68,7 @@
 #include "font_menu.h"
 #include "font_menu.h"
 #include "font_hud.h"
+#include "font_hud_compact.h"
 
 #include "bn_music_item.h"
 #include "bn_music_items.h"
@@ -97,6 +98,37 @@ void scene_controls()
     text_generator.generate(-106, 0, "R > ENGAGE ENGINES", text_sprites);
     text_generator.generate(-106, + 10, "L > REDUCE SPEED", text_sprites);
     text_generator.generate(-106, + 20, "L + R > ENGAGE REVERSE ENGINES", text_sprites);
+
+    while (!bn::keypad::b_pressed())
+    {
+        bn::core::update();
+    }
+}
+
+void scene_known_issues()
+{
+    const bn::regular_bg_ptr regular_bg = bn::regular_bg_items::bg_information.create_bg(0, 0);
+
+    bgm_theme_upbeat.play();
+
+    bn::sprite_text_generator text_generator(font_hud);
+    bn::sprite_text_generator text_generator_compact(font_hud_compact);
+    bn::vector<bn::sprite_ptr, 128> text_sprites;
+
+    text_generator.set_center_alignment();
+    text_generator.generate(0, - 65, "KNOWN ISSUES", text_sprites);
+    text_generator.set_left_alignment();
+    text_generator_compact.generate(-108, - 50, "> FIRING LASERS IN MISSION 2 CAUSES CPU OVERLOAD.", text_sprites);
+    text_generator_compact.generate(-108, - 40, "  THIS IS DUE TO THE ADDITIONAL COLLISION CHECKING.", text_sprites);
+    text_generator_compact.generate(-108, - 30, "  THIS RESULTS IN TEMPORARY GAME SLOW DOWN.", text_sprites);
+    text_generator_compact.generate(-108, - 20, "", text_sprites);
+    text_generator_compact.generate(-108, - 10, "> THE AMOUNT OF ASTEROIDS IN MISSION 2 IS NOT AS MANY", text_sprites);
+    text_generator_compact.generate(-108, +  0, "  AS INTENDED DUE TO SPRITE QUANTITIY LIMITATIONS.", text_sprites);
+    text_generator_compact.generate(-108, + 10, "  CAN'T JUST PLACE A BUNCH OF C++ OBJECTS AROUND.", text_sprites);
+    text_generator_compact.generate(-108, + 20, "  NEED A BETTER WAY OF MAKING MANY ASTEROIDS EXIST.", text_sprites);
+    text_generator_compact.generate(-108, + 30, "", text_sprites);
+    text_generator_compact.generate(-108, + 40, "> MISSIONS 3 AND 4 CURRENTLY HAVE NO FUNCTIONALITY.", text_sprites);
+    text_generator_compact.generate(-108, + 50, "  ALL THE PLAYER CAN DO IS JUST FLY AROUND.", text_sprites);
 
     while (!bn::keypad::b_pressed())
     {

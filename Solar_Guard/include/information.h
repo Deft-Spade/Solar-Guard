@@ -37,6 +37,7 @@
 #define INFORMATION_H
 
 void scene_controls();
+void scene_known_issues();
 void scene_credits();
 void scene_art_ack();
 

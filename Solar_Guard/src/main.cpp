@@ -405,12 +405,19 @@ int main()
 
             case 32:
                 bn::sound_items::sfx_menu_select.play();
-                scene_credits();
+                scene_known_issues();
                 bn::sound_items::sfx_menu_back.play();
                 bn::core::update();
                 break;
 
             case 33:
+                bn::sound_items::sfx_menu_select.play();
+                scene_credits();
+                bn::sound_items::sfx_menu_back.play();
+                bn::core::update();
+                break;
+
+            case 34:
                 bn::sound_items::sfx_menu_select.play();
                 scene_art_ack();
                 bn::sound_items::sfx_menu_back.play();
