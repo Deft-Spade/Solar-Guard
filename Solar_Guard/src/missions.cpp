@@ -59,6 +59,7 @@
 #include "gameplay.h"
 #include "heads_up_display.h"
 #include "hud_ally.h"
+#include "pause_menu.h"
 
 #include "player_ship.h"
 #include "pirate_ship.h"
@@ -257,10 +258,15 @@ int mission_1(int ship_selection)
             return -1;
         }
 
-        // Check for SELECT key indicating user exit.
-        if (bn::keypad::select_pressed())
+        // Check for START key, activate pause if pressed.
+        if (bn::keypad::start_pressed())
         {
-            return 0;
+            int pause_selection = pause_menu();
+
+            if (pause_selection == 2)
+            {
+                return 0;
+            }
         }
 
         bn::core::update();
@@ -510,10 +516,15 @@ int mission_2(int ship_selection)
             return -2;
         }
 
-        // Check for SELECT key indicating user exit.
-        if (bn::keypad::select_pressed())
+        // Check for START key, activate pause if pressed.
+        if (bn::keypad::start_pressed())
         {
-            return 0;
+            int pause_selection = pause_menu();
+
+            if (pause_selection == 2)
+            {
+                return 0;
+            }
         }
 
         bn::core::update();
@@ -629,10 +640,15 @@ int mission_3(int ship_selection)
         bn::fixed cam_y_pos = bn::max(bn::fixed(bn::min(player_ship.y, y_limit - 80)), -y_limit + 80);
         camera.set_position(cam_x_pos, cam_y_pos);
 
-        // Check for SELECT key indicating user exit.
-        if (bn::keypad::select_pressed())
+        // Check for START key, activate pause if pressed.
+        if (bn::keypad::start_pressed())
         {
-            return 0;
+            int pause_selection = pause_menu();
+
+            if (pause_selection == 2)
+            {
+                return 0;
+            }
         }
 
         bn::core::update();
@@ -746,10 +762,15 @@ int mission_4(int ship_selection)
         bn::fixed cam_y_pos = bn::max(bn::fixed(bn::min(player_ship.y, y_limit - 80)), -y_limit + 80);
         camera.set_position(cam_x_pos, cam_y_pos);
 
-        // Check for SELECT key indicating user exit.
-        if (bn::keypad::select_pressed())
+        // Check for START key, activate pause if pressed.
+        if (bn::keypad::start_pressed())
         {
-            return 0;
+            int pause_selection = pause_menu();
+
+            if (pause_selection == 2)
+            {
+                return 0;
+            }
         }
 
         bn::core::update();
@@ -925,10 +946,15 @@ int mission_5(int ship_selection)
             }
         }
 
-        // Check for SELECT key indicating user exit.
-        if (bn::keypad::select_pressed())
+        // Check for START key, activate pause if pressed.
+        if (bn::keypad::start_pressed())
         {
-            return 0;
+            int pause_selection = pause_menu();
+
+            if (pause_selection == 2)
+            {
+                return 0;
+            }
         }
 
         bn::core::update();
