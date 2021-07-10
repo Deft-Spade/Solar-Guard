@@ -2,6 +2,14 @@
  * Using Butano by GValiente
  * Made for GBA JAM 2021
  * Source Code and Assets Licensed Under GPL-3.0
+ *
+ * This source code has known issues. No promises are made as to the
+ * quality/reliability of anything in this source code. Such issues
+ * include and are not necessarily limited to code repetition, magic
+ * numbers, undocumented conventions for what certain variable values
+ * mean, etc. Lots of refactoring and commenting/documenting is needed
+ * to bring the overall code quality up-to-scratch, after all, this was
+ * developed as fast as possible within 3 months for a game jam.
  */
 
 /*
