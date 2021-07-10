@@ -59,8 +59,8 @@
 heads_up_display::heads_up_display()
 {
     // Flip sprites on the right side of the screen that are horizontal mirrors of left side HUD sprites.
-    spr_shield_tgt.set_horizontal_flip(true);
-    spr_hull_tgt.set_horizontal_flip(true);
+    //spr_shield_tgt.set_horizontal_flip(true);
+    //spr_hull_tgt.set_horizontal_flip(true);
     spr_heat_utility.set_horizontal_flip(true);
 }
 
@@ -86,7 +86,7 @@ void heads_up_display::draw_hud_speed(player_ship &player_ship)
     // Movement Speed
     bn::fixed speed_display_value = (player_ship.directional_speed / 2) * 60;
     text_generator_compact.set_left_alignment();
-    text_generator_compact.generate(19, -76, bn::to_string<8>(speed_display_value.floor_integer()) + "M/S", hud_text_speed);
+    text_generator_compact.generate(91, -76, bn::to_string<8>(speed_display_value.floor_integer()) + "M/S", hud_text_speed);
     bn::fixed speed_display_sprite = (player_ship.directional_speed / player_ship.speed_max[player_ship.type]) * 30;
     spr_speed.set_tiles(bn::sprite_items::spr_hud_speed.tiles_item().create_tiles(bn::min(speed_display_sprite.floor_integer(),30)));
 }

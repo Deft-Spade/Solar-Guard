@@ -85,13 +85,13 @@ public:
     bn::sprite_ptr spr_hull_text = bn::sprite_items::spr_hud_number_hull.create_sprite(-112,-67);
     bn::sprite_ptr spr_outline_corner = bn::sprite_items::spr_hud_outline_corner.create_sprite(-78,-71);
 
-    bn::sprite_ptr spr_speed = bn::sprite_items::spr_hud_speed.create_sprite(-13,-71);
-    bn::sprite_ptr spr_direction = bn::sprite_items::spr_hud_direction.create_sprite(33,-68);
+    bn::sprite_ptr spr_speed = bn::sprite_items::spr_hud_speed.create_sprite(58,-71);
+    bn::sprite_ptr spr_direction = bn::sprite_items::spr_hud_direction.create_sprite(105,-68);
 
-    bn::sprite_ptr spr_shield_tgt = bn::sprite_items::spr_hud_shield.create_sprite(78,-74);
-    bn::sprite_ptr spr_hull_tgt = bn::sprite_items::spr_hud_hull.create_sprite(78,-66);
-    bn::sprite_ptr spr_outline_corner_target = bn::sprite_items::spr_hud_outline_corner.create_sprite(79,-70);
-    bn::sprite_ptr spr_tgt_none = bn::sprite_items::spr_hud_outline_corner_no_tgt.create_sprite(114,-70);
+    //bn::sprite_ptr spr_shield_tgt = bn::sprite_items::spr_hud_shield.create_sprite(78,-74);
+    //bn::sprite_ptr spr_hull_tgt = bn::sprite_items::spr_hud_hull.create_sprite(78,-66);
+    //bn::sprite_ptr spr_outline_corner_target = bn::sprite_items::spr_hud_outline_corner.create_sprite(79,-70);
+    //bn::sprite_ptr spr_tgt_none = bn::sprite_items::spr_hud_outline_corner_no_tgt.create_sprite(114,-70);
 
     bn::sprite_ptr spr_objective = bn::sprite_items::spr_hud_objective1.create_sprite(-86, -47);
 
