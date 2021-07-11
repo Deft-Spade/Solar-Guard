@@ -348,12 +348,12 @@ void player_ship::damage(bn::fixed amount)
     {
         if (shields.floor_integer() > 0)
         {
-            hull -= amount - shields;
+            hull -= (amount - shields) / hull_damage_divider[type].to_double();
             shields = 0;
         }
         else
         {
-            hull -= amount;
+            hull -= amount / hull_damage_divider[type].to_double();
         }
 
         if (hull.to_double() < 0)

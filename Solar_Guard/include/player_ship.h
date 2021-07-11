@@ -72,7 +72,8 @@ public:
     const bn::array<int, number_of_ships> shields_recharge_delay_max = { 360, 360, 360, 360, 360, 360, 360, 360 };
 
     bn::fixed hull = 100;
-    const bn::array<bn::fixed, number_of_ships> hull_damage_factor = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    const bn::array<bn::fixed, number_of_ships> hull_damage_factor = { 2, 2/3, 1, 1, 2/3, 1, 0.5, 0.5 };
+    const bn::array<bn::fixed, number_of_ships> hull_damage_divider = { 0.5, 1.5, 1, 1, 1.5, 1, 2, 2 };
     int hull_recharge_timer = 0;
     const bn::array<int, number_of_ships> hull_recharge_rate = { 0, 0, 300, 180, 60, 0, 0, 0 };
     const bn::array<int, number_of_ships> hull_recharge_portion = { 0, 0, 20, 20, 20, 0, 0, 0 };
