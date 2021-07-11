@@ -131,7 +131,7 @@ public:
     bn::vector<bn::sprite_ptr, 6> hud_text_speed;
     bn::vector<bn::sprite_ptr, 6> hud_text_direction;
     bn::vector<bn::sprite_ptr, 29> hud_text_objectives;
-    bn::vector<bn::sprite_ptr, 32> hud_text_coordinates;
+    //bn::vector<bn::sprite_ptr, 32> hud_text_coordinates;
 
     // Functions
     void draw_hud_shields(player_ship &player_ship);

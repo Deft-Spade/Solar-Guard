@@ -299,12 +299,12 @@ void heads_up_display::draw_hud_gun_heat(player_ship &player_ship)
 void heads_up_display::draw_hud_map(player_ship &player_ship, bn::fixed x_lim, bn::fixed y_lim)
 {
     // Clear HUD text.
-    hud_text_coordinates.clear();
+    //hud_text_coordinates.clear();
 
     // Coordinates Text
-    text_generator_compact.set_right_alignment();
-    text_generator_compact.generate(66, 75, "(" + bn::to_string<16>(player_ship.x.round_integer()) + "," +
-                                    bn::to_string<16>(player_ship.y.round_integer()) + ")", hud_text_coordinates);
+    //text_generator_compact.set_right_alignment();
+    //text_generator_compact.generate(66, 75, "(" + bn::to_string<16>(player_ship.x.round_integer()) + "," +
+    //                                bn::to_string<16>(player_ship.y.round_integer()) + ")", hud_text_coordinates);
 
     // Map position update.
     spr_map_position.set_x(spr_map.x() + (player_ship.x / x_lim) * 24);
