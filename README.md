@@ -8,6 +8,8 @@ The game is a space shooter where you complete various missions. These missions 
 
 This game is in a state of development (i.e. any build thus far can be considered a development version as the game is not feature/content complete).
 
+This game [is also avaliable on itch.io](https://deft-spade.itch.io/solar-guard).
+
 This game was made using [GValiente](https://github.com/GValiente)'s [Butano](https://github.com/GValiente/butano) engine).
 
 > Butano is a modern C++ high level engine for the [Game Boy Advance](https://en.wikipedia.org/wiki/Game_Boy_Advance).
