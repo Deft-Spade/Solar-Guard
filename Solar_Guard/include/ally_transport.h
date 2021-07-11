@@ -50,6 +50,8 @@ public:
     bn::fixed hull = 100;
     bn::fixed x = -4900;
     bn::fixed y = 4900;
+    bn::fixed x_speed = 0;
+    bn::fixed y_speed = 0;
     int rotation = 45;
 
     bn::sprite_ptr sprite = bn::sprite_items::spr_transport.create_sprite(x, y, 0);

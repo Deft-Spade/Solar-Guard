@@ -45,8 +45,18 @@ void ally_transport::move()
     // At this point, mission success should trigger anyway.
     if (x.round_integer() < 4900)
     {
-        x += 1;
-        y -= 1;
+        x += x_speed;
+        y -= y_speed;
+    }
+
+    // Acceleration at start of mission 2.
+    if (x_speed.to_float() != 1)
+    {
+        x_speed += 0.005;
+        y_speed += 0.005;
+
+        if (x_speed.to_double() > 1) x_speed = 1;
+        if (y_speed.to_double() > 1) y_speed = 1;
     }
 
     // Update sprite.
