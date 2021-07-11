@@ -309,6 +309,7 @@ void heads_up_display::draw_hud_map(player_ship &player_ship, bn::fixed x_lim, b
     // Map position update.
     spr_map_position.set_x(spr_map.x() + (player_ship.x / x_lim) * 24);
     spr_map_position.set_y(spr_map.y() + (player_ship.y / y_lim) * 24);
+    //spr_map_position.set_rotation_angle(player_ship.direction);
 }
 
 void heads_up_display::draw_hud(player_ship &player_ship, bn::fixed x_lim, bn::fixed y_lim)
