@@ -431,7 +431,7 @@ int mission_2(int ship_selection)
                 for (int j = 0; j < array_player_lasers_size; j++)
                 {
                     // Collision with bounding box 16x16 pixels.
-                    if (array_asteroids[i].active &&
+                    if (array_player_lasers[j].active &&
                         array_player_lasers[j].check_collision(array_asteroids[i].x.round_integer(),
                                                                array_asteroids[i].y.round_integer(), 20, 20))
                     {
