@@ -111,7 +111,7 @@ public:
     const int gun_cooldown_time = 15;
     int gun_firing_cooldown = gun_cooldown_time;
     bn::fixed gun_energy = 0;
-    const bn::array<bn::fixed, number_of_ships> gun_energy_max = { 400, 400, 400, 400, 400, 400, 400, 400 };
+    const bn::array<bn::fixed, number_of_ships> gun_energy_max = { 200, 200, 300, 300, 400, 300, 300, 300 };
     bn::fixed gun_heat = 0;
     const bn::array<bn::fixed, number_of_ships> gun_heat_max = { 100, 100, 100, 100, 100, 100, 100, 100 };
     const bn::array<bn::fixed, number_of_ships> gun_heat_increase_rate = { 10, 10, 8, 6, 4, 6, 6, 6 };
