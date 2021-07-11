@@ -232,6 +232,9 @@ int mission_1(int ship_selection)
 
                     // Play collision sound.
                     bn::sound_items::sfx_collision.play();
+
+                    // Reduce amount of junk left.
+                    array_orbital_junk_left -= 1;
                 }
             }
         }
