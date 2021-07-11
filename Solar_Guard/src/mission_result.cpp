@@ -174,22 +174,22 @@ void mission_failure(int mission_failure_number)
 
         case 21:
             text_generator_compact.set_left_alignment();
-            text_generator_compact.generate(-106, 25, "THE SOLAR GUARD FIGHTER WAS LOST DURING THE.", briefing_text);
-            text_generator_compact.generate(-106, 34, "ESCORT OPERATION DUE TO CRITICAL HULL FAILURE.", briefing_text);
-            text_generator_compact.generate(-106, 43, "ARISING FROM DAMAGE SUSTAINED FROM ASTEROID", briefing_text);
-            text_generator_compact.generate(-106, 52, "COLLISIONS.", briefing_text);
-            text_generator_compact.generate(-106, 61, "", briefing_text);
-            text_generator_compact.generate(-106, 70, "ESCORT MISSION FAILED.", briefing_text);
+            text_generator_compact.generate(-106, 25, "THE SOLAR GUARD FIGHTER WAS LOST DURING THE ESCORT", briefing_text);
+            text_generator_compact.generate(-106, 34, "OPERATION DUE TO CRITICAL HULL FAILURE ARISING FROM", briefing_text);
+            text_generator_compact.generate(-106, 43, "FROM DAMAGE SUSTAINED FROM ASTEROID COLLISIONS.", briefing_text);
+            text_generator_compact.generate(-106, 52, "", briefing_text);
+            text_generator_compact.generate(-106, 61, "ESCORT MISSION FAILED.", briefing_text);
+            text_generator_compact.generate(-106, 70, "", briefing_text);
             break;
 
         case 22:
             text_generator_compact.set_left_alignment();
-            text_generator_compact.generate(-106, 25, "THE ESCORTED TRANSPORT WAS LOST DURING THE", briefing_text);
-            text_generator_compact.generate(-106, 34, "ESCORT OPERATION DUE TO CRITICAL HULL FAILURE.", briefing_text);
-            text_generator_compact.generate(-106, 43, "ARISING FROM DAMAGE SUSTAINED FROM ASTEROID", briefing_text);
-            text_generator_compact.generate(-106, 52, "COLLISIONS.", briefing_text);
-            text_generator_compact.generate(-106, 61, "", briefing_text);
-            text_generator_compact.generate(-106, 70, "ESCORT MISSION FAILED.", briefing_text);
+            text_generator_compact.generate(-106, 25, "THE ESCORTED TRANSPORT WAS LOST DURING THE ESCORT", briefing_text);
+            text_generator_compact.generate(-106, 34, "OPERATION DUE TO CRITICAL HULL FAILURE ARISING", briefing_text);
+            text_generator_compact.generate(-106, 43, "FROM DAMAGE SUSTAINED FROM ASTEROID COLLISIONS.", briefing_text);
+            text_generator_compact.generate(-106, 52, "", briefing_text);
+            text_generator_compact.generate(-106, 61, "ESCORT MISSION FAILED.", briefing_text);
+            text_generator_compact.generate(-106, 70, "", briefing_text);
             break;
 
         case 3:
