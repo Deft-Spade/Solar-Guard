@@ -432,8 +432,8 @@ int mission_2(int ship_selection)
                 {
                     // Collision with bounding box 16x16 pixels.
                     if (array_player_lasers[j].active &&
-                        array_player_lasers[j].check_collision(array_asteroids[i].x.round_integer(),
-                                                               array_asteroids[i].y.round_integer(), 20, 20))
+                        array_player_lasers[j].check_collision(array_asteroids[i].x.round_integer() - 18,
+                                                               array_asteroids[i].y.round_integer() - 15, 36, 30))
                     {
                         // Make the junk take damage.
                         array_asteroids[i].hull -= 5;
