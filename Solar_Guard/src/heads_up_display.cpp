@@ -78,15 +78,17 @@ heads_up_display::heads_up_display()
 void heads_up_display::draw_hud_shields(player_ship &player_ship)
 {
     // Player Shields
-    spr_shield.set_tiles(bn::sprite_items::spr_hud_shield.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.shields.floor_integer() / 4, 25))));
-    spr_shield_text.set_tiles(bn::sprite_items::spr_hud_number_shield.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.shields.floor_integer(), 100))));
+    spr_shield.set_tiles(bn::sprite_items::spr_hud_shield.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.shields.ceil_integer() / 4 +
+                                                                                                      bn::min(player_ship.shields.ceil_integer() % 4, 1), 25))));
+    spr_shield_text.set_tiles(bn::sprite_items::spr_hud_number_shield.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.shields.ceil_integer(), 100))));
 }
 
 void heads_up_display::draw_hud_hull(player_ship &player_ship)
 {
     // Player Hull
-    spr_hull.set_tiles(bn::sprite_items::spr_hud_hull.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.hull.floor_integer() / 4, 25))));
-    spr_hull_text.set_tiles(bn::sprite_items::spr_hud_number_hull.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.hull.floor_integer(), 100))));
+    spr_hull.set_tiles(bn::sprite_items::spr_hud_hull.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.hull.ceil_integer() / 4 +
+                                                                                                  bn::min(player_ship.hull.ceil_integer() % 4, 1), 25))));
+    spr_hull_text.set_tiles(bn::sprite_items::spr_hud_number_hull.tiles_item().create_tiles(bn::max(0,bn::min(player_ship.hull.ceil_integer(), 100))));
 }
 
 void heads_up_display::draw_hud_speed(player_ship &player_ship)
